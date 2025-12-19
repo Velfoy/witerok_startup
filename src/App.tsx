@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Navigation } from "./components/Navigation";
+import { HeroSection } from "./components/HeroSection";
+import { ESGSection } from "./components/ESGSection";
+import { ProblemSection } from "./components/ProblemSection";
+import { ProductSection } from "./components/ProductSection";
+import { CompetitiveSection } from "./components/CompetitiveSection";
+import { TargetAudienceSection } from "./components/TargetAudienceSection";
+import { BusinessModelSection } from "./components/BusinessModelSection";
+import { MarketingSection } from "./components/MarketingSection";
+import { TeamSection } from "./components/TeamSection";
+import { FinancialSection } from "./components/FinancialSection";
+import { RoadmapSection } from "./components/RoadmapSection";
+import { FAQSection } from "./components/FAQSection";
+import { ContactSection } from "./components/ContactSection";
+import { Footer } from "./components/Footer";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="min-h-screen bg-background scroll-smooth">
+      <Navigation />
 
-export default App
+      <main>
+        <HeroSection />
+        <ESGSection />
+        <ProblemSection />
+        <ProductSection />
+        <CompetitiveSection />
+        <TargetAudienceSection />
+        <BusinessModelSection />
+        <MarketingSection />
+        <TeamSection />
+        <FinancialSection />
+        <RoadmapSection />
+        <FAQSection />
+        <ContactSection />
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
