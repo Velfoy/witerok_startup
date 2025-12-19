@@ -1,6 +1,24 @@
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export function HeroSection() {
+  const { lang } = useLanguage();
+
+  const copy = {
+    title: {
+      uk: "Вітроенергія нового покоління",
+      en: "Next-generation wind energy",
+    },
+    subtitle: {
+      uk: "WITERoK — компактні вітрогенератори для локальної енергонезалежності бізнесу та громад",
+      en: "WITERoK builds compact wind turbines for local energy independence of businesses and communities",
+    },
+    ctas: {
+      primary: { uk: "Дізнатися більше", en: "Learn more" },
+      secondary: { uk: "Зв'язатися з нами", en: "Contact us" },
+    },
+  };
+
   return (
     <section
       id="home"
@@ -19,18 +37,17 @@ export function HeroSection() {
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
         <h1 className="text-5xl md:text-7xl text-white mb-6">
-          Вітроенергія нового покоління
+          {lang === "uk" ? copy.title.uk : copy.title.en}
         </h1>
         <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-12">
-          WITERoK — компактні вітрогенератори для локальної енергонезалежності
-          бізнесу та громад
+          {lang === "uk" ? copy.subtitle.uk : copy.subtitle.en}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="#product"
             className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary rounded-full hover:bg-gray-100 transition-all group"
           >
-            Дізнатися більше
+            {lang === "uk" ? copy.ctas.primary.uk : copy.ctas.primary.en}
             <ArrowRight
               className="ml-2 group-hover:translate-x-1 transition-transform"
               size={20}
@@ -40,7 +57,7 @@ export function HeroSection() {
             href="#contact"
             className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white rounded-full hover:bg-white/10 transition-all"
           >
-            Зв'язатися з нами
+            {lang === "uk" ? copy.ctas.secondary.uk : copy.ctas.secondary.en}
           </a>
         </div>
       </div>

@@ -1,50 +1,64 @@
 import { Linkedin, Mail } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export function TeamSection() {
+  const { lang } = useLanguage();
+
   const team = [
     {
-      name: "Олександр Коваленко",
-      position: "CEO & Co-Founder",
-      bio: "15 років у відновлюваній енергетиці. Раніше - Head of Business Development у провідній енергетичній компанії",
-      skills: ["Стратегія", "Продажі", "Енергетика"],
+      name: { uk: "Олександр Коваленко", en: "Oleksandr Kovalenko" },
+      position: { uk: "CEO & Co-Founder", en: "CEO & Co-Founder" },
+      bio: {
+        uk: "15 років у відновлюваній енергетиці. Раніше - Head of Business Development у провідній енергетичній компанії",
+        en: "15 years in renewable energy. Former Head of Business Development at a leading energy company.",
+      },
+      skills: {
+        uk: ["Стратегія", "Продажі", "Енергетика"],
+        en: ["Strategy", "Sales", "Energy"],
+      },
       image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400",
     },
     {
-      name: "Марія Петренко",
-      position: "CTO & Co-Founder",
-      bio: "PhD в галузі інженерії. 10 років досвіду розробки вітрових технологій у міжнародних компаніях",
-      skills: ["R&D", "Інженерія", "Інновації"],
+      name: { uk: "Марія Петренко", en: "Maria Petrenko" },
+      position: { uk: "CTO & Co-Founder", en: "CTO & Co-Founder" },
+      bio: {
+        uk: "PhD в галузі інженерії. 10 років досвіду розробки вітрових технологій у міжнародних компаніях",
+        en: "PhD in engineering. 10 years building wind tech in international companies.",
+      },
+      skills: {
+        uk: ["R&D", "Інженерія", "Інновації"],
+        en: ["R&D", "Engineering", "Innovation"],
+      },
       image:
         "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400",
     },
     {
-      name: "Дмитро Шевченко",
-      position: "Head of Operations",
-      bio: "Експерт у виробництві та логістиці. Досвід масштабування виробничих процесів у стартапах",
-      skills: ["Виробництво", "Логістика", "Оптимізація"],
+      name: { uk: "Дмитро Шевченко", en: "Dmytro Shevchenko" },
+      position: { uk: "Head of Operations", en: "Head of Operations" },
+      bio: {
+        uk: "Експерт у виробництві та логістиці. Досвід масштабування виробничих процесів у стартапах",
+        en: "Manufacturing and logistics expert. Scaled production in multiple startups.",
+      },
+      skills: {
+        uk: ["Виробництво", "Логістика", "Оптимізація"],
+        en: ["Manufacturing", "Logistics", "Optimization"],
+      },
       image:
         "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400",
     },
     {
-      name: "Анна Іваненко",
-      position: "Head of Marketing",
-      bio: "10 років у B2B маркетингу. Успішний досвід виведення технологічних продуктів на ринок",
-      skills: ["Маркетинг", "Брендинг", "B2B"],
+      name: { uk: "Анна Іваненко", en: "Anna Ivanenko" },
+      position: { uk: "Head of Marketing", en: "Head of Marketing" },
+      bio: {
+        uk: "10 років у B2B маркетингу. Успішний досвід виведення технологічних продуктів на ринок",
+        en: "10 years in B2B marketing. Led multiple tech product launches.",
+      },
+      skills: {
+        uk: ["Маркетинг", "Брендинг", "B2B"],
+        en: ["Marketing", "Branding", "B2B"],
+      },
       image:
         "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400",
-    },
-  ];
-
-  const advisors = [
-    {
-      name: "Проф. Володимир Сидоренко",
-      role: "Технічний радник",
-      expertise: "Професор кафедри відновлюваної енергетики КПІ",
-    },
-    {
-      name: "Ірина Мельник",
-      role: "Бізнес-радник",
-      expertise: "Ex-директор ЄБРР, експерт з зеленого фінансування",
     },
   ];
 
@@ -52,9 +66,13 @@ export function TeamSection() {
     <section id="team" className="py-24 bg-muted">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl text-primary mb-4">Команда</h2>
+          <h2 className="text-4xl md:text-5xl text-primary mb-4">
+            {lang === "uk" ? "Команда" : "Team"}
+          </h2>
           <p className="text-xl text-foreground/80">
-            Досвідчені професіонали з різних галузей
+            {lang === "uk"
+              ? "Досвідчені професіонали з різних галузей"
+              : "Experienced professionals from multiple domains"}
           </p>
         </div>
 
@@ -68,23 +86,31 @@ export function TeamSection() {
               <div className="aspect-square overflow-hidden bg-muted">
                 <img
                   src={member.image}
-                  alt={member.name}
+                  alt={lang === "uk" ? member.name.uk : member.name.en}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-xl text-primary mb-1">{member.name}</h3>
-                <p className="text-secondary mb-4">{member.position}</p>
-                <p className="text-sm text-foreground/70 mb-4">{member.bio}</p>
+                <h3 className="text-xl text-primary mb-1">
+                  {lang === "uk" ? member.name.uk : member.name.en}
+                </h3>
+                <p className="text-secondary mb-4">
+                  {lang === "uk" ? member.position.uk : member.position.en}
+                </p>
+                <p className="text-sm text-foreground/70 mb-4">
+                  {lang === "uk" ? member.bio.uk : member.bio.en}
+                </p>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {member.skills.map((skill, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1 bg-secondary/10 text-secondary text-xs rounded-full"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                  {(lang === "uk" ? member.skills.uk : member.skills.en).map(
+                    (skill, i) => (
+                      <span
+                        key={i}
+                        className="px-3 py-1 bg-secondary/10 text-secondary text-xs rounded-full"
+                      >
+                        {skill}
+                      </span>
+                    )
+                  )}
                 </div>
                 <div className="flex gap-3">
                   <button className="p-2 bg-muted rounded-full hover:bg-secondary/10 transition-colors">
@@ -100,45 +126,21 @@ export function TeamSection() {
         </div>
 
         {/* Advisors */}
-        <div className="bg-white rounded-2xl p-8 shadow-lg">
-          <h3 className="text-3xl text-primary mb-8 text-center">
-            Радники та ментори
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {advisors.map((advisor, index) => (
-              <div
-                key={index}
-                className="flex items-start gap-4 p-6 bg-muted rounded-xl"
-              >
-                <div className="flex-shrink-0 w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center">
-                  <span className="text-2xl text-secondary">
-                    {advisor.name.charAt(0)}
-                  </span>
-                </div>
-                <div>
-                  <h4 className="text-lg text-primary mb-1">{advisor.name}</h4>
-                  <p className="text-secondary text-sm mb-2">{advisor.role}</p>
-                  <p className="text-foreground/70 text-sm">
-                    {advisor.expertise}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* We're Hiring */}
         <div className="mt-12 bg-gradient-to-r from-primary to-secondary rounded-2xl p-8 text-center text-white">
-          <h3 className="text-2xl mb-4">Приєднуйся до команди!</h3>
+          <h3 className="text-2xl mb-4">
+            {lang === "uk" ? "Приєднуйся до команди!" : "Join the team!"}
+          </h3>
           <p className="mb-6 text-white/90">
-            Ми шукаємо талановитих людей для спільної роботи над енергетичним
-            майбутнім України
+            {lang === "uk"
+              ? "Ми шукаємо талановитих людей для спільної роботи над енергетичним майбутнім України"
+              : "We are hiring talented people to build the energy future together."}
           </p>
           <a
             href="#contact"
             className="inline-block px-8 py-3 bg-white text-primary rounded-full hover:bg-gray-100 transition-colors"
           >
-            Дивитися вакансії
+            {lang === "uk" ? "Дивитися вакансії" : "View openings"}
           </a>
         </div>
       </div>

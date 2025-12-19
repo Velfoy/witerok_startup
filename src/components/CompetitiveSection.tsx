@@ -1,82 +1,60 @@
 import { CheckCircle2, Target, Award, Rocket } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export function CompetitiveSection() {
+  const { lang } = useLanguage();
+
   const advantages = [
     {
       icon: Target,
-      title: "Компактність",
-      description:
-        "Вертикальна конструкція займає мінімум місця - можна встановити навіть на дахах комерційних будівель",
+      title: { uk: "Компактність", en: "Compact" },
+      description: {
+        uk: "Вертикальна конструкція займає мінімум місця - можна встановити навіть на дахах комерційних будівель",
+        en: "Vertical design needs minimal footprint — even rooftops are viable.",
+      },
     },
     {
       icon: Award,
-      title: "Ефективність",
-      description:
-        "Працює при низьких швидкостях вітру (від 3 м/с), що робить його ідеальним для України",
+      title: { uk: "Ефективність", en: "Efficiency" },
+      description: {
+        uk: "Працює при низьких швидкостях вітру (від 3 м/с), що робить його ідеальним для України",
+        en: "Operates from 3 m/s wind — ideal for typical Ukrainian wind patterns.",
+      },
     },
     {
       icon: CheckCircle2,
-      title: "Прозорість",
-      description:
-        "Відкритий онлайн калькулятор окупності та детальна звітність по кожній установці",
+      title: { uk: "Прозорість", en: "Transparency" },
+      description: {
+        uk: "Відкритий онлайн калькулятор окупності та детальна звітність по кожній установці",
+        en: "Open payback calculator and detailed reporting for every installation.",
+      },
     },
     {
       icon: Rocket,
-      title: "Швидкий запуск",
-      description:
-        "Від замовлення до запуску - 2-4 тижні (у конкурентів 3-6 місяців)",
-    },
-  ];
-
-  const comparison = [
-    {
-      feature: "Вартість встановлення",
-      witerok: "Низька",
-      traditional: "Висока",
-      highlight: true,
-    },
-    {
-      feature: "Час встановлення",
-      witerok: "2-4 тижні",
-      traditional: "3-6 місяців",
-      highlight: true,
-    },
-    {
-      feature: "Мінімальна швидкість вітру",
-      witerok: "3 м/с",
-      traditional: "5-7 м/с",
-      highlight: true,
-    },
-    {
-      feature: "Площа для встановлення",
-      witerok: "Мінімальна",
-      traditional: "Велика",
-      highlight: true,
-    },
-    {
-      feature: "Обслуговування",
-      witerok: "1 раз/рік",
-      traditional: "3-4 рази/рік",
-      highlight: false,
-    },
-    {
-      feature: "Термін служби",
-      witerok: "15-20 років",
-      traditional: "15-20 років",
-      highlight: false,
+      title: { uk: "Швидкий запуск", en: "Fast deployment" },
+      description: {
+        uk: "Від замовлення до запуску - 2-4 тижні (у конкурентів 3-6 місяців)",
+        en: "From order to launch in 2–4 weeks (vs 3–6 months for incumbents).",
+      },
     },
   ];
 
   return (
-    <section className="py-24 bg-muted">
+    <section id="advantages" className="py-24 bg-muted">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Competitive Advantages */}
         <div className="mb-20">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl text-primary mb-4">
-              Конкурентні переваги
+              {lang === "uk"
+                ? "Конкурентні переваги"
+                : "Competitive Advantages"}
             </h2>
-            <p className="text-xl text-foreground/80">Чому обирають WITERoK</p>
+            <p className="text-xl text-foreground/80">
+              {lang === "uk"
+                ? "Чому обирають WITERoK"
+                : "Why teams choose WITERoK"}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -91,64 +69,16 @@ export function CompetitiveSection() {
                     <Icon className="text-secondary" size={24} />
                   </div>
                   <h3 className="text-xl text-primary mb-3">
-                    {advantage.title}
+                    {lang === "uk" ? advantage.title.uk : advantage.title.en}
                   </h3>
-                  <p className="text-foreground/70">{advantage.description}</p>
+                  <p className="text-foreground/70">
+                    {lang === "uk"
+                      ? advantage.description.uk
+                      : advantage.description.en}
+                  </p>
                 </div>
               );
             })}
-          </div>
-        </div>
-
-        {/* Comparison Table */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="bg-gradient-to-r from-primary to-secondary p-6 text-center">
-            <h3 className="text-2xl md:text-3xl text-white">
-              Порівняння з традиційними рішеннями
-            </h3>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-muted">
-                  <th className="px-6 py-4 text-left text-foreground">
-                    Параметр
-                  </th>
-                  <th className="px-6 py-4 text-center text-secondary">
-                    WITERoK
-                  </th>
-                  <th className="px-6 py-4 text-center text-foreground/60">
-                    Традиційні вітряки
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparison.map((row, index) => (
-                  <tr
-                    key={index}
-                    className={`border-t border-border ${
-                      row.highlight ? "bg-secondary/5" : ""
-                    }`}
-                  >
-                    <td className="px-6 py-4 text-foreground">{row.feature}</td>
-                    <td className="px-6 py-4 text-center">
-                      <span
-                        className={`inline-block px-3 py-1 rounded-full ${
-                          row.highlight
-                            ? "bg-secondary text-white"
-                            : "text-secondary"
-                        }`}
-                      >
-                        {row.witerok}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-center text-foreground/70">
-                      {row.traditional}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
         </div>
       </div>

@@ -8,17 +8,48 @@ import {
   Calendar,
   Zap,
 } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export function ProductSection() {
+  const { lang } = useLanguage();
+
   const specs = [
-    { icon: Wind, label: "Потужність", value: "5-10 кВт" },
-    { icon: Gauge, label: "Швидкість вітру", value: "3-25 м/с" },
-    { icon: Battery, label: "Автономність", value: "24/7" },
-    { icon: Shield, label: "Гарантія", value: "5 років" },
-    { icon: Calendar, label: "Термін служби", value: "15-20 років" },
-    { icon: Wrench, label: "Обслуговування", value: "Мінімальне" },
-    { icon: TrendingUp, label: "Окупність", value: "3-5 років" },
-    { icon: Zap, label: "Ефективність", value: ">90%" },
+    { icon: Wind, label: { uk: "Потужність", en: "Power" }, value: "5-10 кВт" },
+    {
+      icon: Gauge,
+      label: { uk: "Швидкість вітру", en: "Wind speed" },
+      value: "3-25 м/с",
+    },
+    {
+      icon: Battery,
+      label: { uk: "Автономність", en: "Autonomy" },
+      value: "24/7",
+    },
+    {
+      icon: Shield,
+      label: { uk: "Гарантія", en: "Warranty" },
+      value: "5 років / years",
+    },
+    {
+      icon: Calendar,
+      label: { uk: "Термін служби", en: "Lifetime" },
+      value: "15-20 років",
+    },
+    {
+      icon: Wrench,
+      label: { uk: "Обслуговування", en: "Maintenance" },
+      value: { uk: "Мінімальне", en: "Minimal" },
+    },
+    {
+      icon: TrendingUp,
+      label: { uk: "Окупність", en: "Payback" },
+      value: "3-5 років",
+    },
+    {
+      icon: Zap,
+      label: { uk: "Ефективність", en: "Efficiency" },
+      value: ">90%",
+    },
   ];
 
   return (
@@ -26,10 +57,12 @@ export function ProductSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl text-primary mb-4">
-            Вітрогенератор WITERoK
+            {lang === "uk" ? "Вітрогенератор WITERoK" : "WITERoK Wind Turbine"}
           </h2>
           <p className="text-xl text-foreground/80">
-            Інноваційне рішення для локальної енергонезалежності
+            {lang === "uk"
+              ? "Інноваційне рішення для локальної енергонезалежності"
+              : "An innovative solution for local energy independence"}
           </p>
         </div>
 
@@ -44,14 +77,18 @@ export function ProductSection() {
               />
             </div>
             <div className="absolute -bottom-6 -right-6 bg-secondary text-white p-6 rounded-xl shadow-xl">
-              <div className="text-sm mb-1">Термін служби</div>
-              <div className="text-3xl">15-20 років</div>
+              <div className="text-sm mb-1">
+                {lang === "uk" ? "Термін служби" : "Lifetime"}
+              </div>
+              <div className="text-3xl">15-20</div>
             </div>
           </div>
 
           {/* Product Features */}
           <div>
-            <h3 className="text-3xl text-primary mb-8">Характеристики</h3>
+            <h3 className="text-3xl text-primary mb-8">
+              {lang === "uk" ? "Характеристики" : "Specifications"}
+            </h3>
             <div className="grid grid-cols-2 gap-6">
               {specs.map((spec, index) => {
                 const Icon = spec.icon;
@@ -62,9 +99,15 @@ export function ProductSection() {
                   >
                     <Icon className="text-secondary mb-2" size={24} />
                     <div className="text-sm text-foreground/60 mb-1">
-                      {spec.label}
+                      {lang === "uk" ? spec.label.uk : spec.label.en}
                     </div>
-                    <div className="text-lg text-primary">{spec.value}</div>
+                    <div className="text-lg text-primary">
+                      {typeof spec.value === "string"
+                        ? spec.value
+                        : lang === "uk"
+                        ? spec.value.uk
+                        : spec.value.en}
+                    </div>
                   </div>
                 );
               })}
@@ -74,26 +117,42 @@ export function ProductSection() {
 
         {/* Benefits */}
         <div className="bg-gradient-to-br from-primary to-secondary rounded-2xl p-8 md:p-12 text-white">
-          <h3 className="text-3xl mb-8 text-center">Переваги WITERoK</h3>
+          <h3 className="text-3xl mb-8 text-center">
+            {lang === "uk" ? "Переваги WITERoK" : "WITERoK Advantages"}
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="text-5xl mb-3">⚡</div>
-              <h4 className="text-xl mb-2">Швидке встановлення</h4>
+              <h4 className="text-xl mb-2">
+                {lang === "uk" ? "Швидке встановлення" : "Fast installation"}
+              </h4>
               <p className="text-white/80">
-                Не потребує складної інфраструктури та спецтехніки
+                {lang === "uk"
+                  ? "Не потребує складної інфраструктури та спецтехніки"
+                  : "No heavy infrastructure or special equipment required"}
               </p>
             </div>
             <div className="text-center">
               <div className="text-5xl mb-3">💰</div>
-              <h4 className="text-xl mb-2">Економія коштів</h4>
+              <h4 className="text-xl mb-2">
+                {lang === "uk" ? "Економія коштів" : "Cost savings"}
+              </h4>
               <p className="text-white/80">
-                Зниження витрат на електроенергію до 70%
+                {lang === "uk"
+                  ? "Зниження витрат на електроенергію до 70%"
+                  : "Reduce electricity costs by up to 70%"}
               </p>
             </div>
             <div className="text-center">
               <div className="text-5xl mb-3">🌱</div>
-              <h4 className="text-xl mb-2">Екологічність</h4>
-              <p className="text-white/80">Чиста енергія без викидів CO₂</p>
+              <h4 className="text-xl mb-2">
+                {lang === "uk" ? "Екологічність" : "Eco-friendly"}
+              </h4>
+              <p className="text-white/80">
+                {lang === "uk"
+                  ? "Чиста енергія без викидів CO₂"
+                  : "Clean energy with zero CO₂ emissions"}
+              </p>
             </div>
           </div>
         </div>
