@@ -4,7 +4,8 @@ import { useLanguage } from "../contexts/LanguageContext";
 
 export function Navigation() {
   const { lang, toggleLanguage } = useLanguage();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
 
   const navItems = [
     { key: "home", label: { uk: "Головна", en: "Home" }, href: "#home" },
@@ -65,6 +66,9 @@ export function Navigation() {
     },
   ];
 
+  const navLinks = navItems.filter((item) => item.key !== "contact");
+  const contactLink = navItems.find((item) => item.key === "contact");
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -77,16 +81,32 @@ export function Navigation() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-4 lg:gap-5 xl:gap-6">
-            {navItems.map((item) => (
-              <a
-                key={item.key}
-                href={item.href}
-                className="text-foreground hover:text-secondary transition-colors whitespace-nowrap text-sm lg:text-base"
+          <div className="hidden md:flex items-center gap-3 lg:gap-4 xl:gap-5">
+            <div className="relative">
+              <button
+                onClick={() => setIsDesktopMenuOpen((prev) => !prev)}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-foreground hover:bg-muted transition-colors text-sm lg:text-base whitespace-nowrap"
+                aria-haspopup="true"
+                aria-expanded={isDesktopMenuOpen}
               >
-                {lang === "uk" ? item.label.uk : item.label.en}
-              </a>
-            ))}
+                <Menu size={18} />
+                {lang === "uk" ? "Меню" : "Menu"}
+              </button>
+              {isDesktopMenuOpen && (
+                <div className="absolute right-0 mt-2 w-56 bg-white border border-border rounded-xl shadow-lg overflow-hidden">
+                  {navLinks.map((item) => (
+                    <a
+                      key={item.key}
+                      href={item.href}
+                      className="block px-4 py-3 text-foreground hover:bg-muted transition-colors text-sm"
+                      onClick={() => setIsDesktopMenuOpen(false)}
+                    >
+                      {lang === "uk" ? item.label.uk : item.label.en}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
             <button
               onClick={toggleLanguage}
               className="px-4 py-2 rounded-full border border-border text-foreground hover:bg-muted transition-colors text-sm lg:text-base whitespace-nowrap"
@@ -95,7 +115,7 @@ export function Navigation() {
               {lang === "uk" ? "EN" : "UA"}
             </button>
             <a
-              href="#contact"
+              href={contactLink?.href}
               className="px-6 py-2 bg-secondary text-white rounded-full hover:bg-primary transition-colors whitespace-nowrap text-sm lg:text-base"
             >
               {lang === "uk" ? "Зв'язатися" : "Contact"}
@@ -105,23 +125,23 @@ export function Navigation() {
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
               className="p-2 rounded-md text-foreground hover:bg-muted"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
+        {isMobileOpen && (
           <div className="md:hidden pb-4">
             {navItems.map((item) => (
               <a
                 key={item.key}
                 href={item.href}
                 className="block py-2 text-foreground hover:text-secondary transition-colors"
-                onClick={() => setIsOpen(false)}
+                onClick={() => setIsMobileOpen(false)}
               >
                 {lang === "uk" ? item.label.uk : item.label.en}
               </a>
@@ -129,16 +149,16 @@ export function Navigation() {
             <button
               onClick={() => {
                 toggleLanguage();
-                setIsOpen(false);
+                setIsMobileOpen(false);
               }}
               className="mt-2 block w-full px-6 py-2 border border-border rounded-full text-center text-foreground hover:bg-muted transition-colors"
             >
               {lang === "uk" ? "English" : "Українська"}
             </button>
             <a
-              href="#contact"
+              href={contactLink?.href}
               className="block mt-2 px-6 py-2 bg-secondary text-white rounded-full text-center hover:bg-primary transition-colors"
-              onClick={() => setIsOpen(false)}
+              onClick={() => setIsMobileOpen(false)}
             >
               {lang === "uk" ? "Зв'язатися" : "Contact"}
             </a>
