@@ -1,79 +1,147 @@
 import { CheckCircle2, Circle, Clock } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export function RoadmapSection() {
+  const { lang } = useLanguage();
+
   const roadmapItems = [
     {
-      phase: "TRL 4",
-      title: "Підтвердження Концепції",
-      subtitle: "Лабораторні випробування Прототипу №1",
+      phase: { uk: "TRL 4", en: "TRL 4" },
+      title: { uk: "Підтвердження Концепції", en: "Concept validation" },
+      subtitle: {
+        uk: "Лабораторні випробування Прототипу №1",
+        en: "Lab testing of Prototype #1",
+      },
       status: "completed",
       date: "Q1 2024",
-      achievements: [
-        "Розробка базового прототипу",
-        "Лабораторні тести ефективності",
-        "Підтвердження технічної концепції",
-      ],
+      achievements: {
+        uk: [
+          "Розробка базового прототипу",
+          "Лабораторні тести ефективності",
+          "Підтвердження технічної концепції",
+        ],
+        en: [
+          "Built baseline prototype",
+          "Lab efficiency tests",
+          "Technical concept validated",
+        ],
+      },
     },
     {
-      phase: "TRL 5",
-      title: "Повнофункціональний Прототип",
-      subtitle:
-        "Створення Прототипу №2 та тестування в релевантному середовищі",
+      phase: { uk: "TRL 5", en: "TRL 5" },
+      title: { uk: "Повнофункціональний Прототип", en: "Full prototype" },
+      subtitle: {
+        uk: "Створення Прототипу №2 та тестування в релевантному середовищі",
+        en: "Prototype #2 and testing in relevant environment",
+      },
       status: "completed",
       date: "Q2-Q3 2024",
-      achievements: [
-        "Оптимізація конструкції",
-        "Польові випробування",
-        "Валідація в реальних умовах",
-      ],
+      achievements: {
+        uk: [
+          "Оптимізація конструкції",
+          "Польові випробування",
+          "Валідація в реальних умовах",
+        ],
+        en: [
+          "Optimized design",
+          "Field trials",
+          "Validation in real conditions",
+        ],
+      },
     },
     {
-      phase: "TRL 6",
-      title: "Демонстрація Системи",
-      subtitle: "Демонстрація Прототипу №3 бенефіціару",
+      phase: { uk: "TRL 6", en: "TRL 6" },
+      title: { uk: "Демонстрація Системи", en: "System demonstration" },
+      subtitle: {
+        uk: "Демонстрація Прототипу №3 бенефіціару",
+        en: "Prototype #3 demo to beneficiary",
+      },
       status: "in-progress",
       date: "Q4 2024",
-      achievements: [
-        "Створення фінальної версії прототипу",
-        "Демонстрація клієнтам",
-        "Збір зворотного зв'язку",
-      ],
+      achievements: {
+        uk: [
+          "Створення фінальної версії прототипу",
+          "Демонстрація клієнтам",
+          "Збір зворотного зв'язку",
+        ],
+        en: [
+          "Final prototype built",
+          "Client demonstrations",
+          "Feedback collection",
+        ],
+      },
     },
     {
-      phase: "TRL 7",
-      title: "Пілотна Партія та Експлуатація",
-      subtitle: "Тривала експлуатація Прототипу №4 в операційному середовищі",
+      phase: { uk: "TRL 7", en: "TRL 7" },
+      title: {
+        uk: "Пілотна Партія та Експлуатація",
+        en: "Pilot batch and operation",
+      },
+      subtitle: {
+        uk: "Тривала експлуатація Прототипу №4 в операційному середовищі",
+        en: "Long-run operation of Prototype #4",
+      },
       status: "planned",
       date: "Q1-Q2 2025",
-      achievements: [
-        "Виробництво пілотної партії (10 од.)",
-        "Встановлення у перших клієнтів",
-        "Моніторинг та оптимізація",
-      ],
+      achievements: {
+        uk: [
+          "Виробництво пілотної партії (10 од.)",
+          "Встановлення у перших клієнтів",
+          "Моніторинг та оптимізація",
+        ],
+        en: [
+          "Produce pilot batch (10 units)",
+          "Deploy to first customers",
+          "Monitor and optimize",
+        ],
+      },
     },
     {
-      phase: "TRL 8",
-      title: "Захист та Кваліфікація",
-      subtitle: "Отримання захисту торгової марки та сертифікація",
+      phase: { uk: "TRL 8", en: "TRL 8" },
+      title: {
+        uk: "Захист та Кваліфікація",
+        en: "Protection and qualification",
+      },
+      subtitle: {
+        uk: "Отримання захисту торгової марки та сертифікація",
+        en: "Trademark protection and certification",
+      },
       status: "planned",
       date: "Q3 2025",
-      achievements: [
-        "Реєстрація торгової марки",
-        "Отримання сертифікатів якості",
-        "Патентний захист технології",
-      ],
+      achievements: {
+        uk: [
+          "Реєстрація торгової марки",
+          "Отримання сертифікатів якості",
+          "Патентний захист технології",
+        ],
+        en: [
+          "Trademark registration",
+          "Quality certifications",
+          "Patent protection",
+        ],
+      },
     },
     {
-      phase: "Масштабування",
-      title: "Серійне виробництво",
-      subtitle: "Запуск повномасштабного виробництва та продажів",
+      phase: { uk: "Масштабування", en: "Scaling" },
+      title: { uk: "Серійне виробництво", en: "Serial production" },
+      subtitle: {
+        uk: "Запуск повномасштабного виробництва та продажів",
+        en: "Launch full-scale production and sales",
+      },
       status: "planned",
       date: "Q4 2025 - 2026",
-      achievements: [
-        "Налагодження серійного виробництва",
-        "Розгортання каналів продажу",
-        "Досягнення 100+ установок",
-      ],
+      achievements: {
+        uk: [
+          "Налагодження серійного виробництва",
+          "Розгортання каналів продажу",
+          "Досягнення 100+ установок",
+        ],
+        en: [
+          "Ramp serial production",
+          "Roll out sales channels",
+          "Achieve 100+ installs",
+        ],
+      },
     },
   ];
 
@@ -82,10 +150,12 @@ export function RoadmapSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl text-primary mb-4">
-            Дорожна карта
+            {lang === "uk" ? "Дорожна карта" : "Roadmap"}
           </h2>
           <p className="text-xl text-foreground/80">
-            Поетапний розвиток від прототипу до серійного виробництва
+            {lang === "uk"
+              ? "Поетапний розвиток від прототипу до серійного виробництва"
+              : "Step-by-step progress from prototype to mass production"}
           </p>
         </div>
 
@@ -141,16 +211,18 @@ export function RoadmapSection() {
                         <span
                           className={`px-3 py-1 ${statusBg} ${statusColor} text-sm rounded-full`}
                         >
-                          {item.phase}
+                          {lang === "uk" ? item.phase.uk : item.phase.en}
                         </span>
                         <span className="text-sm text-foreground/60">
                           {item.date}
                         </span>
                       </div>
                       <h3 className="text-2xl text-primary mb-2">
-                        {item.title}
+                        {lang === "uk" ? item.title.uk : item.title.en}
                       </h3>
-                      <p className="text-foreground/70 mb-4">{item.subtitle}</p>
+                      <p className="text-foreground/70 mb-4">
+                        {lang === "uk" ? item.subtitle.uk : item.subtitle.en}
+                      </p>
                     </div>
                   </div>
 
@@ -158,7 +230,10 @@ export function RoadmapSection() {
                   <div className={isEven ? "md:col-start-2" : "md:col-start-1"}>
                     <div className="bg-white rounded-xl p-6 shadow-lg border border-border">
                       <ul className="space-y-2">
-                        {item.achievements.map((achievement, i) => (
+                        {(lang === "uk"
+                          ? item.achievements.uk
+                          : item.achievements.en
+                        ).map((achievement, i) => (
                           <li key={i} className="flex items-start">
                             <span className="inline-block w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0" />
                             <span className="text-foreground/80">
@@ -180,17 +255,23 @@ export function RoadmapSection() {
           <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
             <CheckCircle2 className="text-green-600 mx-auto mb-3" size={32} />
             <div className="text-3xl text-green-600 mb-2">2</div>
-            <div className="text-foreground/70">Завершені етапи</div>
+            <div className="text-foreground/70">
+              {lang === "uk" ? "Завершені етапи" : "Completed phases"}
+            </div>
           </div>
           <div className="bg-secondary/10 border border-secondary/20 rounded-xl p-6 text-center">
             <Clock className="text-secondary mx-auto mb-3" size={32} />
             <div className="text-3xl text-secondary mb-2">1</div>
-            <div className="text-foreground/70">Поточний етап</div>
+            <div className="text-foreground/70">
+              {lang === "uk" ? "Поточний етап" : "Current phase"}
+            </div>
           </div>
           <div className="bg-muted border border-border rounded-xl p-6 text-center">
             <Circle className="text-foreground/40 mx-auto mb-3" size={32} />
             <div className="text-3xl text-foreground/60 mb-2">3</div>
-            <div className="text-foreground/70">Заплановані етапи</div>
+            <div className="text-foreground/70">
+              {lang === "uk" ? "Заплановані етапи" : "Planned phases"}
+            </div>
           </div>
         </div>
       </div>

@@ -77,26 +77,26 @@ export function Navigation() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center gap-4 lg:gap-5 xl:gap-6">
             {navItems.map((item) => (
               <a
                 key={item.key}
                 href={item.href}
-                className="text-foreground hover:text-secondary transition-colors"
+                className="text-foreground hover:text-secondary transition-colors whitespace-nowrap text-sm lg:text-base"
               >
                 {lang === "uk" ? item.label.uk : item.label.en}
               </a>
             ))}
             <button
               onClick={toggleLanguage}
-              className="px-4 py-2 rounded-full border border-border text-foreground hover:bg-muted transition-colors"
+              className="px-4 py-2 rounded-full border border-border text-foreground hover:bg-muted transition-colors text-sm lg:text-base whitespace-nowrap"
               aria-label="Switch language"
             >
               {lang === "uk" ? "EN" : "UA"}
             </button>
             <a
               href="#contact"
-              className="px-6 py-2 bg-secondary text-white rounded-full hover:bg-primary transition-colors"
+              className="px-6 py-2 bg-secondary text-white rounded-full hover:bg-primary transition-colors whitespace-nowrap text-sm lg:text-base"
             >
               {lang === "uk" ? "Зв'язатися" : "Contact"}
             </a>

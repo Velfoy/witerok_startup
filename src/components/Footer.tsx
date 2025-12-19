@@ -1,24 +1,36 @@
+import { useLanguage } from "../contexts/LanguageContext";
+
 export function Footer() {
+  const { lang } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {
     company: [
-      { label: "Про компанію", href: "#about" },
-      { label: "Команда", href: "#team" },
-      { label: "Вакансії", href: "#contact" },
-      { label: "Блог", href: "#" },
+      { label: { uk: "Про компанію", en: "About" }, href: "#about" },
+      { label: { uk: "Команда", en: "Team" }, href: "#team" },
+      { label: { uk: "Вакансії", en: "Careers" }, href: "#contact" },
+      { label: { uk: "Блог", en: "Blog" }, href: "#" },
     ],
     product: [
-      { label: "WITERoK Generator", href: "#product" },
-      { label: "Характеристики", href: "#product" },
-      { label: "Ціни", href: "#contact" },
-      { label: "Документація", href: "#" },
+      {
+        label: { uk: "WITERoK Generator", en: "WITERoK Generator" },
+        href: "#product",
+      },
+      {
+        label: { uk: "Характеристики", en: "Specifications" },
+        href: "#product",
+      },
+      { label: { uk: "Ціни", en: "Pricing" }, href: "#contact" },
+      { label: { uk: "Документація", en: "Documentation" }, href: "#" },
     ],
     resources: [
-      { label: "Калькулятор окупності", href: "#" },
-      { label: "Кейси", href: "#" },
-      { label: "FAQ", href: "#faq" },
-      { label: "Підтримка", href: "#contact" },
+      {
+        label: { uk: "Калькулятор окупності", en: "Payback calculator" },
+        href: "#",
+      },
+      { label: { uk: "Кейси", en: "Case studies" }, href: "#" },
+      { label: { uk: "FAQ", en: "FAQ" }, href: "#faq" },
+      { label: { uk: "Підтримка", en: "Support" }, href: "#contact" },
     ],
   };
 
@@ -30,17 +42,23 @@ export function Footer() {
           <div>
             <div className="text-2xl mb-4">WITERoK</div>
             <p className="text-white/70 mb-4">
-              Вітроенергія нового покоління для бізнесу та громад України
+              {lang === "uk"
+                ? "Вітроенергія нового покоління для бізнесу та громад України"
+                : "Next-generation wind energy for businesses and communities"}
             </p>
             <div className="text-white/60 text-sm">
-              <p>вул. Хрещатик, 1</p>
-              <p>Київ, 01001, Україна</p>
+              <p>{lang === "uk" ? "вул. Хрещатик, 1" : "1 Khreshchatyk St."}</p>
+              <p>
+                {lang === "uk"
+                  ? "Київ, 01001, Україна"
+                  : "Kyiv, 01001, Ukraine"}
+              </p>
             </div>
           </div>
 
           {/* Company Links */}
           <div>
-            <h4 className="mb-4">Компанія</h4>
+            <h4 className="mb-4">{lang === "uk" ? "Компанія" : "Company"}</h4>
             <ul className="space-y-2">
               {footerLinks.company.map((link, index) => (
                 <li key={index}>
@@ -48,7 +66,7 @@ export function Footer() {
                     href={link.href}
                     className="text-white/70 hover:text-white transition-colors"
                   >
-                    {link.label}
+                    {lang === "uk" ? link.label.uk : link.label.en}
                   </a>
                 </li>
               ))}
@@ -57,7 +75,7 @@ export function Footer() {
 
           {/* Product Links */}
           <div>
-            <h4 className="mb-4">Продукт</h4>
+            <h4 className="mb-4">{lang === "uk" ? "Продукт" : "Product"}</h4>
             <ul className="space-y-2">
               {footerLinks.product.map((link, index) => (
                 <li key={index}>
@@ -65,7 +83,7 @@ export function Footer() {
                     href={link.href}
                     className="text-white/70 hover:text-white transition-colors"
                   >
-                    {link.label}
+                    {lang === "uk" ? link.label.uk : link.label.en}
                   </a>
                 </li>
               ))}
@@ -74,7 +92,7 @@ export function Footer() {
 
           {/* Resources Links */}
           <div>
-            <h4 className="mb-4">Ресурси</h4>
+            <h4 className="mb-4">{lang === "uk" ? "Ресурси" : "Resources"}</h4>
             <ul className="space-y-2">
               {footerLinks.resources.map((link, index) => (
                 <li key={index}>
@@ -82,7 +100,7 @@ export function Footer() {
                     href={link.href}
                     className="text-white/70 hover:text-white transition-colors"
                   >
-                    {link.label}
+                    {lang === "uk" ? link.label.uk : link.label.en}
                   </a>
                 </li>
               ))}
@@ -94,20 +112,22 @@ export function Footer() {
         <div className="pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-white/60 text-sm">
-              © {currentYear} WITERoK. Всі права захищено.
+              {lang === "uk"
+                ? `© ${currentYear} WITERoK. Всі права захищено.`
+                : `© ${currentYear} WITERoK. All rights reserved.`}
             </div>
             <div className="flex gap-6 text-sm">
               <a
                 href="#"
                 className="text-white/60 hover:text-white transition-colors"
               >
-                Політика конфіденційності
+                {lang === "uk" ? "Політика конфіденційності" : "Privacy policy"}
               </a>
               <a
                 href="#"
                 className="text-white/60 hover:text-white transition-colors"
               >
-                Умови використання
+                {lang === "uk" ? "Умови використання" : "Terms of use"}
               </a>
             </div>
           </div>

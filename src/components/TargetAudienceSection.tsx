@@ -1,50 +1,92 @@
 import { Building2, Factory, Home, Sprout } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export function TargetAudienceSection() {
+  const { lang } = useLanguage();
+
   const audiences = [
     {
       icon: Building2,
-      title: "Малий та середній бізнес",
-      description:
-        "Виробничі підприємства, логістичні центри, готелі, торгові центри",
-      benefits: [
-        "Зниження операційних витрат на 30-70%",
-        "Енергонезалежність під час блекаутів",
-        "Покращення ESG-показників компанії",
-      ],
+      title: { uk: "Малий та середній бізнес", en: "SMBs" },
+      description: {
+        uk: "Виробничі підприємства, логістичні центри, готелі, торгові центри",
+        en: "Manufacturers, logistics hubs, hotels, retail centers",
+      },
+      benefits: {
+        uk: [
+          "Зниження операційних витрат на 30-70%",
+          "Енергонезалежність під час блекаутів",
+          "Покращення ESG-показників компанії",
+        ],
+        en: [
+          "Cut operating costs by 30-70%",
+          "Energy independence during outages",
+          "Improved ESG metrics",
+        ],
+      },
       color: "secondary",
     },
     {
       icon: Factory,
-      title: "Промислові підприємства",
-      description: "Виробництва з високим споживанням електроенергії",
-      benefits: [
-        "Стабільне електропостачання виробництва",
-        "Зниження собівартості продукції",
-        "Резервне живлення критичних систем",
-      ],
+      title: { uk: "Промислові підприємства", en: "Industrial" },
+      description: {
+        uk: "Виробництва з високим споживанням електроенергії",
+        en: "High-consumption manufacturing sites",
+      },
+      benefits: {
+        uk: [
+          "Стабільне електропостачання виробництва",
+          "Зниження собівартості продукції",
+          "Резервне живлення критичних систем",
+        ],
+        en: [
+          "Stable supply for production",
+          "Lower product cost",
+          "Backup for critical systems",
+        ],
+      },
       color: "primary",
     },
     {
       icon: Sprout,
-      title: "Аграрний сектор",
-      description: "Фермерські господарства, тепличні комплекси",
-      benefits: [
-        "Автономне живлення в польових умовах",
-        "Забезпечення роботи систем зрошення",
-        "Економія на енергозабезпеченні",
-      ],
+      title: { uk: "Аграрний сектор", en: "Agriculture" },
+      description: {
+        uk: "Фермерські господарства, тепличні комплекси",
+        en: "Farms and greenhouse complexes",
+      },
+      benefits: {
+        uk: [
+          "Автономне живлення в польових умовах",
+          "Забезпечення роботи систем зрошення",
+          "Економія на енергозабезпеченні",
+        ],
+        en: [
+          "Autonomous power in the field",
+          "Keeps irrigation running",
+          "Cuts energy expenses",
+        ],
+      },
       color: "secondary",
     },
     {
       icon: Home,
-      title: "Громади та кооперативи",
-      description: "ОСББ, сільські громади, енергетичні кооперативи",
-      benefits: [
-        "Колективна енергонезалежність",
-        "Зниження комунальних платежів",
-        "Створення локальних енергомереж",
-      ],
+      title: { uk: "Громади та кооперативи", en: "Communities & co-ops" },
+      description: {
+        uk: "ОСББ, сільські громади, енергетичні кооперативи",
+        en: "HOAs, rural communities, energy co-ops",
+      },
+      benefits: {
+        uk: [
+          "Колективна енергонезалежність",
+          "Зниження комунальних платежів",
+          "Створення локальних енергомереж",
+        ],
+        en: [
+          "Collective energy independence",
+          "Lower utility bills",
+          "Build local microgrids",
+        ],
+      },
       color: "primary",
     },
   ];
@@ -54,10 +96,12 @@ export function TargetAudienceSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl text-primary mb-4">
-            Цільова аудиторія
+            {lang === "uk" ? "Цільова аудиторія" : "Target audience"}
           </h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            WITERoK створює цінність для різних сегментів ринку
+            {lang === "uk"
+              ? "WITERoK створює цінність для різних сегментів ринку"
+              : "WITERoK creates value across diverse market segments"}
           </p>
         </div>
 
@@ -85,12 +129,19 @@ export function TargetAudienceSection() {
                 >
                   <Icon className={textColor} size={32} />
                 </div>
-                <h3 className="text-2xl text-primary mb-2">{audience.title}</h3>
+                <h3 className="text-2xl text-primary mb-2">
+                  {lang === "uk" ? audience.title.uk : audience.title.en}
+                </h3>
                 <p className="text-foreground/70 mb-6">
-                  {audience.description}
+                  {lang === "uk"
+                    ? audience.description.uk
+                    : audience.description.en}
                 </p>
                 <div className="space-y-3">
-                  {audience.benefits.map((benefit, i) => (
+                  {(lang === "uk"
+                    ? audience.benefits.uk
+                    : audience.benefits.en
+                  ).map((benefit, i) => (
                     <div key={i} className="flex items-start">
                       <div
                         className={`flex-shrink-0 w-6 h-6 ${bgColor} rounded-full flex items-center justify-center mt-0.5`}
@@ -121,23 +172,30 @@ export function TargetAudienceSection() {
         {/* Market Size */}
         <div className="mt-16 bg-gradient-to-br from-primary to-secondary rounded-2xl p-8 md:p-12 text-white text-center">
           <h3 className="text-3xl mb-6">Розмір ринку в Україні</h3>
+          <h3 className="sr-only">{lang === "uk" ? "" : ""}</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <div className="text-5xl mb-2">50 000+</div>
               <div className="text-white/80">
-                Підприємств малого та середнього бізнесу
+                {lang === "uk"
+                  ? "Підприємств малого та середнього бізнесу"
+                  : "SMB companies in Ukraine"}
               </div>
             </div>
             <div>
               <div className="text-5xl mb-2">$2.5 млрд</div>
               <div className="text-white/80">
-                Потенційний обсяг ринку до 2030
+                {lang === "uk"
+                  ? "Потенційний обсяг ринку до 2030"
+                  : "TAM potential by 2030"}
               </div>
             </div>
             <div>
               <div className="text-5xl mb-2">25%</div>
               <div className="text-white/80">
-                Річне зростання попиту на автономну енергію
+                {lang === "uk"
+                  ? "Річне зростання попиту на автономну енергію"
+                  : "YoY demand growth for autonomous energy"}
               </div>
             </div>
           </div>
