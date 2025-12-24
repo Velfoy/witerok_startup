@@ -289,7 +289,7 @@ export function TeamSection() {
           <h2 className="text-4xl md:text-5xl text-white font-bold mb-4 drop-shadow-lg">
             {lang === "uk" ? "Команда" : "Team"}
           </h2>
-          <p className="text-xl text-white/90 drop-shadow-sm">
+          <p className="text-l text-white/90 drop-shadow-sm">
             {lang === "uk"
               ? "Досвідчені професіонали з різних галузей"
               : "Experienced professionals from multiple domains"}
@@ -315,7 +315,7 @@ export function TeamSection() {
 
           <div
             ref={sliderRef}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-6 px-10"
+            className="flex overflow-x-auto no-scrollbar snap-x snap-mandatory gap-6 px-10"
             style={{ scrollBehavior: "smooth" }}
           >
             {team.map((member, index) => (

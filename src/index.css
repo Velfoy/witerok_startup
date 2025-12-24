@@ -124,6 +124,15 @@
   .glass-input::placeholder {
     color: rgba(20, 64, 115, 0.45);
   }
+
+  /* Hide scrollbars for custom sliders while preserving scrollability */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
 }
 
 .dark {
