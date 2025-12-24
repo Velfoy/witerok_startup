@@ -1,158 +1,182 @@
-import { DollarSign, Package, Repeat, Users } from "lucide-react";
+import { Settings, ShoppingBag, Hammer, Award } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 
 export function BusinessModelSection() {
   const { lang } = useLanguage();
 
-  const revenueStreams = [
+  const modelItems = [
     {
-      icon: Package,
-      title: { uk: "Прямі продажі", en: "Direct sales" },
+      icon: Settings,
+      title: { uk: "Аналітика місцевості", en: "Location Analytics" },
       description: {
-        uk: "Продаж вітрогенераторів з повним циклом встановлення та налаштування",
-        en: "Turbine sales with full installation and commissioning",
+        uk: "Ми проводимо аналіз вітрового потенціалу місцевості, щоб на 100% підтвердити окупність інвестиції клієнта.",
+        en: "We analyze the wind potential of a location to 100% confirm the client's investment payback.",
       },
-      revenue: "60%",
     },
     {
-      icon: Repeat,
-      title: { uk: "Сервісне обслуговування", en: "Service" },
+      icon: ShoppingBag,
+      title: { uk: "Продаж", en: "Sales" },
       description: {
-        uk: "Річні контракти на технічне обслуговування та моніторинг систем",
-        en: "Annual maintenance and monitoring contracts",
+        uk: "Ми надаємо професійну допомогу та пропонуємо найкраще рішення для ваших потреб.",
+        en: "We provide professional assistance and offer the best solution for your needs.",
       },
-      revenue: "25%",
     },
     {
-      icon: Users,
-      title: { uk: "Консалтинг", en: "Consulting" },
+      icon: Hammer,
+      title: { uk: "Встановлення", en: "Installation" },
       description: {
-        uk: "Аудит енергоефективності та розробка стратегій переходу на відновлювану енергію",
-        en: "Energy efficiency audits and transition strategy design",
+        uk: "Ми виконуємо монтаж швидко, точно та відповідно до всіх технічних вимог.",
+        en: "We perform installation quickly, accurately, and according to all technical requirements.",
       },
-      revenue: "10%",
     },
     {
-      icon: DollarSign,
-      title: { uk: "Лізинг та фінансування", en: "Leasing & financing" },
+      icon: Award,
+      title: { uk: "Сервіс", en: "Service" },
       description: {
-        uk: "Програми оренди та розстрочки для малого та середнього бізнесу",
-        en: "Lease and installment programs for SMBs",
+        uk: "Ми гарантуємо довгострокову підтримку та регулярне технічне обслуговування.",
+        en: "We guarantee long-term support and regular maintenance.",
       },
-      revenue: "5%",
     },
   ];
 
-  const costs = [
+  const channels = [
     {
-      category: { uk: "Виробництво", en: "Manufacturing" },
-      percentage: 40,
-      amount: "40%",
+      title: {
+        uk: "Прямі продажі через сайт з формою заявки",
+        en: "Direct sales through website with application form",
+      },
+      description: {
+        uk: "– основний канал, низькі витрати.",
+        en: "– main channel, low costs.",
+      },
     },
     {
-      category: { uk: "Маркетинг та продажі", en: "Marketing & Sales" },
-      percentage: 25,
-      amount: "25%",
+      title: {
+        uk: "B2B-партнерства (агрокомпанії, малі бізнеси)",
+        en: "B2B partnerships (agricultural companies, small businesses)",
+      },
+      description: {
+        uk: "– великі обсяги продажів, середні витрати.",
+        en: "– large sales volumes, medium costs.",
+      },
     },
-    { category: { uk: "R&D", en: "R&D" }, percentage: 15, amount: "15%" },
     {
-      category: { uk: "Операційні витрати", en: "Operations" },
-      percentage: 12,
-      amount: "12%",
+      title: {
+        uk: "Дистриб'ютори обладнання в ВДЕ",
+        en: "Renewable energy equipment distributors",
+      },
+      description: {
+        uk: "– вхід на готову мережу клієнтів (комісія партнерам).",
+        en: "– access to ready-made client network (partner commission).",
+      },
     },
-    { category: { uk: "Інше", en: "Other" }, percentage: 8, amount: "8%" },
+    {
+      title: {
+        uk: "Маркетплейси (Prom.ua, OLX Pro, Rozetka Business)",
+        en: "Marketplaces (Prom.ua, OLX Pro, Rozetka Business)",
+      },
+      description: {
+        uk: "– додатковий канал.",
+        en: "– additional channel.",
+      },
+    },
   ];
 
   return (
-    <section id="business" className="py-24 bg-muted">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl text-primary mb-4">
-            {lang === "uk" ? "Бізнес-модель" : "Business model"}
+    <section
+      id="business"
+      className="relative py-16 bg-gradient-to-b from-white via-[#f7fbff] to-white overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.08),transparent_36%),radial-gradient(circle_at_80%_30%,rgba(59,130,246,0.08),transparent_34%),radial-gradient(circle_at_50%_80%,rgba(14,165,233,0.05),transparent_32%)]" />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/60 via-transparent to-white/70" />
+
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8">
+          <h2 className="text-4xl md:text-5xl text-slate-900 font-semibold mt-4 mb-3">
+            {lang === "uk" ? "Бізнес-модель" : "Business Model"}
           </h2>
-          <p className="text-xl text-foreground/80">
+          <p className="text-l text-slate-600 max-w-3xl mx-auto">
             {lang === "uk"
-              ? "Диверсифіковані потоки доходів та оптимізована структура витрат"
-              : "Diversified revenue streams and optimized cost structure"}
+              ? "Комплексний підхід від аналітики до сервісу"
+              : "Comprehensive approach from analytics to service"}
           </p>
         </div>
 
-        {/* Revenue Streams */}
-        <div className="mb-16">
-          <h3 className="text-3xl text-primary mb-8 text-center">
-            {lang === "uk" ? "Потоки доходів" : "Revenue streams"}
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {revenueStreams.map((stream, index) => {
-              const Icon = stream.icon;
-              return (
-                <div
-                  key={index}
-                  className="bg-white rounded-xl p-6 shadow-lg border border-border relative overflow-hidden group hover:shadow-xl transition-all"
-                >
-                  <div className="absolute top-0 right-0 bg-secondary text-white px-4 py-1 rounded-bl-xl">
-                    {stream.revenue}
+        {/* Main Model Items */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {modelItems.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <div key={index} className="h-full">
+                <div className="group h-full flex flex-col rounded-2xl bg-white border border-slate-200 shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_14px_36px_rgba(26,109,204,0.18)] transition overflow-hidden">
+                  <div className="p-6 flex-1 flex flex-col items-center text-center">
+                    <div
+                      className="w-16 h-16 rounded-xl text-white flex items-center justify-center shadow-md mb-4"
+                      style={{
+                        background: "linear-gradient(135deg, #144073, #1A6DCC)",
+                      }}
+                    >
+                      <Icon size={32} />
+                    </div>
+                    <h3 className="text-lg text-slate-900 font-semibold mb-3">
+                      {lang === "uk" ? item.title.uk : item.title.en}
+                    </h3>
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      {lang === "uk"
+                        ? item.description.uk
+                        : item.description.en}
+                    </p>
                   </div>
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-secondary/10 rounded-lg mb-4 group-hover:bg-secondary/20 transition-colors">
-                    <Icon className="text-secondary" size={24} />
-                  </div>
-                  <h4 className="text-lg text-primary mb-2">
-                    {lang === "uk" ? stream.title.uk : stream.title.en}
-                  </h4>
-                  <p className="text-sm text-foreground/70">
-                    {lang === "uk"
-                      ? stream.description.uk
-                      : stream.description.en}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Cost Structure */}
-        <div className="bg-white rounded-2xl p-8 shadow-xl">
-          <h3 className="text-3xl text-primary mb-8 text-center">
-            {lang === "uk" ? "Структура витрат" : "Cost structure"}
-          </h3>
-          <div className="space-y-4">
-            {costs.map((cost, index) => (
-              <div key={index} className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <span className="text-foreground">
-                    {lang === "uk" ? cost.category.uk : cost.category.en}
-                  </span>
-                  <span className="text-secondary">{cost.amount}</span>
-                </div>
-                <div className="w-full bg-muted rounded-full h-3 overflow-hidden">
                   <div
-                    className="bg-gradient-to-r from-primary to-secondary h-full rounded-full transition-all duration-1000"
-                    style={{ width: `${cost.percentage}%` }}
+                    className="h-1 mt-auto opacity-70 group-hover:opacity-100 transition"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, #144073, #1A6DCC, #144073)",
+                    }}
                   />
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
+        </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6 bg-muted rounded-xl">
-              <div className="text-4xl text-secondary mb-2">45%</div>
-              <div className="text-foreground/70">
-                {lang === "uk" ? "Валова маржа" : "Gross margin"}
+        {/* Sales Channels Flow */}
+        <div className="relative">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {channels.map((channel, index) => (
+              <div key={index} className="relative">
+                <div className="h-full rounded-xl bg-gradient-to-br from-[#144073] to-[#1A6DCC] p-6 text-white shadow-lg">
+                  <p className="font-semibold mb-2 text-sm leading-tight">
+                    {lang === "uk" ? channel.title.uk : channel.title.en}
+                  </p>
+                  <p className="text-xs text-white/90">
+                    {lang === "uk"
+                      ? channel.description.uk
+                      : channel.description.en}
+                  </p>
+                </div>
+                {/* Arrow connector */}
+                {index < channels.length - 1 && (
+                  <div className="hidden lg:block absolute top-1/2 -right-2 transform -translate-y-1/2 z-10">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6 3L11 8L6 13"
+                        stroke="#1A6DCC"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                )}
               </div>
-            </div>
-            <div className="text-center p-6 bg-muted rounded-xl">
-              <div className="text-4xl text-secondary mb-2">3-5 років</div>
-              <div className="text-foreground/70">
-                {lang === "uk" ? "Окупність для клієнта" : "Payback for client"}
-              </div>
-            </div>
-            <div className="text-center p-6 bg-muted rounded-xl">
-              <div className="text-4xl text-secondary mb-2">18 міс</div>
-              <div className="text-foreground/70">
-                {lang === "uk" ? "Break-even point" : "Break-even point"}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
