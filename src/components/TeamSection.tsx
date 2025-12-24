@@ -1,6 +1,13 @@
 import { useLanguage } from "../contexts/LanguageContext";
 import { useEffect, useRef } from "react";
 import { useInViewport } from "../hooks/useInViewport";
+import leraZlydarImg from "../assets/lera_zlydar.jpg";
+import artem_dedeniukImg from "../assets/artem_der.jpg";
+import stasKotlyarImg from "../assets/Stat_kotlar.jpg";
+import yaroslavaPolikarpovaImg from "../assets/Jaroslava_Polikarpowa.jpg";
+import valeriiaSlodkovskaImg from "../assets/valeriia_slodkowska.jpg";
+import danilKurtaImg from "../assets/Danil-Kurta.jpg";
+import nataliaYaroshenkoImg from "../assets/natalia-yaroszenko.png";
 
 function TeamBackground({ active }: { active: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -137,24 +144,6 @@ export function TeamSection() {
 
   const team = [
     {
-      name: { uk: "Валерія Злидар", en: "Valeriia Zlydar" },
-      position: { uk: "Frontend розробник", en: "Frontend Developer" },
-      bio: {
-        uk: "Фронтенд-розробниця, відповідальна за сайт та UI продукту",
-        en: "Frontend developer responsible for the website and product UI",
-      },
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400",
-    },
-    {
-      name: { uk: "Ярослав Кутовенко", en: "Yaroslav Kutovenko" },
-      position: { uk: "Frontend розробник", en: "Frontend Developer" },
-      bio: {
-        uk: "1+ рік досвіду в програмуванні та розробці веб-сайтів",
-        en: "1+ year of experience in programming and web development",
-      },
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400",
-    },
-    {
       name: { uk: "Артем Деденок", en: "Artem Dedenok" },
       position: {
         uk: "Data Analyst, co-founders",
@@ -164,8 +153,7 @@ export function TeamSection() {
         uk: "2+ роки досвіду роботи в галузі альтернативної енергетики",
         en: "2+ years of experience in the renewable energy sector",
       },
-      image:
-        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400",
+      image: artem_dedeniukImg,
     },
     {
       name: { uk: "Ярослава Полікарпова", en: "Yaroslava Polikarpova" },
@@ -174,8 +162,7 @@ export function TeamSection() {
         uk: "3+ роки досвіду в бізнес-аналітиці, фандрайзингу та інженерії",
         en: "3+ years of experience in business analytics, fundraising and engineering",
       },
-      image:
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400",
+      image: yaroslavaPolikarpovaImg,
     },
     {
       name: { uk: "Станіслав Котляр", en: "Stanislav Kotliar" },
@@ -184,8 +171,16 @@ export function TeamSection() {
         uk: "3+ років в 3D моделюванні та розробці механізмів",
         en: "3+ years in 3D modeling and mechanism development",
       },
-      image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400",
+      image: stasKotlyarImg,
+    },
+    {
+      name: { uk: "Валерія Злидар", en: "Valeriia Zlydar" },
+      position: { uk: "Frontend розробник", en: "Frontend Developer" },
+      bio: {
+        uk: "1+ рік комерційного досвіду у розробці веб-сторінок та UI/UX дизайні",
+        en: "1+ year of commercial experience in web development and UI/UX design",
+      },
+      image: leraZlydarImg,
     },
     {
       name: { uk: "Наталія Ярошенко", en: "Natalia Yaroshenko" },
@@ -194,40 +189,29 @@ export function TeamSection() {
         uk: "0,5+ рік досвіду активної комунікації з потенційними клієнтами",
         en: "0.5+ year of experience in active communication with potential clients",
       },
-      image:
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400",
+      image: nataliaYaroshenkoImg,
     },
   ];
 
   const openRoles = [
     {
       title: {
-        uk: "Механічний інженер (R&D)",
-        en: "Mechanical Engineer (R&D)",
+        uk: "Електроінженер",
+        en: "Electrical Engineer",
       },
       desc: {
-        uk: "Проектування вузлів турбіни, прототипування та тестування",
-        en: "Design turbine assemblies, rapid prototyping and testing",
+        uk: "Розробка електронних систем керування та силових перетворювачів",
+        en: "Development of electronic control systems and power converters",
       },
     },
     {
       title: {
-        uk: "Електроінженер (Силові системи)",
-        en: "Electrical Engineer (Power Systems)",
+        uk: "Інженер з матеріалів",
+        en: "Materials Engineer",
       },
       desc: {
-        uk: "Електроніка керування, перетворювачі та безпека",
-        en: "Control electronics, converters and safety",
-      },
-    },
-    {
-      title: {
-        uk: "Backend розробник (Node.js)",
-        en: "Backend Developer (Node.js)",
-      },
-      desc: {
-        uk: "API, інтеграції, аналітика даних",
-        en: "APIs, integrations and data analytics",
+        uk: "Дослідження та підбір матеріалів для підвищення ефективності турбіни",
+        en: "Research and selection of materials to improve turbine efficiency",
       },
     },
   ];

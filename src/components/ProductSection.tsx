@@ -241,8 +241,8 @@ export function ProductSection() {
             </h3>
             <p className="text-white/90 mb-6 drop-shadow-sm leading-relaxed">
               {lang === "uk"
-                ? "Компактна конструкція з потужністю 2-4 МВт·год/рік, працює при низьких швидкостях вітру від 3 м/с. Легко монтується на дахи та тераси з мінімальним впливом на довколишнє середовище. Низький рівень шуму (30-40 дБ) і довговічність 15-20 років роблять її ідеальним рішенням для домохозяйств та малого бізнесу."
-                : "Compact design generating 2-4 MWh/year, operates at low wind speeds from 3 m/s. Easy to install on roofs and terraces with minimal environmental impact. Low noise level (30-40 dB) and 15-20 year lifespan make it ideal for households and small businesses."}
+                ? "WITERoK поєднує інноваційний дизайн без лопатей з практичною функціональністю. Це безпечне, тихе рішення для енергонезалежності, яке легко встановлюється та вимагає мінімального обслуговування."
+                : "WITERoK combines innovative bladeless design with practical functionality. It's a safe, quiet solution for energy independence that installs easily and requires minimal maintenance."}
             </p>
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 ">
               {specs.map((spec, index) => {

@@ -161,7 +161,7 @@ export function FAQSection() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="mailto:info@witerok.ua"
+              href="mailto:witerokgreenenergy@gmail.com"
               className="inline-block px-8 py-3 bg-white text-[#144073] rounded-full hover:bg-gray-100 transition-colors font-medium"
             >
               {lang === "uk" ? "Надіслати питання" : "Send a question"}
