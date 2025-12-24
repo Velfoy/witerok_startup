@@ -106,7 +106,7 @@ export function ProblemSection() {
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl text-slate-900 font-semibold mt-3 mb-4">
+          <h2 className="text-4xl md:text-5xl text-[#144073] font-semibold mt-3 mb-4">
             {lang === "uk" ? "Проблема" : "Problem"}
           </h2>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto">

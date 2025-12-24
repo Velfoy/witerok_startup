@@ -44,9 +44,9 @@ export function Navigation() {
     },
     { key: "team", label: { uk: "Команда", en: "Team" }, href: "#team" },
     {
-      key: "advisors",
-      label: { uk: "Радники", en: "Advisors" },
-      href: "#advisors",
+      key: "parteners",
+      label: { uk: "Партнери", en: "Partnerships" },
+      href: "#partnership",
     },
     {
       key: "financial",

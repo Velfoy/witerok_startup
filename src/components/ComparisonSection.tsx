@@ -75,7 +75,7 @@ export function ComparisonSection() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h2 className="text-4xl md:text-5xl text-slate-900 font-semibold mt-4 mb-3">
+          <h2 className="text-4xl md:text-5xl text-[#144073] font-semibold mt-4 mb-3">
             {lang === "uk" ? "Конкурентний аналіз" : "Competitive Analysis"}
           </h2>
           <p className="text-base text-slate-500 max-w-3xl mx-auto">
