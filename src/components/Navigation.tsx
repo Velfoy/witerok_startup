@@ -13,7 +13,7 @@ export function Navigation() {
     { key: "esg", label: { uk: "ESG", en: "ESG" }, href: "#esg" },
     {
       key: "problem",
-      label: { uk: "Проблема", en: "Problem" },
+      label: { uk: "Проблема", en: "Problem & Solution" },
       href: "#problem",
     },
     {
@@ -22,8 +22,8 @@ export function Navigation() {
       href: "#product",
     },
     {
-      key: "advantages",
-      label: { uk: "Переваги", en: "Advantages" },
+      key: "competitive",
+      label: { uk: "Конкурентні переваги", en: "Competitive Advantages" },
       href: "#advantages",
     },
     {
@@ -31,34 +31,43 @@ export function Navigation() {
       label: { uk: "Порівняння", en: "Comparison" },
       href: "#comparison",
     },
-    { key: "audience", label: { uk: "ЦА", en: "Audience" }, href: "#audience" },
+    {
+      key: "audience",
+      label: { uk: "Цільова аудиторія", en: "Target Audience" },
+      href: "#audience",
+    },
     {
       key: "business",
-      label: { uk: "Бізнес", en: "Business" },
+      label: { uk: "Бізнес-модель", en: "Business Model" },
       href: "#business",
     },
     {
       key: "marketing",
-      label: { uk: "Маркетинг", en: "Marketing" },
+      label: { uk: "Маркетингова стратегія", en: "Marketing Strategy" },
       href: "#marketing",
     },
     { key: "team", label: { uk: "Команда", en: "Team" }, href: "#team" },
     {
-      key: "parteners",
-      label: { uk: "Партнери", en: "Partnerships" },
+      key: "partners",
+      label: { uk: "Партнери", en: "Partners" },
       href: "#partnership",
     },
     {
       key: "financial",
-      label: { uk: "Фінанси", en: "Financial" },
+      label: { uk: "Фінансова модель", en: "Financial Model" },
       href: "#financial",
     },
     {
       key: "roadmap",
-      label: { uk: "Дорожня карта", en: "Roadmap" },
+      label: { uk: "Дорожна карта", en: "Roadmap" },
       href: "#roadmap",
     },
-    { key: "faq", label: { uk: "FAQ", en: "FAQ" }, href: "#faq" },
+    {
+      key: "calculator",
+      label: { uk: "Калькулятор", en: "Efficiency Calculator" },
+      href: "#calculator",
+    },
+    { key: "faq", label: { uk: "Запитання", en: "FAQ" }, href: "#faq" },
     {
       key: "contact",
       label: { uk: "Контакти", en: "Contact" },

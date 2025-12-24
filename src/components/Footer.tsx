@@ -8,8 +8,8 @@ export function Footer() {
     company: [
       { label: { uk: "Про компанію", en: "About" }, href: "#about" },
       { label: { uk: "Команда", en: "Team" }, href: "#team" },
-      { label: { uk: "Вакансії", en: "Careers" }, href: "#contact" },
-      { label: { uk: "Блог", en: "Blog" }, href: "#" },
+      { label: { uk: "Партнери", en: "Partners" }, href: "#partnership" },
+      { label: { uk: "Контакти", en: "Contact" }, href: "#contact" },
     ],
     product: [
       {
@@ -20,17 +20,20 @@ export function Footer() {
         label: { uk: "Характеристики", en: "Specifications" },
         href: "#product",
       },
-      { label: { uk: "Ціни", en: "Pricing" }, href: "#contact" },
-      { label: { uk: "Документація", en: "Documentation" }, href: "#" },
+      { label: { uk: "Переваги", en: "Advantages" }, href: "#advantages" },
+      { label: { uk: "Порівняння", en: "Comparison" }, href: "#comparison" },
     ],
     resources: [
       {
-        label: { uk: "Калькулятор окупності", en: "Payback calculator" },
-        href: "#",
+        label: { uk: "Проблема & Рішення", en: "Problem & Solution" },
+        href: "#problem",
       },
-      { label: { uk: "Кейси", en: "Case studies" }, href: "#" },
+      {
+        label: { uk: "Цільова аудиторія", en: "Target Audience" },
+        href: "#audience",
+      },
       { label: { uk: "FAQ", en: "FAQ" }, href: "#faq" },
-      { label: { uk: "Підтримка", en: "Support" }, href: "#contact" },
+      { label: { uk: "Дорожна карта", en: "Roadmap" }, href: "#roadmap" },
     ],
   };
 
