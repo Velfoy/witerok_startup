@@ -17,11 +17,13 @@ import { FAQSection } from "./components/FAQSection";
 import { ContactSection } from "./components/ContactSection";
 import { Footer } from "./components/Footer";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import WindCursorGlobal from "./components/WindCursorGlobal";
 
 export default function App() {
   return (
     <LanguageProvider>
       <div className="min-h-screen bg-background scroll-smooth">
+        <WindCursorGlobal />
         <Navigation />
 
         <main>

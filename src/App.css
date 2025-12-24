@@ -40,3 +40,58 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Wind-themed CTA hover effect */
+.wind-cta {
+  position: relative;
+  overflow: hidden;
+}
+.wind-cta::before {
+  content: "";
+  position: absolute;
+  left: -20%;
+  top: -40%;
+  width: 140%;
+  height: 180%;
+  border-radius: 9999px;
+  background: radial-gradient(
+    220px 60px at var(--x, 50%) 120%,
+    rgba(255, 255, 255, 0.35),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+.wind-cta:hover::before {
+  opacity: 0.8;
+}
+.wind-cta::after {
+  content: "";
+  position: absolute;
+  left: -120%;
+  top: 0;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  opacity: 0;
+  pointer-events: none;
+}
+.wind-cta:hover::after {
+  opacity: 0.6;
+  animation: wind-shimmer 2s ease-in-out infinite;
+}
+@keyframes wind-shimmer {
+  0% {
+    left: -120%;
+  }
+  100% {
+    left: 120%;
+  }
+}

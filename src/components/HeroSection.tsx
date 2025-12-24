@@ -1,9 +1,303 @@
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import turbineImg from "../assets/turbine.jpg";
+import { useEffect, useRef, useState } from "react";
+
+function WindParticles({ blurAmount = 0 }: { blurAmount?: number }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    const mouse = { x: -1000, y: -1000, radius: 200 };
+
+    // Set canvas size
+    const resizeCanvas = () => {
+      if (!canvas) return;
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    // Mouse move handler
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
+
+    canvas.addEventListener("mousemove", handleMouseMove);
+    canvas.addEventListener("mouseleave", handleMouseLeave);
+
+    // Particle configuration (balanced for performance)
+    const particleCount = 190;
+
+    class Particle {
+      x: number;
+      y: number;
+      baseX: number;
+      baseY: number;
+      vx: number;
+      vy: number;
+      size: number;
+      density: number;
+
+      constructor(canvasWidth: number, canvasHeight: number) {
+        this.x = Math.random() * canvasWidth;
+        this.y = Math.random() * canvasHeight;
+        this.baseX = this.x;
+        this.baseY = this.y;
+        this.vx = 0;
+        this.vy = 0;
+        this.density = Math.random() * 3 + 1;
+        this.size = Math.random() * 3 + 2; // slightly larger particles
+      }
+
+      update() {
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < mouse.radius) {
+          // Wind effect - push particles away from mouse
+          const angle = Math.atan2(dy, dx);
+          const force = (mouse.radius - distance) / mouse.radius;
+
+          // Create wind acceleration
+          this.vx -= Math.cos(angle) * force * this.density * 2;
+          this.vy -= Math.sin(angle) * force * this.density * 2;
+        }
+
+        // Apply velocity
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Friction/damping
+        this.vx *= 0.85;
+        this.vy *= 0.85;
+
+        // Return to base position
+        const returnForceX = (this.baseX - this.x) * 0.05;
+        const returnForceY = (this.baseY - this.y) * 0.05;
+        this.vx += returnForceX;
+        this.vy += returnForceY;
+      }
+
+      draw() {
+        if (!ctx) return;
+
+        // Particle glow based on velocity
+        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        const glowIntensity = Math.min(speed * 0.2, 1);
+
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.65 + glowIntensity * 0.35})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+
+        // Add glow for moving particles (reduced cost)
+        if (speed > 1.4) {
+          ctx.shadowBlur = 6;
+          ctx.shadowColor = "rgba(255, 255, 255, 0.5)";
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size * 1.4, 0, Math.PI * 2);
+          ctx.closePath();
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+      }
+    }
+
+    // Create particles
+    const particles: Particle[] = [];
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle(canvas.width, canvas.height));
+    }
+
+    // Wind trails from mouse
+    const windTrails: Array<{ x: number; y: number; life: number }> = [];
+    let lastMouseX = mouse.x;
+    let lastMouseY = mouse.y;
+    let gustTick = 0; // throttle counter for gust rendering
+
+    // Connect particles using spatial grid to reduce checks
+    function connect() {
+      if (!ctx) return;
+      const maxDistance = 150;
+      const cellSize = maxDistance;
+
+      const grid = new Map<string, number[]>();
+      const keyFor = (x: number, y: number) =>
+        `${Math.floor(x / cellSize)},${Math.floor(y / cellSize)}`;
+
+      for (let i = 0; i < particles.length; i++) {
+        const k = keyFor(particles[i].x, particles[i].y);
+        const bucket = grid.get(k);
+        if (bucket) bucket.push(i);
+        else grid.set(k, [i]);
+      }
+
+      for (let i = 0; i < particles.length; i++) {
+        const pi = particles[i];
+        const cx = Math.floor(pi.x / cellSize);
+        const cy = Math.floor(pi.y / cellSize);
+        for (let dx = -1; dx <= 1; dx++) {
+          for (let dy = -1; dy <= 1; dy++) {
+            const k = `${cx + dx},${cy + dy}`;
+            const bucket = grid.get(k);
+            if (!bucket) continue;
+            for (const j of bucket) {
+              if (j <= i) continue; // avoid duplicate pairs
+              const pj = particles[j];
+              const ddx = pi.x - pj.x;
+              const ddy = pi.y - pj.y;
+              const dist = Math.sqrt(ddx * ddx + ddy * ddy);
+              if (dist < maxDistance) {
+                const opacity = 1 - dist / maxDistance;
+                ctx.strokeStyle = `rgba(148, 163, 184, ${opacity * 0.4})`;
+                ctx.lineWidth = 1.1;
+                ctx.beginPath();
+                ctx.moveTo(pi.x, pi.y);
+                ctx.lineTo(pj.x, pj.y);
+                ctx.stroke();
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Animation loop
+    function animate() {
+      if (!ctx || !canvas) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Subtle animated gust lines behind particles (throttled, no blur)
+      const time = Date.now() * 0.001;
+      if (gustTick++ % 6 === 0) {
+        const gusts = 3;
+        for (let g = 0; g < gusts; g++) {
+          const y =
+            canvas.height * (0.2 + 0.2 * g) + Math.sin(time + g * 1.7) * 18;
+          ctx.strokeStyle = `rgba(255, 255, 255, ${0.05 + g * 0.02})`;
+          ctx.lineWidth = 6 - g;
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          for (let x = 0; x <= canvas.width; x += 90) {
+            const offset = Math.sin(time * 0.6 + x * 0.01 + g) * 14;
+            ctx.lineTo(x, y + offset);
+          }
+          ctx.stroke();
+        }
+      }
+
+      // Add wind trail effects when mouse moves
+      if (mouse.x > 0 && mouse.y > 0) {
+        const mouseDx = mouse.x - lastMouseX;
+        const mouseDy = mouse.y - lastMouseY;
+        const mouseSpeed = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
+
+        if (mouseSpeed > 2) {
+          windTrails.push({
+            x: mouse.x,
+            y: mouse.y,
+            life: 30,
+          });
+        }
+      }
+
+      // Draw and update wind trails
+      windTrails.forEach((trail, index) => {
+        trail.life--;
+        const alpha = trail.life / 30;
+
+        ctx.beginPath();
+        ctx.arc(trail.x, trail.y, 15 * (1 - alpha), 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(148, 163, 184, ${alpha * 0.25})`; // slate-400
+        ctx.fill();
+
+        if (trail.life <= 0) {
+          windTrails.splice(index, 1);
+        }
+      });
+
+      lastMouseX = mouse.x;
+      lastMouseY = mouse.y;
+
+      // Update and draw particles
+      particles.forEach((particle) => {
+        particle.update();
+        particle.draw();
+      });
+
+      connect();
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+      canvas.removeEventListener("mousemove", handleMouseMove);
+      canvas.removeEventListener("mouseleave", handleMouseLeave);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      style={{
+        opacity: 0.9,
+        filter: blurAmount > 0 ? `blur(${blurAmount}px)` : undefined,
+        transition: "filter 200ms ease",
+      }}
+    />
+  );
+}
 
 export function HeroSection() {
   const { lang } = useLanguage();
+  const [bgBlur, setBgBlur] = useState(0);
+  const heroRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    let ticking = false;
+    const update = () => {
+      const rect = heroRef.current?.getBoundingClientRect();
+      const height = rect?.height ?? window.innerHeight;
+      const top = rect?.top ?? 0;
+      const scrolled = Math.max(0, -top);
+      const threshold = Math.max(180, height * 0.45);
+      const progress = Math.min(1, scrolled / threshold);
+      setBgBlur(progress * 6); // up to 6px blur
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          update();
+          ticking = false;
+        });
+      }
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const copy = {
     title: {
@@ -21,11 +315,16 @@ export function HeroSection() {
   };
 
   return (
-    <section id="home" className="section-shell relative overflow-hidden">
-      <div className="section-surface max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <section
+      id="home"
+      ref={heroRef}
+      className="section-shell relative overflow-hidden"
+    >
+      <WindParticles blurAmount={bgBlur} />
+      <div className="section-surface max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
           {/* Left panel: white content */}
-          <div className="bg-white rounded-2xl p-12 pl-0 flex flex-col justify-center">
+          <div className="bg-transparent rounded-2xl p-12 pl-0 flex flex-col justify-center">
             <h1 className="text-5xl md:text-6xl lg:text-7xl leading-tight font-extrabold text-foreground mb-6">
               {lang === "uk" ? copy.title.uk : copy.title.en}
             </h1>
@@ -37,10 +336,18 @@ export function HeroSection() {
             <div className="flex items-center gap-4">
               <a
                 href="#product"
-                className="inline-flex items-center gap-3 glass-pill bg-white text-[#004799] px-6 py-3 shadow-md"
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  e.currentTarget.style.setProperty("--x", `${x}px`);
+                }}
+                className="group wind-cta inline-flex items-center gap-3 glass-pill bg-white text-[#004799] px-6 py-3 shadow-md transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_10px_30px_rgba(0,71,153,0.35)]"
               >
                 {lang === "uk" ? copy.ctas.primary.uk : copy.ctas.primary.en}
-                <ArrowRight size={18} />
+                <ArrowRight
+                  size={18}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
               </a>
               <a
                 href="https://www.linkedin.com/company/witerok"
