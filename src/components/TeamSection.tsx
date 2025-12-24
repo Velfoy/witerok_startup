@@ -52,9 +52,9 @@ function TeamBackground({ active }: { active: boolean }) {
         canvas.width,
         canvas.height
       );
-      gradient.addColorStop(0, "#0a4275");
-      gradient.addColorStop(0.5, "#2d6fa6");
-      gradient.addColorStop(1, "#6aa8d4");
+      gradient.addColorStop(0, "#0a2540");
+      gradient.addColorStop(0.5, "#144073");
+      gradient.addColorStop(1, "#1A6DCC");
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
@@ -68,9 +68,9 @@ function TeamBackground({ active }: { active: boolean }) {
         canvas.width,
         canvas.height
       );
-      gradient.addColorStop(0, "#0a4275");
-      gradient.addColorStop(0.5, "#2d6fa6");
-      gradient.addColorStop(1, "#6aa8d4");
+      gradient.addColorStop(0, "#0a2540");
+      gradient.addColorStop(0.5, "#144073");
+      gradient.addColorStop(1, "#1A6DCC");
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 

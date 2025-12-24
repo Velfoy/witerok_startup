@@ -36,14 +36,6 @@ export function MarketingSection() {
     },
   ];
 
-  const growthData = [
-    { period: "2010-2020", percentage: 23.1 },
-    { period: "2021", percentage: 17.9 },
-    { period: "2022", percentage: 12.8 },
-    { period: "2023", percentage: 17.9 },
-    { period: "2025", percentage: 2.8 },
-  ];
-
   return (
     <section
       id="marketing"

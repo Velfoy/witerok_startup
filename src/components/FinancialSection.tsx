@@ -36,7 +36,7 @@ export function FinancialSection() {
   return (
     <section
       id="financial"
-      className="relative py-6 bg-gradient-to-b from-white via-[#f7fbff] to-white overflow-hidden"
+      className="relative py-6 pb-20 bg-gradient-to-b from-white via-[#f7fbff] to-white overflow-hidden"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.08),transparent_36%),radial-gradient(circle_at_80%_30%,rgba(59,130,246,0.08),transparent_34%),radial-gradient(circle_at_50%_80%,rgba(14,165,233,0.05),transparent_32%)]" />
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/60 via-transparent to-white/70" />
