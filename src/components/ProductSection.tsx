@@ -11,9 +11,10 @@ import {
 } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useEffect, useRef } from "react";
+import { useInViewport } from "../hooks/useInViewport";
 import turbineImg from "../assets/turbine2.png";
 
-function ProductBackground() {
+function ProductBackground({ active }: { active: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -53,7 +54,22 @@ function ProductBackground() {
     }
 
     let frame = 0;
-    let animationId: number;
+    let animationId: number | null = null;
+
+    const drawStatic = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const gradient = ctx.createLinearGradient(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+      gradient.addColorStop(0, "#0a2540");
+      gradient.addColorStop(0.5, "#144073");
+      gradient.addColorStop(1, "#1A6DCC");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    };
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -98,16 +114,25 @@ function ProductBackground() {
       animationId = requestAnimationFrame(animate);
     };
 
-    animate();
+    if (active) {
+      animate();
+    } else {
+      drawStatic();
+    }
 
-    return () => cancelAnimationFrame(animationId);
-  }, []);
+    return () => {
+      if (animationId !== null) cancelAnimationFrame(animationId);
+    };
+  }, [active]);
 
   return <canvas ref={canvasRef} className="w-full h-full" />;
 }
 
 export function ProductSection() {
   const { lang } = useLanguage();
+  const { ref: viewportRef, inView } = useInViewport<HTMLElement>({
+    threshold: 0.2,
+  });
 
   const specs = [
     {
@@ -160,10 +185,13 @@ export function ProductSection() {
   return (
     <section
       id="product"
+      ref={(el) => {
+        viewportRef.current = el as HTMLElement | null;
+      }}
       className="relative py-24 min-h-[500px] overflow-hidden"
     >
       <div className="absolute inset-0" style={{ zIndex: 0 }}>
-        <ProductBackground />
+        <ProductBackground active={inView} />
       </div>
       <div
         className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/20"
@@ -193,6 +221,8 @@ export function ProductSection() {
               <img
                 src={turbineImg}
                 alt="WITERoK Wind Generator"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
             </div>

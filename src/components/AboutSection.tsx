@@ -1,7 +1,8 @@
 import { useLanguage } from "../contexts/LanguageContext";
 import { useEffect, useRef } from "react";
+import { useInViewport } from "../hooks/useInViewport";
 
-function WindEnergyBackground() {
+function WindEnergyBackground({ active }: { active: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -42,7 +43,22 @@ function WindEnergyBackground() {
     }
 
     let frame = 0;
-    let animationId: number;
+    let animationId: number | null = null;
+
+    const drawStatic = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const gradient = ctx.createLinearGradient(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+      gradient.addColorStop(0, "#0a4275");
+      gradient.addColorStop(0.5, "#2d6fa6");
+      gradient.addColorStop(1, "#6aa8d4");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    };
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -88,10 +104,16 @@ function WindEnergyBackground() {
       animationId = requestAnimationFrame(animate);
     };
 
-    animate();
+    if (active) {
+      animate();
+    } else {
+      drawStatic();
+    }
 
-    return () => cancelAnimationFrame(animationId);
-  }, []);
+    return () => {
+      if (animationId !== null) cancelAnimationFrame(animationId);
+    };
+  }, [active]);
 
   return <canvas ref={canvasRef} className="w-full h-full" />;
 }
@@ -100,6 +122,9 @@ export function AboutSection() {
   const { lang } = useLanguage();
   const sectionRef = useRef<HTMLElement | null>(null);
   const bgRef = useRef<HTMLDivElement | null>(null);
+  const { ref: viewportRef, inView } = useInViewport<HTMLElement>({
+    threshold: 0.2,
+  });
 
   useEffect(() => {
     let ticking = false;
@@ -167,7 +192,11 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      ref={sectionRef}
+      ref={(el) => {
+        sectionRef.current = el;
+        // Observe visibility for animation gating
+        viewportRef.current = el as HTMLElement | null;
+      }}
       className="relative py-16 min-h-[450px] my-20"
     >
       {/* Parallax background */}
@@ -176,7 +205,7 @@ export function AboutSection() {
         className="absolute inset-0 overflow-hidden"
         style={{ willChange: "transform", zIndex: 0 }}
       >
-        <WindEnergyBackground />
+        <WindEnergyBackground active={inView} />
       </div>
       {/* Soft overlay to keep text readable */}
       <div

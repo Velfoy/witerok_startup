@@ -1,8 +1,8 @@
-import { Building2, Factory, Home, Sprout } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useEffect, useRef } from "react";
+import { useInViewport } from "../hooks/useInViewport";
 
-function AudienceBackground() {
+function AudienceBackground({ active }: { active: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -42,7 +42,22 @@ function AudienceBackground() {
     }
 
     let frame = 0;
-    let animationId: number;
+    let animationId: number | null = null;
+
+    const drawStatic = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const gradient = ctx.createLinearGradient(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+      gradient.addColorStop(0, "#0a2540");
+      gradient.addColorStop(0.5, "#144073");
+      gradient.addColorStop(1, "#1A6DCC");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    };
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -87,111 +102,38 @@ function AudienceBackground() {
       animationId = requestAnimationFrame(animate);
     };
 
-    animate();
+    if (active) {
+      animate();
+    } else {
+      drawStatic();
+    }
 
-    return () => cancelAnimationFrame(animationId);
-  }, []);
+    return () => {
+      if (animationId !== null) cancelAnimationFrame(animationId);
+    };
+  }, [active]);
 
   return <canvas ref={canvasRef} className="w-full h-full" />;
 }
 
 export function TargetAudienceSection() {
   const { lang } = useLanguage();
+  const { ref: viewportRef, inView } = useInViewport<HTMLElement>({
+    threshold: 0.2,
+  });
 
-  const audiences = [
-    {
-      icon: Building2,
-      title: { uk: "Малий та середній бізнес", en: "SMBs" },
-      description: {
-        uk: "Виробничі підприємства, логістичні центри, готелі, торгові центри",
-        en: "Manufacturers, logistics hubs, hotels, retail centers",
-      },
-      benefits: {
-        uk: [
-          "Зниження операційних витрат на 30-70%",
-          "Енергонезалежність під час блекаутів",
-          "Покращення ESG-показників компанії",
-        ],
-        en: [
-          "Cut operating costs by 30-70%",
-          "Energy independence during outages",
-          "Improved ESG metrics",
-        ],
-      },
-      color: "secondary",
-    },
-    {
-      icon: Factory,
-      title: { uk: "Промислові підприємства", en: "Industrial" },
-      description: {
-        uk: "Виробництва з високим споживанням електроенергії",
-        en: "High-consumption manufacturing sites",
-      },
-      benefits: {
-        uk: [
-          "Стабільне електропостачання виробництва",
-          "Зниження собівартості продукції",
-          "Резервне живлення критичних систем",
-        ],
-        en: [
-          "Stable supply for production",
-          "Lower product cost",
-          "Backup for critical systems",
-        ],
-      },
-      color: "primary",
-    },
-    {
-      icon: Sprout,
-      title: { uk: "Аграрний сектор", en: "Agriculture" },
-      description: {
-        uk: "Фермерські господарства, тепличні комплекси",
-        en: "Farms and greenhouse complexes",
-      },
-      benefits: {
-        uk: [
-          "Автономне живлення в польових умовах",
-          "Забезпечення роботи систем зрошення",
-          "Економія на енергозабезпеченні",
-        ],
-        en: [
-          "Autonomous power in the field",
-          "Keeps irrigation running",
-          "Cuts energy expenses",
-        ],
-      },
-      color: "secondary",
-    },
-    {
-      icon: Home,
-      title: { uk: "Громади та кооперативи", en: "Communities & co-ops" },
-      description: {
-        uk: "ОСББ, сільські громади, енергетичні кооперативи",
-        en: "HOAs, rural communities, energy co-ops",
-      },
-      benefits: {
-        uk: [
-          "Колективна енергонезалежність",
-          "Зниження комунальних платежів",
-          "Створення локальних енергомереж",
-        ],
-        en: [
-          "Collective energy independence",
-          "Lower utility bills",
-          "Build local microgrids",
-        ],
-      },
-      color: "primary",
-    },
-  ];
+  // Audience card data was used in a previous design; removed to avoid unused variable warnings.
 
   return (
     <section
       id="audience"
+      ref={(el) => {
+        viewportRef.current = el as HTMLElement | null;
+      }}
       className="relative py-24 min-h-[500px] overflow-hidden"
     >
       <div className="absolute inset-0" style={{ zIndex: 0 }}>
-        <AudienceBackground />
+        <AudienceBackground active={inView} />
       </div>
       <div
         className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/20"
