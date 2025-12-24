@@ -11,8 +11,8 @@ export default function WindCursorGlobal() {
 
     let animationId = 0;
     const trail: Array<{ x: number; y: number; life: number }> = [];
-    const maxTrail = 56; // longer trail for more airy effect
-    const TRAIL_LIFE = 40; // frames until a segment fades out
+    const maxTrail = 56;
+    const TRAIL_LIFE = 40;
     let windPhase = 0;
     const windSpeed = 0.15;
     const cursor = { x: -1000, y: -1000 };
