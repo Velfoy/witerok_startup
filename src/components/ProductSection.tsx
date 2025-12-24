@@ -118,32 +118,32 @@ export function ProductSection() {
     {
       icon: Gauge,
       label: { uk: "Шум", en: "Noise" },
-      value: "30 - 40 dcb",
+      value: { uk: "30 - 40 дБ", en: "30 - 40 dB" },
     },
     {
       icon: Wind,
       label: { uk: "Номінальна швидкість вітру", en: "Nominal wind speed" },
-      value: "~7,0 m/s",
+      value: { uk: "~7,0 м/с", en: "~7.0 m/s" },
     },
     {
       icon: Wrench,
       label: { uk: "Вага", en: "Weight" },
-      value: "~150 kg",
+      value: { uk: "~150 кг", en: "~150 kg" },
     },
     {
       icon: TrendingUp,
       label: { uk: "Висота", en: "Height" },
-      value: "~2,5 m",
+      value: { uk: "~2,5 м", en: "~2.5 m" },
     },
     {
       icon: Shield,
       label: { uk: "Площа основи", en: "Base area" },
-      value: "~ 1 m²",
+      value: { uk: "~ 1 м²", en: "~ 1 m²" },
     },
     {
       icon: Battery,
       label: { uk: "Ціна", en: "Price" },
-      value: "2500$",
+      value: { uk: "2500$", en: "2500$" },
     },
     {
       icon: Zap,
@@ -178,10 +178,11 @@ export function ProductSection() {
           <h2 className="text-4xl md:text-5xl text-white mb-4 drop-shadow-lg">
             {lang === "uk" ? "Вітрогенератор WITERoK" : "WITERoK Wind Turbine"}
           </h2>
+
           <p className="text-l text-white/90 drop-shadow-md max-w-4xl mx-auto">
             {lang === "uk"
-              ? "Інноваційний вертикальний вітрогенератор, який генерує близько 2-3 МВт·год/рік на площі менш ніж 1 м²"
-              : "An innovative vertical wind turbine generating around 2-3 MWh/year in less than 1 m²"}
+              ? "WITERoK — інноваційний вертикальний вітрогенератор, який генерує близько 2-3 МВт·год/рік на площі менш ніж 1 м²."
+              : "WITERoK — an innovative vertical wind turbine generating around 2-3 MWh/year in less than 1 m²."}
           </p>
         </div>
 
