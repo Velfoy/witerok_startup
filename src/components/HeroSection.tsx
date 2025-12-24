@@ -305,8 +305,8 @@ export function HeroSection() {
       en: "Next-generation wind energy",
     },
     subtitle: {
-      uk: "WITERoK — компактні вітрогенератори для локальної енергонезалежності бізнесу та громад",
-      en: "WITERoK builds compact wind turbines for local energy independence of businesses and communities",
+      uk: "Witerok - український стартап, що створює інноваційні безлопатеві вітрові установки для енергонезалежності.",
+      en: "Witerok - ukrainian startup creating innovative bladeless wind turbines for energy independence.",
     },
     ctas: {
       primary: { uk: "Дізнатися більше", en: "Learn more" },

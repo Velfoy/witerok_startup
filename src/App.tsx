@@ -68,6 +68,11 @@ const RoadmapSection = lazy(() =>
 const FAQSection = lazy(() =>
   import("./components/FAQSection").then((m) => ({ default: m.FAQSection }))
 );
+const EfficiencyCalculator = lazy(() =>
+  import("./components/EfficiencyCalculator").then((m) => ({
+    default: m.EfficiencyCalculator,
+  }))
+);
 const ContactSection = lazy(() =>
   import("./components/ContactSection").then((m) => ({
     default: m.ContactSection,
@@ -104,6 +109,7 @@ export default function App() {
             <FinancialSection />
             <RoadmapSection />
             <FAQSection />
+            <EfficiencyCalculator />
             <ContactSection />
           </Suspense>
         </main>

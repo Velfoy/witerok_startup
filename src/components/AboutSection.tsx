@@ -161,29 +161,29 @@ export function AboutSection() {
       en: "About Us",
     },
     tagline: {
-      uk: "WITERoK — український стартап, що створює компактні вітрогенератори для енергонезалежності бізнесу та громад.",
-      en: "WITERoK is a Ukrainian startup building compact wind turbines to unlock energy independence for businesses and communities.",
+      uk: "Команда інженерів, дизайнерів та експертів з енергетики, що працює над створенням чистого енергетичного майбутнього для України.",
+      en: "A team of engineers, designers and energy experts working to create a clean energy future for Ukraine.",
     },
     pillars: [
       {
         title: { uk: "Місія", en: "Mission" },
         text: {
-          uk: "Доступна чиста енергія для кожного бізнесу та громади.",
-          en: "Make clean energy accessible to every business and community.",
+          uk: "Зробити кожен будинок та підприємство енергетично незалежним через доступ до чистої вітрової енергії.",
+          en: "Make every home and business energy independent through access to clean wind energy.",
         },
       },
       {
-        title: { uk: "Фокус", en: "Focus" },
+        title: { uk: "Продукт", en: "Product" },
         text: {
-          uk: "Вертикальні вітрогенератори, що працюють при вітрі від 3 м/с і встановлюються за 2–4 тижні.",
-          en: "Vertical turbines that work from 3 m/s wind and install in 2–4 weeks.",
+          uk: "Безлопатеві вітрові установки для дахів, терас та віддалених місцевостей з простою інтеграцією.",
+          en: "Bladeless wind turbines for roofs, terraces and remote areas with easy integration.",
         },
       },
       {
         title: { uk: "Цінність", en: "Value" },
         text: {
-          uk: "Прозора економіка, онлайн-калькулятор окупності та відкритий сервісний супровід.",
-          en: "Transparent economics, an online payback calculator, and open service support.",
+          uk: "Інноваційні технології для сталого розвитку та збереження планети для майбутніх поколінь.",
+          en: "Innovative technologies for sustainable development and preserving the planet for future generations.",
         },
       },
     ],

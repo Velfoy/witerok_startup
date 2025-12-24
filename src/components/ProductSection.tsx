@@ -209,8 +209,8 @@ export function ProductSection() {
 
           <p className="text-l text-white/90 drop-shadow-md max-w-4xl mx-auto">
             {lang === "uk"
-              ? "WITERoK — інноваційний вертикальний вітрогенератор, який генерує близько 2-3 МВт·год/рік на площі менш ніж 1 м²."
-              : "WITERoK — an innovative vertical wind turbine generating around 2-3 MWh/year in less than 1 m²."}
+              ? "Безлопатева вітрова установка, що генерує 2-4 МВт·год на рік з окупністю за 3-5 років. Працює від низької швидкості вітру, не потребує регулярного обслуговування та перевищує 15 років безперервної роботи."
+              : "Bladeless wind turbine generating 2-4 MWh per year with payback in 3-5 years. Works from low wind speeds, requires minimal maintenance, and operates for over 15 years continuously."}
           </p>
         </div>
 
@@ -241,8 +241,8 @@ export function ProductSection() {
             </h3>
             <p className="text-white/90 mb-6 drop-shadow-sm leading-relaxed">
               {lang === "uk"
-                ? "Компактний вертикальний вітрогенератор, розроблений для енергонезалежності малого та середнього бізнесу. Працює від низької швидкості вітру, не потребує складної інфраструктури та забезпечує швидку окупність."
-                : "A compact vertical wind turbine designed for small and medium business energy independence. Operates from low wind speeds, requires no complex infrastructure, and ensures fast payback."}
+                ? "Компактна конструкція з потужністю 2-4 МВт·год/рік, працює при низьких швидкостях вітру від 3 м/с. Легко монтується на дахи та тераси з мінімальним впливом на довколишнє середовище. Низький рівень шуму (30-40 дБ) і довговічність 15-20 років роблять її ідеальним рішенням для домохозяйств та малого бізнесу."
+                : "Compact design generating 2-4 MWh/year, operates at low wind speeds from 3 m/s. Easy to install on roofs and terraces with minimal environmental impact. Low noise level (30-40 dB) and 15-20 year lifespan make it ideal for households and small businesses."}
             </p>
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 ">
               {specs.map((spec, index) => {

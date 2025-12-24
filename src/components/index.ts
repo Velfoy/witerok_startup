@@ -15,5 +15,6 @@ export { AdvisorsSection } from "./AdvisorsSection";
 export { FinancialSection } from "./FinancialSection";
 export { RoadmapSection } from "./RoadmapSection";
 export { FAQSection } from "./FAQSection";
+export { EfficiencyCalculator } from "./EfficiencyCalculator";
 export { ContactSection } from "./ContactSection";
 export { Footer } from "./Footer";
