@@ -146,8 +146,8 @@ export function RoadmapSection() {
   ];
 
   return (
-    <section id="roadmap" className="py-24 bg-muted">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="roadmap" className="section-shell relative overflow-hidden">
+      <div className="section-surface max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl text-primary mb-4">
             {lang === "uk" ? "Дорожна карта" : "Roadmap"}
@@ -228,8 +228,8 @@ export function RoadmapSection() {
 
                   {/* Achievements card */}
                   <div className={isEven ? "md:col-start-2" : "md:col-start-1"}>
-                    <div className="bg-white rounded-xl p-6 shadow-lg border border-border">
-                      <ul className="space-y-2">
+                    <div className="glass-panel rounded-xl p-6">
+                      <ul className="space-y-3">
                         {(lang === "uk"
                           ? item.achievements.uk
                           : item.achievements.en
@@ -252,21 +252,21 @@ export function RoadmapSection() {
 
         {/* Milestones Summary */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
+          <div className="glass-panel rounded-xl p-6 text-center">
             <CheckCircle2 className="text-green-600 mx-auto mb-3" size={32} />
             <div className="text-3xl text-green-600 mb-2">2</div>
             <div className="text-foreground/70">
               {lang === "uk" ? "Завершені етапи" : "Completed phases"}
             </div>
           </div>
-          <div className="bg-secondary/10 border border-secondary/20 rounded-xl p-6 text-center">
+          <div className="glass-panel rounded-xl p-6 text-center">
             <Clock className="text-secondary mx-auto mb-3" size={32} />
             <div className="text-3xl text-secondary mb-2">1</div>
             <div className="text-foreground/70">
               {lang === "uk" ? "Поточний етап" : "Current phase"}
             </div>
           </div>
-          <div className="bg-muted border border-border rounded-xl p-6 text-center">
+          <div className="glass-panel rounded-xl p-6 text-center">
             <Circle className="text-foreground/40 mx-auto mb-3" size={32} />
             <div className="text-3xl text-foreground/60 mb-2">3</div>
             <div className="text-foreground/70">

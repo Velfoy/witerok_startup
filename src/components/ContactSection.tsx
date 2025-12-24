@@ -90,23 +90,32 @@ export function ContactSection() {
               </div>
               <div className="flex gap-4">
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/company/witerok"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors"
-                  aria-label="LinkedIn"
+                  aria-label="WITERoK on LinkedIn"
+                  title="LinkedIn"
                 >
                   <Linkedin className="text-white" size={24} />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.facebook.com/witerok"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors"
-                  aria-label="Facebook"
+                  aria-label="WITERoK on Facebook"
+                  title="Facebook"
                 >
                   <Facebook className="text-white" size={24} />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/witerok"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors"
-                  aria-label="Instagram"
+                  aria-label="WITERoK on Instagram"
+                  title="Instagram"
                 >
                   <Instagram className="text-white" size={24} />
                 </a>
@@ -115,7 +124,7 @@ export function ContactSection() {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+          <div className="glass-panel rounded-2xl p-8">
             <form className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-white mb-2">
@@ -124,7 +133,7 @@ export function ContactSection() {
                 <input
                   type="text"
                   id="name"
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-white/40"
+                  className="glass-input w-full text-foreground placeholder-foreground/60"
                   placeholder={lang === "uk" ? "Ваше ім'я" : "Your name"}
                 />
               </div>
@@ -136,7 +145,7 @@ export function ContactSection() {
                 <input
                   type="email"
                   id="email"
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-white/40"
+                  className="glass-input w-full text-foreground placeholder-foreground/60"
                   placeholder="your@email.com"
                 />
               </div>
@@ -148,7 +157,7 @@ export function ContactSection() {
                 <input
                   type="text"
                   id="company"
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-white/40"
+                  className="glass-input w-full text-foreground placeholder-foreground/60"
                   placeholder={
                     lang === "uk" ? "Назва компанії" : "Company name"
                   }
@@ -162,7 +171,7 @@ export function ContactSection() {
                 <textarea
                   id="message"
                   rows={4}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-white/40 resize-none"
+                  className="glass-input w-full resize-none text-foreground placeholder-foreground/60"
                   placeholder={
                     lang === "uk"
                       ? "Розкажіть про ваш проєкт..."
@@ -173,7 +182,7 @@ export function ContactSection() {
 
               <button
                 type="submit"
-                className="w-full px-8 py-4 bg-white text-primary rounded-lg hover:bg-gray-100 transition-colors"
+                className="w-full px-8 py-4 bg-secondary text-white rounded-lg hover:brightness-105 transition"
               >
                 {lang === "uk" ? "Надіслати повідомлення" : "Send message"}
               </button>

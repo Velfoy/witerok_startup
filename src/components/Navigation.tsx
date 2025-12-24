@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 
@@ -69,54 +69,118 @@ export function Navigation() {
   const navLinks = navItems.filter((item) => item.key !== "contact");
   const contactLink = navItems.find((item) => item.key === "contact");
 
+  // Number of links shown in the centered nav depends on viewport width.
+  const [centerCount, setCenterCount] = useState(6);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const md = window.matchMedia("(min-width: 768px)");
+    const lg = window.matchMedia("(min-width: 1024px)");
+    const xl = window.matchMedia("(min-width: 1280px)");
+
+    const update = () => {
+      if (xl.matches) setCenterCount(6);
+      else if (lg.matches) setCenterCount(5);
+      else if (md.matches) setCenterCount(3);
+      else setCenterCount(0);
+    };
+
+    update();
+
+    const add = (m: MediaQueryList, fn: () => void) => {
+      if ((m as any).addEventListener) m.addEventListener("change", fn);
+      else m.addListener(fn);
+    };
+    const remove = (m: MediaQueryList, fn: () => void) => {
+      if ((m as any).removeEventListener) m.removeEventListener("change", fn);
+      else m.removeListener(fn);
+    };
+
+    add(md, update);
+    add(lg, update);
+    add(xl, update);
+
+    return () => {
+      remove(md, update);
+      remove(lg, update);
+      remove(xl, update);
+    };
+  }, []);
+
+  // Links visible in the centered nav (first `centerCount`)
+  const centerVisibleKeys = new Set(
+    navLinks.slice(0, centerCount).map((i) => i.key)
+  );
+  // Dropdown should exclude links already visible in the center. If nothing remains, fall back to showing all items.
+  let dropdownItems = navItems.filter(
+    (item) => !centerVisibleKeys.has(item.key)
+  );
+  if (dropdownItems.length === 0) dropdownItems = navItems;
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex items-center h-16 justify-between">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="#home" className="text-2xl text-primary">
+            <a href="#home" className="text-2xl text-primary font-medium">
               WITERoK
             </a>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-3 lg:gap-4 xl:gap-5">
+          {/* Centered links + desktop hamburger */}
+          <div className="hidden md:flex items-center flex-1 justify-center gap-8">
             <div className="relative">
               <button
                 onClick={() => setIsDesktopMenuOpen((prev) => !prev)}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-foreground hover:bg-muted transition-colors text-sm lg:text-base whitespace-nowrap"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-primary hover:bg-white/20 transition-colors"
                 aria-haspopup="true"
                 aria-expanded={isDesktopMenuOpen}
               >
                 <Menu size={18} />
-                {lang === "uk" ? "Меню" : "Menu"}
               </button>
               {isDesktopMenuOpen && (
-                <div className="absolute right-0 mt-2 w-56 bg-white border border-border rounded-xl shadow-lg overflow-hidden">
-                  {navLinks.map((item) => (
-                    <a
-                      key={item.key}
-                      href={item.href}
-                      className="block px-4 py-3 text-foreground hover:bg-muted transition-colors text-sm"
-                      onClick={() => setIsDesktopMenuOpen(false)}
-                    >
-                      {lang === "uk" ? item.label.uk : item.label.en}
-                    </a>
-                  ))}
+                <div className="absolute left-0 lg:left-auto lg:right-0 mt-2 w-56 bg-white shadow-lg rounded-xl border border-white/20">
+                  <div className="max-h-64 overflow-y-auto">
+                    {dropdownItems.map((item) => (
+                      <a
+                        key={item.key}
+                        href={item.href}
+                        className="block px-4 py-3 text-foreground hover:bg-muted transition-colors text-sm whitespace-nowrap"
+                        onClick={() => setIsDesktopMenuOpen(false)}
+                      >
+                        {lang === "uk" ? item.label.uk : item.label.en}
+                      </a>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
+
+            {navLinks.slice(0, centerCount).map((item) => (
+              <a
+                key={item.key}
+                href={item.href}
+                className="text-foreground/70 hover:text-foreground transition-colors text-sm"
+              >
+                {lang === "uk" ? item.label.uk : item.label.en}
+              </a>
+            ))}
+          </div>
+
+          {/* Actions */}
+          <div className="hidden md:flex items-center gap-3">
             <button
               onClick={toggleLanguage}
-              className="px-4 py-2 rounded-full border border-border text-foreground hover:bg-muted transition-colors text-sm lg:text-base whitespace-nowrap"
+              className="px-3 py-1 rounded-full bg-white/10 text-primary text-sm hover:bg-white/20 transition-colors"
               aria-label="Switch language"
             >
               {lang === "uk" ? "EN" : "UA"}
             </button>
             <a
               href={contactLink?.href}
-              className="px-6 py-2 bg-secondary text-white rounded-full hover:bg-primary transition-colors whitespace-nowrap text-sm lg:text-base"
+              className="px-5 py-2 bg-[#1A6DCC] text-white rounded-full hover:opacity-95 transition-opacity text-sm font-medium"
             >
               {lang === "uk" ? "Зв'язатися" : "Contact"}
             </a>
