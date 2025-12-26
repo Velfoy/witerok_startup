@@ -13,7 +13,7 @@ const LanguageContext = createContext<LanguageContextValue | undefined>(
 );
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLanguage] = useState<Language>("uk");
+  const [lang, setLanguage] = useState<Language>("en");
 
   const value = useMemo(
     () => ({
