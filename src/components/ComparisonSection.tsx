@@ -90,9 +90,7 @@ export function ComparisonSection() {
             <table className="w-full">
               <thead>
                 <tr className="bg-gradient-to-r from-[#144073] to-[#1A6DCC]">
-                  <th className="px-6 py-4 text-left text-white font-semibold">
-                    {/* Empty for row labels */}
-                  </th>
+                  <th className="px-6 py-4 text-left text-white font-semibold"></th>
                   <th className="px-6 py-4 text-center text-white font-semibold">
                     Solar
                   </th>

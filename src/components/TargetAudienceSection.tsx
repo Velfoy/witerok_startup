@@ -122,8 +122,6 @@ export function TargetAudienceSection() {
     threshold: 0.2,
   });
 
-  // Audience card data was used in a previous design; removed to avoid unused variable warnings.
-
   return (
     <section
       id="audience"
@@ -155,10 +153,8 @@ export function TargetAudienceSection() {
           </p>
         </div>
 
-        {/* Market Size - TAM/SAM/SOM */}
         <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 md:p-12 text-white">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {/* TAM */}
             <div className="text-center">
               <div className="w-48 h-48 mx-auto mb-6 rounded-full border-8 border-[#144073] flex items-center justify-center bg-white/5">
                 <span
@@ -194,7 +190,6 @@ export function TargetAudienceSection() {
               </div>
             </div>
 
-            {/* SAM */}
             <div className="text-center">
               <div className="w-48 h-48 mx-auto mb-6 rounded-full border-8 border-[#1A6DCC] flex items-center justify-center bg-white/5">
                 <span
@@ -230,7 +225,6 @@ export function TargetAudienceSection() {
               </div>
             </div>
 
-            {/* SOM */}
             <div className="text-center">
               <div className="w-48 h-48 mx-auto mb-6 rounded-full border-8 border-[#5BA3E8] flex items-center justify-center bg-white/5">
                 <span

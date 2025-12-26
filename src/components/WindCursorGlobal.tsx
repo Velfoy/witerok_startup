@@ -47,7 +47,6 @@ export default function WindCursorGlobal() {
         return;
       }
 
-      // Aging & pruning: fade segments when mouse is idle
       for (let i = 0; i < trail.length; i++) {
         trail[i].life -= 1;
       }
@@ -55,7 +54,6 @@ export default function WindCursorGlobal() {
         if (trail[i].life <= 0) trail.splice(i, 1);
       }
 
-      // Main orb (bigger + glow)
       const orbRadius = 12;
       const gradient = ctx.createRadialGradient(
         cursor.x,
@@ -66,7 +64,7 @@ export default function WindCursorGlobal() {
         orbRadius * 2.5
       );
       gradient.addColorStop(0, "rgba(255, 255, 255, 0.85)");
-      gradient.addColorStop(0.5, "rgba(148, 163, 184, 0.35)"); // slate-400
+      gradient.addColorStop(0.5, "rgba(148, 163, 184, 0.35)");
       gradient.addColorStop(1, "rgba(255, 255, 255, 0.0)");
       ctx.fillStyle = gradient;
       ctx.shadowBlur = 14;
@@ -76,32 +74,28 @@ export default function WindCursorGlobal() {
       ctx.fill();
       ctx.shadowBlur = 0;
 
-      // Wavy windy trail (ribbon-like with normal offsets)
       ctx.globalCompositeOperation = "lighter";
       for (let i = 1; i < trail.length; i++) {
         const p1 = trail[i - 1];
         const p2 = trail[i];
         const t = i / Math.max(1, trail.length);
-        const width = (1 - t) * 10 + 1; // thicker near cursor, taper away
+        const width = (1 - t) * 10 + 1;
         const baseAlpha = (1 - t) * 0.5;
         const lifeAlpha = Math.min(1, Math.max(0, p2.life / TRAIL_LIFE));
         const alpha = baseAlpha * lifeAlpha;
 
-        // Direction and normal
         const dx = p2.x - p1.x;
         const dy = p2.y - p1.y;
         const len = Math.max(0.0001, Math.sqrt(dx * dx + dy * dy));
-        const nx = -dy / len; // normal x
-        const ny = dx / len; // normal y
+        const nx = -dy / len;
+        const ny = dx / len;
 
-        // Sinusoidal offset along normal for windiness
-        const amplitude = (1 - t) * 12; // bigger near cursor
+        const amplitude = (1 - t) * 12;
         const phase = windPhase + i * 0.3;
         const offsetX = nx * Math.sin(phase) * amplitude;
         const offsetY = ny * Math.sin(phase) * amplitude;
 
-        // Primary pastel cyan stroke
-        ctx.strokeStyle = `rgba(148, 163, 184, ${alpha})`; // slate-400
+        ctx.strokeStyle = `rgba(148, 163, 184, ${alpha})`;
         ctx.lineWidth = width;
         ctx.lineCap = "round";
         ctx.beginPath();
@@ -109,10 +103,9 @@ export default function WindCursorGlobal() {
         ctx.lineTo(p2.x + offsetX, p2.y + offsetY);
         ctx.stroke();
 
-        // Secondary sky-blue stroke with slight phase shift for layered look
         const offsetX2 = nx * Math.sin(phase + 0.8) * (amplitude * 0.6);
         const offsetY2 = ny * Math.sin(phase + 0.8) * (amplitude * 0.6);
-        ctx.strokeStyle = `rgba(96, 165, 250, ${alpha * 0.7})`; // blue-400
+        ctx.strokeStyle = `rgba(96, 165, 250, ${alpha * 0.7})`;
         ctx.lineWidth = width * 0.7;
         ctx.beginPath();
         ctx.moveTo(p1.x + offsetX2, p1.y + offsetY2);
@@ -121,7 +114,6 @@ export default function WindCursorGlobal() {
       }
       ctx.globalCompositeOperation = "source-over";
 
-      // Cross-breeze accent
       for (let i = 2; i < trail.length; i += 3) {
         const p = trail[i];
         const t = i / Math.max(1, trail.length);

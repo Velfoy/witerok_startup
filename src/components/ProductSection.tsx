@@ -215,7 +215,6 @@ export function ProductSection() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-16">
-          {/* Product Image */}
           <div className="relative max-w-xl mx-auto lg:mx-0">
             <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
               <img
@@ -233,8 +232,6 @@ export function ProductSection() {
               <div className="text-3xl font-semibold">15-20</div>
             </div>
           </div>
-
-          {/* Product Features */}
           <div>
             <h3 className="text-3xl text-white mb-4 drop-shadow-lg">
               {lang === "uk" ? "Характеристики" : "Specifications"}

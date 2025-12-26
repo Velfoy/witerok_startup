@@ -280,7 +280,6 @@ export function TeamSection() {
           </p>
         </div>
 
-        {/* Team Slider (shows 4 cards on large screens) */}
         <div className="relative mb-16">
           <button
             aria-label={lang === "uk" ? "Попередні" : "Previous"}
@@ -332,7 +331,6 @@ export function TeamSection() {
           </div>
         </div>
 
-        {/* Open Roles */}
         <div className="mb-20">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-2xl text-white font-bold">
@@ -367,9 +365,7 @@ export function TeamSection() {
           </div>
         </div>
 
-        {/* Milestones Timeline */}
         <div className="relative">
-          {/* Timeline line */}
           <div
             className="absolute top-8 left-0 right-0 h-1 bg-white/30"
             style={{ zIndex: 1 }}
@@ -382,7 +378,6 @@ export function TeamSection() {
             {milestones.map((milestone, index) => (
               <div key={index} className="relative">
                 <div className="flex items-start gap-4 mb-6">
-                  {/* Timeline dot */}
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#144073] to-[#1A6DCC] flex items-center justify-center text-white font-bold shadow-lg flex-shrink-0">
                     {index === 0 ? "2026" : "2031"}
                   </div>

@@ -259,11 +259,7 @@ export function RoadmapSection() {
           </p>
         </div>
 
-        {/* Horizontal Timeline */}
         <div className="relative mt-12">
-          {/* Connecting Line */}
-
-          {/* Left Navigation Button */}
           <button
             onClick={() => scroll("left")}
             className="absolute left-2 top-1/2 -translate-y-1/2 z-30 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 rounded-full p-3 transition-all hover:scale-110"
@@ -271,8 +267,6 @@ export function RoadmapSection() {
           >
             <ChevronLeft className="text-white" size={24} />
           </button>
-
-          {/* Right Navigation Button */}
           <button
             onClick={() => scroll("right")}
             className="absolute right-2 top-1/2 -translate-y-1/2 z-30 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 rounded-full p-3 transition-all hover:scale-110"
@@ -310,14 +304,12 @@ export function RoadmapSection() {
                     key={index}
                     className="flex flex-col items-center flex-shrink-0 w-64"
                   >
-                    {/* Timeline Dot */}
                     <div
                       className={`w-8 h-8 ${statusBg} rounded-full border-2 border-white/30 flex items-center justify-center mb-4 relative z-20`}
                     >
                       <StatusIcon size={16} className={`${statusColor}`} />
                     </div>
 
-                    {/* Card */}
                     <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 text-white hover:bg-white/15 transition-all h-full">
                       <div className="flex items-center gap-2 mb-3">
                         <span
@@ -341,7 +333,6 @@ export function RoadmapSection() {
           </div>
         </div>
 
-        {/* Milestones Summary */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 text-center hover:bg-white/15 transition-all">
             <CheckCircle2 className="text-green-400 mx-auto mb-3" size={32} />

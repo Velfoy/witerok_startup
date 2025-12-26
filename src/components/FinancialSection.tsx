@@ -53,7 +53,6 @@ export function FinancialSection() {
           </p>
         </div>
 
-        {/* Key Metrics Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {metrics.map((metric, index) => {
             return (
@@ -97,7 +96,6 @@ export function FinancialSection() {
           })}
         </div>
 
-        {/* Financial Breakdown */}
         <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_8px_24px_rgba(0,0,0,0.06)] p-8">
           <h3 className="text-2xl text-slate-900 font-semibold mb-6">
             {lang === "uk" ? "Розбивка прибутку" : "Profit breakdown"}

@@ -22,7 +22,6 @@ function WindEnergyBackground({ active }: { active: boolean }) {
       opacity: number;
     }> = [];
 
-    // Create flowing particles
     for (let i = 0; i < 40; i++) {
       particles.push({
         x: Math.random() * canvas.width,
@@ -75,7 +74,6 @@ function WindEnergyBackground({ active }: { active: boolean }) {
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Draw flowing waves
       waves.forEach((wave, idx) => {
         ctx.beginPath();
         ctx.moveTo(0, wave.y);
@@ -194,12 +192,10 @@ export function AboutSection() {
       id="about"
       ref={(el) => {
         sectionRef.current = el;
-        // Observe visibility for animation gating
         viewportRef.current = el as HTMLElement | null;
       }}
       className="relative py-16 min-h-[450px] my-20"
     >
-      {/* Parallax background */}
       <div
         ref={bgRef}
         className="absolute inset-0 overflow-hidden"
@@ -207,7 +203,6 @@ export function AboutSection() {
       >
         <WindEnergyBackground active={inView} />
       </div>
-      {/* Soft overlay to keep text readable */}
       <div
         className="absolute inset-0 bg-gradient-to-b from-black/15 via-black/8 to-black/15"
         style={{ zIndex: 1 }}

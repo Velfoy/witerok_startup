@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 export function ContactSection() {
   const { lang } = useLanguage();
@@ -17,6 +18,10 @@ export function ContactSection() {
     company: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
+    null
+  );
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -27,10 +32,52 @@ export function ContactSection() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      // EmailJS configuration
+      const serviceId = "service_btq3vp4";
+      const templateId = "template_8vnj5hr";
+      const publicKey = "WdICTs7D7xOv_EtOn";
+
+      // Validate required fields
+      if (!formData.name || !formData.email || !formData.message) {
+        setSubmitStatus("error");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const response = await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          company: formData.company || "Not specified",
+          message: formData.message,
+          email: "witerokgreenenergy@gmail.com",
+        },
+        publicKey
+      );
+
+      console.log("Email sent successfully:", response);
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", company: "", message: "" });
+      setTimeout(() => setSubmitStatus(null), 5000);
+    } catch (error: any) {
+      console.error("Email send error:", error);
+      console.error("Error details:", {
+        status: error.status,
+        text: error.text,
+        message: error.message,
+      });
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -54,7 +101,6 @@ export function ContactSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {/* Email Card */}
           <div className="flex items-start gap-4 p-6 rounded-2xl bg-white border border-slate-200 shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_14px_36px_rgba(26,109,204,0.18)] transition">
             <div
               className="w-12 h-12 rounded-xl text-white flex items-center justify-center shadow-md flex-shrink-0"
@@ -80,7 +126,6 @@ export function ContactSection() {
             </div>
           </div>
 
-          {/* Phone Card */}
           <div className="flex items-start gap-4 p-6 rounded-2xl bg-white border border-slate-200 shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_14px_36px_rgba(26,109,204,0.18)] transition">
             <div
               className="w-12 h-12 rounded-xl text-white flex items-center justify-center shadow-md flex-shrink-0"
@@ -106,7 +151,6 @@ export function ContactSection() {
             </div>
           </div>
 
-          {/* Address Card */}
           <div className="flex items-start gap-4 p-6 rounded-2xl bg-white border border-slate-200 shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_14px_36px_rgba(26,109,204,0.18)] transition">
             <div
               className="w-12 h-12 rounded-xl text-white flex items-center justify-center shadow-md flex-shrink-0"
@@ -135,7 +179,6 @@ export function ContactSection() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {/* Contact Form */}
           <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_8px_24px_rgba(0,0,0,0.06)] p-8 hover:shadow-[0_14px_36px_rgba(26,109,204,0.18)] transition">
             <h3 className="text-xl font-semibold text-[#144073] mb-6">
               {lang === "uk" ? "Надішліть повідомлення" : "Send Message"}
@@ -215,16 +258,42 @@ export function ContactSection() {
                 />
               </div>
 
+              {submitStatus === "success" && (
+                <div className="p-4 rounded-lg bg-green-50 border border-green-200">
+                  <p className="text-green-700 text-sm font-medium">
+                    {lang === "uk"
+                      ? "✓ Повідомлення успішно надіслано! Ми зв'яжемося з вами найближчим часом."
+                      : "✓ Message sent successfully! We'll get back to you soon."}
+                  </p>
+                </div>
+              )}
+
+              {submitStatus === "error" && (
+                <div className="p-4 rounded-lg bg-red-50 border border-red-200">
+                  <p className="text-red-700 text-sm font-medium">
+                    {lang === "uk"
+                      ? "✗ Помилка відправки. Будь ласка, спробуйте ще раз або напишіть нам на email."
+                      : "✗ Failed to send. Please try again or email us directly."}
+                  </p>
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="w-full px-8 py-3 bg-gradient-to-r from-[#144073] to-[#1A6DCC] text-white rounded-lg font-semibold hover:shadow-lg transition-all hover:scale-105"
+                disabled={isSubmitting}
+                className="w-full px-8 py-3 bg-gradient-to-r from-[#144073] to-[#1A6DCC] text-white rounded-lg font-semibold hover:shadow-lg transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {lang === "uk" ? "Надіслати повідомлення" : "Send message"}
+                {isSubmitting
+                  ? lang === "uk"
+                    ? "Надсилання..."
+                    : "Sending..."
+                  : lang === "uk"
+                  ? "Надіслати повідомлення"
+                  : "Send message"}
               </button>
             </form>
           </div>
 
-          {/* Socials */}
           <div className="rounded-2xl bg-white border border-slate-200 shadow-[0_8px_24px_rgba(0,0,0,0.06)] p-8 hover:shadow-[0_14px_36px_rgba(26,109,204,0.18)] transition">
             <h3 className="text-xl font-semibold text-[#144073] mb-6">
               {lang === "uk" ? "Стежте за нами" : "Follow Us"}

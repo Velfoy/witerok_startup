@@ -5,7 +5,6 @@ import { Suspense, lazy } from "react";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import WindCursorGlobal from "./components/WindCursorGlobal";
 
-// Lazy-loaded sections (code splitting)
 const AboutSection = lazy(() =>
   import("./components/AboutSection").then((m) => ({ default: m.AboutSection }))
 );

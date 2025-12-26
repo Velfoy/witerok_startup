@@ -41,7 +41,6 @@ export function Footer() {
     <footer className="bg-primary text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          {/* Brand */}
           <div>
             <div className="text-2xl mb-4">WITERoK</div>
             <p className="text-white/70 mb-4">
@@ -59,7 +58,6 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Company Links */}
           <div>
             <h4 className="mb-4">{lang === "uk" ? "Компанія" : "Company"}</h4>
             <ul className="space-y-2">
@@ -76,7 +74,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Product Links */}
           <div>
             <h4 className="mb-4">{lang === "uk" ? "Продукт" : "Product"}</h4>
             <ul className="space-y-2">
@@ -93,7 +90,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Resources Links */}
           <div>
             <h4 className="mb-4">{lang === "uk" ? "Ресурси" : "Resources"}</h4>
             <ul className="space-y-2">
@@ -111,7 +107,6 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-white/60 text-sm">

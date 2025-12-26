@@ -55,7 +55,6 @@
   }
 
   .glass-panel {
-    /* iOS-style liquid glass */
     background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.12),
@@ -80,7 +79,6 @@
     opacity: 1;
   }
 
-  /* Stronger hover variant for small hero card */
   .glass-hover-strong:hover {
     background: linear-gradient(
       180deg,
@@ -125,13 +123,12 @@
     color: rgba(20, 64, 115, 0.45);
   }
 
-  /* Hide scrollbars for custom sliders while preserving scrollability */
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE 10+ */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   .no-scrollbar::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
+    display: none;
   }
 }
 

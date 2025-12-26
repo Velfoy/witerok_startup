@@ -77,8 +77,6 @@ export function Navigation() {
 
   const navLinks = navItems.filter((item) => item.key !== "contact");
   const contactLink = navItems.find((item) => item.key === "contact");
-
-  // Number of links shown in the centered nav depends on viewport width.
   const [centerCount, setCenterCount] = useState(6);
 
   useEffect(() => {
@@ -117,11 +115,9 @@ export function Navigation() {
     };
   }, []);
 
-  // Links visible in the centered nav (first `centerCount`)
   const centerVisibleKeys = new Set(
     navLinks.slice(0, centerCount).map((i) => i.key)
   );
-  // Dropdown should exclude links already visible in the center. If nothing remains, fall back to showing all items.
   let dropdownItems = navItems.filter(
     (item) => !centerVisibleKeys.has(item.key)
   );
@@ -131,14 +127,12 @@ export function Navigation() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center h-16 justify-between">
-          {/* Logo */}
           <div className="flex-shrink-0">
             <a href="#home" className="text-2xl text-primary font-medium">
               WITERoK
             </a>
           </div>
 
-          {/* Centered links + desktop hamburger */}
           <div className="hidden md:flex items-center flex-1 justify-center gap-8">
             <div className="relative">
               <button
@@ -178,7 +172,6 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Actions */}
           <div className="hidden md:flex items-center gap-3">
             <button
               onClick={toggleLanguage}
@@ -195,7 +188,6 @@ export function Navigation() {
             </a>
           </div>
 
-          {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileOpen(!isMobileOpen)}
@@ -206,7 +198,6 @@ export function Navigation() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         {isMobileOpen && (
           <div className="md:hidden pb-4">
             {navItems.map((item) => (

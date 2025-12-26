@@ -83,7 +83,6 @@ export function CompetitiveSection() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {/* Advantages Column */}
           <div className="space-y-6">
             {advantages.map((advantage, index) => {
               const Icon = advantage.icon;
@@ -125,8 +124,6 @@ export function CompetitiveSection() {
               );
             })}
           </div>
-
-          {/* Impact Column */}
           <div className="space-y-6">
             {impact.map((item, index) => {
               const Icon = item.icon;

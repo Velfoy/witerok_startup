@@ -102,7 +102,6 @@ export function BusinessModelSection() {
           </p>
         </div>
 
-        {/* Main Model Items */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {modelItems.map((item, index) => {
             const Icon = item.icon;
@@ -140,7 +139,6 @@ export function BusinessModelSection() {
           })}
         </div>
 
-        {/* Sales Channels Flow */}
         <div className="relative">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {channels.map((channel, index) => (
@@ -155,7 +153,6 @@ export function BusinessModelSection() {
                       : channel.description.en}
                   </p>
                 </div>
-                {/* Arrow connector */}
                 {index < channels.length - 1 && (
                   <div className="hidden lg:block absolute top-1/2 -right-2 transform -translate-y-1/2 z-10">
                     <svg

@@ -180,7 +180,6 @@ export function ProblemSection() {
           })}
         </div>
 
-        {/* Solution teaser */}
         <div className="mt-18 sm:mt-20 text-center">
           <div
             className="inline-block rounded-2xl text-white shadow-[0_12px_32px_rgba(26,109,204,0.28)]"
