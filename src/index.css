@@ -130,6 +130,12 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
+  /* Utility to hide the native cursor across the app */
+  .hide-cursor,
+  .hide-cursor * {
+    cursor: none !important;
+  }
 }
 
 .dark {

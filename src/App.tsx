@@ -81,7 +81,7 @@ const ContactSection = lazy(() =>
 export default function App() {
   return (
     <LanguageProvider>
-      <div className="min-h-screen bg-background scroll-smooth">
+      <div className="min-h-screen bg-background scroll-smooth hide-cursor">
         <WindCursorGlobal />
         <Navigation />
 

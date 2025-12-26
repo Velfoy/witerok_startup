@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 
@@ -6,6 +6,8 @@ export function Navigation() {
   const { lang, toggleLanguage } = useLanguage();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
+  const desktopMenuRef = useRef<HTMLDivElement | null>(null);
+  const navRef = useRef<HTMLElement | null>(null);
 
   const navItems = [
     { key: "home", label: { uk: "Головна", en: "Home" }, href: "#home" },
@@ -123,8 +125,53 @@ export function Navigation() {
   );
   if (dropdownItems.length === 0) dropdownItems = navItems;
 
+  useEffect(() => {
+    const handleGlobalClick = (e: MouseEvent | TouchEvent) => {
+      const target = e.target as Node | null;
+
+      // Close desktop dropdown if clicking outside its container
+      if (
+        isDesktopMenuOpen &&
+        desktopMenuRef.current &&
+        target &&
+        !desktopMenuRef.current.contains(target)
+      ) {
+        setIsDesktopMenuOpen(false);
+      }
+
+      // Close mobile menu if clicking outside the entire nav
+      if (
+        isMobileOpen &&
+        navRef.current &&
+        target &&
+        !navRef.current.contains(target)
+      ) {
+        setIsMobileOpen(false);
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (isDesktopMenuOpen) setIsDesktopMenuOpen(false);
+        if (isMobileOpen) setIsMobileOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleGlobalClick);
+    document.addEventListener("touchstart", handleGlobalClick);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleGlobalClick);
+      document.removeEventListener("touchstart", handleGlobalClick);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isDesktopMenuOpen, isMobileOpen]);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-white/10">
+    <nav
+      ref={navRef}
+      className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-white/10"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center h-16 justify-between">
           <div className="flex-shrink-0">
@@ -134,7 +181,7 @@ export function Navigation() {
           </div>
 
           <div className="hidden md:flex items-center flex-1 justify-center gap-8">
-            <div className="relative">
+            <div className="relative" ref={desktopMenuRef}>
               <button
                 onClick={() => setIsDesktopMenuOpen((prev) => !prev)}
                 className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-primary hover:bg-white/20 transition-colors"
