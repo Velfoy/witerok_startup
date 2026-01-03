@@ -9,7 +9,7 @@ import {
   Zap,
   Clock,
 } from "lucide-react";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../hooks/useLanguage.js";
 import { useEffect, useRef } from "react";
 import { useInViewport } from "../hooks/useInViewport";
 import turbineImg from "../assets/turbine2.png";

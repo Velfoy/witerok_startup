@@ -1,4 +1,4 @@
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../hooks/useLanguage.js";
 import ukrainianFutureLogo from "../assets/ukrainian_future.png";
 import ventureWellLogo from "../assets/venturewell.png";
 import ministryOfGoodMindLogo from "../assets/ministry.png";

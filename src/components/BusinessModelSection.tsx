@@ -1,5 +1,5 @@
 import { Settings, ShoppingBag, Hammer, Award } from "lucide-react";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../hooks/useLanguage.js";
 
 export function BusinessModelSection() {
   const { lang } = useLanguage();

@@ -1,5 +1,5 @@
 import { Zap, MapPin, Calculator, Wind, Car } from "lucide-react";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../hooks/useLanguage.js";
 
 export function CompetitiveSection() {
   const { lang } = useLanguage();

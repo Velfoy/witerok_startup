@@ -1,5 +1,5 @@
 import { Zap, DollarSign, HardHat, Calculator } from "lucide-react";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../hooks/useLanguage.js";
 
 export function ProblemSection() {
   const { lang } = useLanguage();

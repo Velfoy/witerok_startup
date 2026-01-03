@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../hooks/useLanguage.js";
 
 export function Navigation() {
   const { lang, toggleLanguage } = useLanguage();
@@ -98,12 +98,20 @@ export function Navigation() {
     update();
 
     const add = (m: MediaQueryList, fn: () => void) => {
-      if ((m as any).addEventListener) m.addEventListener("change", fn);
-      else m.addListener(fn);
+      const mq = m as unknown as {
+        addEventListener?: (event: string, fn: () => void) => void;
+        addListener?: (fn: () => void) => void;
+      };
+      if (mq.addEventListener) mq.addEventListener("change", fn);
+      else mq.addListener?.(fn);
     };
     const remove = (m: MediaQueryList, fn: () => void) => {
-      if ((m as any).removeEventListener) m.removeEventListener("change", fn);
-      else m.removeListener(fn);
+      const mq = m as unknown as {
+        removeEventListener?: (event: string, fn: () => void) => void;
+        removeListener?: (fn: () => void) => void;
+      };
+      if (mq.removeEventListener) mq.removeEventListener("change", fn);
+      else mq.removeListener?.(fn);
     };
 
     add(md, update);

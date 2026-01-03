@@ -1,4 +1,4 @@
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../hooks/useLanguage.js";
 
 export function Footer() {
   const { lang } = useLanguage();

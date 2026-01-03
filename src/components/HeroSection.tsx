@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../hooks/useLanguage.js";
 import turbineImg from "../assets/turbine.jpg";
 import { useEffect, useRef, useState } from "react";
 
@@ -326,7 +326,7 @@ export function HeroSection() {
                 />
               </a>
               <a
-                href="https://www.linkedin.com/company/witerok"
+                href="https://www.linkedin.com/in/startup-witerok-682429266/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WITERoK on LinkedIn"
@@ -349,25 +349,20 @@ export function HeroSection() {
               </a>
 
               <a
-                href="https://twitter.com/witerok"
+                href="https://www.facebook.com/profile.php?id=61574850533708"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="WITERoK on Twitter"
-                title="Twitter"
+                aria-label="WITERoK on Facebook"
+                title="Facebook"
                 className="p-3 rounded-lg bg-muted inline-flex items-center justify-center hover:bg-white/10 transition"
               >
                 <svg
                   className="w-5 h-5 text-foreground/60"
                   viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
+                  fill="currentColor"
+                  stroke="none"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0016 3c-2.5 0-4.5 2.24-4.5 4.99 0 .39.05.77.13 1.14A12.94 12.94 0 013 4s-4 9 5 13a13 13 0 01-8 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"
-                  />
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                 </svg>
               </a>
             </div>

@@ -1,12 +1,10 @@
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../hooks/useLanguage.js";
 import { useEffect, useRef } from "react";
 import { useInViewport } from "../hooks/useInViewport";
 import leraZlydarImg from "../assets/lera_zlydar.jpg";
 import artem_dedeniukImg from "../assets/artem_der.jpg";
 import stasKotlyarImg from "../assets/Stat_kotlar.jpg";
 import yaroslavaPolikarpovaImg from "../assets/Jaroslava_Polikarpowa.jpg";
-import valeriiaSlodkovskaImg from "../assets/valeriia_slodkowska.jpg";
-import danilKurtaImg from "../assets/Danil-Kurta.jpg";
 import nataliaYaroshenkoImg from "../assets/natalia-yaroszenko.png";
 
 function TeamBackground({ active }: { active: boolean }) {
