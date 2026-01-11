@@ -70,6 +70,7 @@ export function Navigation() {
       href: "#calculator",
     },
     { key: "faq", label: { uk: "Запитання", en: "FAQ" }, href: "#faq" },
+    { key: "news", label: { uk: "Новини", en: "News" }, href: "#news" },
     {
       key: "contact",
       label: { uk: "Контакти", en: "Contact" },

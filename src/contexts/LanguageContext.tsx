@@ -10,7 +10,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       lang,
       setLanguage,
       toggleLanguage: () =>
-        setLanguage((prev) => (prev === "uk" ? "en" : "uk")),
+        setLanguage((prev) => (prev === "en" ? "uk" : "en")),
     }),
     [lang]
   );

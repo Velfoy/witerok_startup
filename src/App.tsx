@@ -77,6 +77,11 @@ const ContactSection = lazy(() =>
     default: m.ContactSection,
   }))
 );
+const NewsSection = lazy(() =>
+  import("./components/NewsSection").then((m) => ({
+    default: m.NewsSection,
+  }))
+);
 
 export default function App() {
   return (
@@ -109,6 +114,7 @@ export default function App() {
             <RoadmapSection />
             <FAQSection />
             <EfficiencyCalculator />
+            <NewsSection />
             <ContactSection />
           </Suspense>
         </main>

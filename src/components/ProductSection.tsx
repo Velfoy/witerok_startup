@@ -266,6 +266,12 @@ export function ProductSection() {
             </div>
           </div>
         </div>
+
+        <div className="text-center mt-16 ">
+          <h3 className="text-xl md:text-2xl text-white font-bold drop-shadow-lg">
+            {lang === "uk" ? "Зроблено в Україні" : "Made in Ukraine"}
+          </h3>
+        </div>
       </div>
     </section>
   );

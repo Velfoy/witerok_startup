@@ -3,6 +3,72 @@ import { useLanguage } from "../hooks/useLanguage.js";
 import turbineImg from "../assets/turbine.jpg";
 import { useEffect, useRef, useState } from "react";
 
+class Particle {
+  x: number;
+  y: number;
+  baseX: number;
+  baseY: number;
+  vx: number;
+  vy: number;
+  size: number;
+  density: number;
+
+  constructor(canvasWidth: number, canvasHeight: number) {
+    this.x = Math.random() * canvasWidth;
+    this.y = Math.random() * canvasHeight;
+    this.baseX = this.x;
+    this.baseY = this.y;
+    this.vx = 0;
+    this.vy = 0;
+    this.density = Math.random() * 3 + 1;
+    this.size = Math.random() * 3 + 2;
+  }
+
+  update(mouse: { x: number; y: number; radius: number }) {
+    const dx = mouse.x - this.x;
+    const dy = mouse.y - this.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance < mouse.radius) {
+      const angle = Math.atan2(dy, dx);
+      const force = (mouse.radius - distance) / mouse.radius;
+      this.vx -= Math.cos(angle) * force * this.density * 2;
+      this.vy -= Math.sin(angle) * force * this.density * 2;
+    }
+
+    this.x += this.vx;
+    this.y += this.vy;
+    this.vx *= 0.85;
+    this.vy *= 0.85;
+    const returnForceX = (this.baseX - this.x) * 0.05;
+    const returnForceY = (this.baseY - this.y) * 0.05;
+    this.vx += returnForceX;
+    this.vy += returnForceY;
+  }
+
+  draw(ctx: CanvasRenderingContext2D) {
+    if (!ctx) return;
+    const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+    const glowIntensity = Math.min(speed * 0.2, 1);
+
+    ctx.fillStyle = `rgba(255, 255, 255, ${0.65 + glowIntensity * 0.35})`;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.fill();
+
+    if (speed > 1.4) {
+      ctx.shadowBlur = 6;
+      ctx.shadowColor = "rgba(255, 255, 255, 0.5)";
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size * 1.4, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+  }
+}
+
 function WindParticles({ blurAmount = 0 }: { blurAmount?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -39,72 +105,6 @@ function WindParticles({ blurAmount = 0 }: { blurAmount?: number }) {
     canvas.addEventListener("mouseleave", handleMouseLeave);
 
     const particleCount = 190;
-
-    class Particle {
-      x: number;
-      y: number;
-      baseX: number;
-      baseY: number;
-      vx: number;
-      vy: number;
-      size: number;
-      density: number;
-
-      constructor(canvasWidth: number, canvasHeight: number) {
-        this.x = Math.random() * canvasWidth;
-        this.y = Math.random() * canvasHeight;
-        this.baseX = this.x;
-        this.baseY = this.y;
-        this.vx = 0;
-        this.vy = 0;
-        this.density = Math.random() * 3 + 1;
-        this.size = Math.random() * 3 + 2;
-      }
-
-      update() {
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < mouse.radius) {
-          const angle = Math.atan2(dy, dx);
-          const force = (mouse.radius - distance) / mouse.radius;
-          this.vx -= Math.cos(angle) * force * this.density * 2;
-          this.vy -= Math.sin(angle) * force * this.density * 2;
-        }
-
-        this.x += this.vx;
-        this.y += this.vy;
-        this.vx *= 0.85;
-        this.vy *= 0.85;
-        const returnForceX = (this.baseX - this.x) * 0.05;
-        const returnForceY = (this.baseY - this.y) * 0.05;
-        this.vx += returnForceX;
-        this.vy += returnForceY;
-      }
-
-      draw() {
-        if (!ctx) return;
-        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-        const glowIntensity = Math.min(speed * 0.2, 1);
-
-        ctx.fillStyle = `rgba(255, 255, 255, ${0.65 + glowIntensity * 0.35})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.fill();
-
-        if (speed > 1.4) {
-          ctx.shadowBlur = 6;
-          ctx.shadowColor = "rgba(255, 255, 255, 0.5)";
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size * 1.4, 0, Math.PI * 2);
-          ctx.closePath();
-          ctx.fill();
-          ctx.shadowBlur = 0;
-        }
-      }
-    }
 
     const particles: Particle[] = [];
     for (let i = 0; i < particleCount; i++) {
@@ -215,8 +215,8 @@ function WindParticles({ blurAmount = 0 }: { blurAmount?: number }) {
       lastMouseY = mouse.y;
 
       particles.forEach((particle) => {
-        particle.update();
-        particle.draw();
+        particle.update(mouse);
+        particle.draw(ctx);
       });
 
       connect();
@@ -282,12 +282,13 @@ export function HeroSection() {
       en: "Next-generation wind energy",
     },
     subtitle: {
-      uk: "Witerok - український стартап, що створює інноваційні безлопатеві вітрові установки для енергонезалежності.",
-      en: "Witerok - ukrainian startup creating innovative bladeless wind turbines for energy independence.",
+      uk: "WITERoK - енергія , яка завжди з вами. Просто. Тихо. Надійно.",
+      en: "WITERoK - energy that is always with you. Simple. Quiet. Reliable.",
     },
     ctas: {
       primary: { uk: "Дізнатися більше", en: "Learn more" },
       secondary: { uk: "Зв'язатися з нами", en: "Contact us" },
+      donate: { uk: "Підтримати", en: "Donate" },
     },
   };
 
@@ -324,6 +325,12 @@ export function HeroSection() {
                   size={18}
                   className="transition-transform duration-300 group-hover:translate-x-1"
                 />
+              </a>
+              <a
+                href="#donate"
+                className="group inline-flex items-center gap-3 glass-pill bg-white text-[#004799] px-6 py-3 shadow-md transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_10px_30px_rgba(0,71,153,0.35)]"
+              >
+                {lang === "uk" ? copy.ctas.donate.uk : copy.ctas.donate.en}
               </a>
               <a
                 href="https://www.linkedin.com/in/startup-witerok-682429266/"
