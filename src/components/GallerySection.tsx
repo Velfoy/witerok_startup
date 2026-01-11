@@ -10,12 +10,12 @@ import img4 from "../assets/9P6A2050-Улучшено-Ум. шума-2.jpg";
 import img5 from "../assets/DSC00275.jpg";
 import img6 from "../assets/IMG_20260109_200624.jpg";
 import img7 from "../assets/IMG_6489_natalinakovalyova_.jpg";
-import img8 from "../assets/IMG_8394.jpg";
-import img9 from "../assets/IMG_8396.jpg";
-import img10 from "../assets/SVOE.IT_lisovoi_422.jpg";
-import img11 from "../assets/0119.jpg";
-import img12 from "../assets/-storage-emulated-0-DCIM-Camera-IMG_20250129_203502.jpg";
-import img13 from "../assets/trashed-1747937738-IMG_20250422_204709.jpg";
+// import img8 from "../assets/IMG_8394.jpg";
+// import img9 from "../assets/IMG_8396.jpg";
+// import img10 from "../assets/SVOE.IT_lisovoi_422.jpg";
+// import img11 from "../assets/0119.jpg";
+// import img12 from "../assets/-storage-emulated-0-DCIM-Camera-IMG_20250129_203502.jpg";
+// import img13 from "../assets/trashed-1747937738-IMG_20250422_204709.jpg";
 
 // Gallery images array
 const galleryImages = [
@@ -49,36 +49,6 @@ const galleryImages = [
     id: "7",
     src: img7,
     alt: { uk: "Учасники проєкту", en: "Project participants" },
-  },
-  {
-    id: "8",
-    src: img8,
-    alt: { uk: "Демонстрація продукту", en: "Product demo" },
-  },
-  {
-    id: "9",
-    src: img9,
-    alt: { uk: "Робоча сесія", en: "Work session" },
-  },
-  {
-    id: "10",
-    src: img10,
-    alt: { uk: "Зустріч з партнерами", en: "Partner meeting" },
-  },
-  {
-    id: "11",
-    src: img11,
-    alt: { uk: "Дизайн макети", en: "Design mockups" },
-  },
-  {
-    id: "12",
-    src: img12,
-    alt: { uk: "Виробничий процес", en: "Production process" },
-  },
-  {
-    id: "13",
-    src: img13,
-    alt: { uk: "Прототип у дії", en: "Prototype in action" },
   },
 ];
 
