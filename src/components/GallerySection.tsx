@@ -53,24 +53,32 @@ const galleryImages = [
   {
     id: "8",
     src: img8,
-    alt: { uk: "Демонстрація технології", en: "Technology demonstration" },
+    alt: { uk: "Демонстрація продукту", en: "Product demo" },
   },
-  { id: "9", src: img9, alt: { uk: "Технічні роботи", en: "Technical work" } },
+  {
+    id: "9",
+    src: img9,
+    alt: { uk: "Робоча сесія", en: "Work session" },
+  },
   {
     id: "10",
     src: img10,
-    alt: { uk: "Інноваційні рішення", en: "Innovative solutions" },
+    alt: { uk: "Зустріч з партнерами", en: "Partner meeting" },
   },
   {
     id: "11",
     src: img11,
-    alt: { uk: "Момент розробки", en: "Development moment" },
+    alt: { uk: "Дизайн макети", en: "Design mockups" },
   },
-  { id: "12", src: img12, alt: { uk: "Робочий процес", en: "Work process" } },
+  {
+    id: "12",
+    src: img12,
+    alt: { uk: "Виробничий процес", en: "Production process" },
+  },
   {
     id: "13",
     src: img13,
-    alt: { uk: "Підготовка до тестування", en: "Preparation for testing" },
+    alt: { uk: "Прототип у дії", en: "Prototype in action" },
   },
 ];
 

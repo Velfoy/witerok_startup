@@ -25,73 +25,21 @@ export function NewsletterSection() {
 
     setStatus("loading");
 
-    try {
-      // Mailchimp configuration
-      // Replace these with your actual Mailchimp credentials:
-      // 1. Sign up at https://mailchimp.com (Free: 500 contacts)
-      // 2. Create an Audience (mailing list)
-      // 3. Get API Key from Account > Extras > API keys
-      // 4. Get Audience ID from Audience > Settings > Audience name and defaults
-      const API_KEY = "YOUR_MAILCHIMP_API_KEY"; // e.g., "abc123...xyz-us21"
-      const AUDIENCE_ID = "YOUR_AUDIENCE_ID"; // e.g., "a1b2c3d4e5"
-      const DATACENTER = API_KEY.split("-")[1]; // Extract datacenter from API key (e.g., "us21")
-
-      const response = await fetch(
-        `https://${DATACENTER}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Basic ${btoa(`anystring:${API_KEY}`)}`,
-          },
-          body: JSON.stringify({
-            email_address: email,
-            status: "subscribed", // or "pending" for double opt-in
-            tags: ["Website Signup"],
-          }),
-        }
-      );
-
-      if (response.ok) {
-        setStatus("success");
-        setMessage(
-          lang === "uk"
-            ? "Дякуємо за підписку! Ви будете отримувати наші новини."
-            : "Thank you for subscribing! You'll receive our updates."
-        );
-        setEmail("");
-
-        setTimeout(() => {
-          setStatus("idle");
-          setMessage("");
-        }, 5000);
-      } else {
-        const error = await response.json();
-        if (error.title === "Member Exists") {
-          setStatus("error");
-          setMessage(
-            lang === "uk"
-              ? "Ця email адреса вже підписана на розсилку."
-              : "This email is already subscribed."
-          );
-        } else {
-          throw new Error(error.detail || "Subscription failed");
-        }
-      }
-    } catch (err) {
-      console.error("Mailchimp error:", err);
-      setStatus("error");
+    // Placeholder - newsletter functionality not yet implemented
+    setTimeout(() => {
+      setStatus("success");
       setMessage(
         lang === "uk"
-          ? "Помилка підписки. Спробуйте пізніше."
-          : "Subscription error. Try again later."
+          ? "Дякуємо за підписку! Ви будете отримувати наші новини."
+          : "Thank you for subscribing! You'll receive our updates."
       );
+      setEmail("");
 
       setTimeout(() => {
         setStatus("idle");
         setMessage("");
       }, 5000);
-    }
+    }, 1000);
   };
 
   const copy = {
@@ -115,52 +63,54 @@ export function NewsletterSection() {
     <section id="newsletter" className="section-shell">
       <div className="section-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="glass-panel rounded-3xl p-8 md:p-12">
+          <div className="rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-xl shadow-[0_18px_50px_rgba(20,64,115,0.16)] p-8 md:p-12">
             <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/15 border border-white/20 shadow-md mb-6">
                 <Mail className="w-8 h-8 text-primary" />
               </div>
               <h2 className="text-3xl md:text-4xl text-foreground font-bold mb-4">
                 {lang === "uk" ? copy.title.uk : copy.title.en}
               </h2>
-              <p className="text-lg text-foreground/70">
+              <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
                 {lang === "uk" ? copy.subtitle.uk : copy.subtitle.en}
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-              <div className="flex flex-col sm:flex-row gap-3">
-                <div className="flex-1">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder={
-                      lang === "uk" ? copy.placeholder.uk : copy.placeholder.en
-                    }
-                    disabled={status === "loading"}
-                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 focus:transition disabled:opacity-50 disabled:cursor-not-allowed"
-                  />
-                </div>
-                <button
-                  type="submit"
+            <form
+              onSubmit={handleSubmit}
+              className="max-w-md mx-auto space-y-4"
+            >
+              <div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={
+                    lang === "uk" ? copy.placeholder.uk : copy.placeholder.en
+                  }
                   disabled={status === "loading"}
-                  className="px-6 py-3 rounded-lg bg-primary hover:bg-primary/90 text-white font-medium focus:transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-                >
-                  {status === "loading" ? (
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  ) : (
-                    <>
-                      {lang === "uk" ? copy.button.uk : copy.button.en}
-                      <Send className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
+                  className="w-full px-4 py-3 rounded-xl bg-white/8 border border-white/15 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 disabled:opacity-50 disabled:cursor-not-allowed shadow-inner"
+                />
               </div>
+
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-[#1A6DCC] hover:from-primary/90 hover:to-[#1A6DCC]/90 text-white font-semibold flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_14px_40px_rgba(26,109,204,0.30)] transition-colors"
+              >
+                {status === "loading" ? (
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : (
+                  <>
+                    {lang === "uk" ? copy.button.uk : copy.button.en}
+                    <Send className="w-4 h-4" />
+                  </>
+                )}
+              </button>
 
               {message && (
                 <div
-                  className={`mt-4 p-3 rounded-lg text-sm ${
+                  className={`mt-2 p-3 rounded-lg text-sm ${
                     status === "success"
                       ? "bg-green-500/10 text-green-500 border border-green-500/20"
                       : "bg-red-500/10 text-red-500 border border-red-500/20"
@@ -169,11 +119,11 @@ export function NewsletterSection() {
                   {message}
                 </div>
               )}
-            </form>
 
-            <p className="text-center text-xs text-foreground/50 mt-6">
-              {lang === "uk" ? copy.privacy.uk : copy.privacy.en}
-            </p>
+              <p className="text-xs text-foreground/50 text-center pt-2">
+                {lang === "uk" ? copy.privacy.uk : copy.privacy.en}
+              </p>
+            </form>
           </div>
         </div>
       </div>

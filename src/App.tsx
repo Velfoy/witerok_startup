@@ -110,6 +110,7 @@ export default function App() {
             }
           >
             <AboutSection />
+            <NewsSection />
             <ESGSection />
             <ProblemSection />
             <ProductSection />
@@ -124,9 +125,8 @@ export default function App() {
             <RoadmapSection />
             <FAQSection />
             <EfficiencyCalculator />
-            <NewsSection />
-            <GallerySection />
             <NewsletterSection />
+            <GallerySection />
             <ContactSection />
           </Suspense>
         </main>

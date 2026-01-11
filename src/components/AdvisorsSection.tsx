@@ -53,14 +53,14 @@ export function AdvisorsSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="flex justify-center">
             {partners.map((p, index) => (
-              <div key={index} className="h-full">
-                <div className="group h-full flex flex-col rounded-2xl bg-white border border-slate-200 shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_14px_36px_rgba(26,109,204,0.18)] transition overflow-hidden">
-                  <div className="p-4 flex-1 flex items-center justify-center min-h-[150px]">
+              <div key={index} className="w-full max-w-3xl">
+                <div className="group h-full flex flex-col items-center rounded-3xl bg-white border border-slate-200 shadow-[0_12px_32px_rgba(0,0,0,0.08)] hover:shadow-[0_18px_46px_rgba(26,109,204,0.18)] transition overflow-hidden">
+                  <div className="p-6 flex-1 flex items-center justify-center min-h-[200px] w-full">
                     {p.imageSrc ? (
                       <div
-                        className="rounded-xl w-full flex items-center justify-center"
+                        className="rounded-2xl w-full flex items-center justify-center"
                         style={{ background: p.bg ?? "transparent" }}
                       >
                         <img
@@ -68,22 +68,22 @@ export function AdvisorsSection() {
                           alt={p.name}
                           loading="lazy"
                           decoding="async"
-                          className="h-16 w-auto object-contain"
+                          className="h-20 w-auto object-contain"
                         />
                       </div>
                     ) : (
                       <div
-                        className="w-20 h-20 rounded-xl text-white flex items-center justify-center shadow-md"
+                        className="w-24 h-24 rounded-2xl text-white flex items-center justify-center shadow-md"
                         style={{
                           background: p.bg,
                         }}
                       >
-                        <span className="font-bold text-xl">{p.monogram}</span>
+                        <span className="font-bold text-2xl">{p.monogram}</span>
                       </div>
                     )}
                   </div>
                   <div
-                    className="h-1 mt-auto opacity-70 group-hover:opacity-100 transition"
+                    className="h-1 w-full mt-auto opacity-70 group-hover:opacity-100 transition"
                     style={{
                       background:
                         "linear-gradient(90deg, #144073, #1A6DCC, #144073)",
@@ -116,14 +116,14 @@ export function AdvisorsSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {grantProviders.map((p, index) => (
               <div key={index} className="h-full">
-                <div className="group h-full flex flex-col rounded-2xl bg-white border border-slate-200 shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_14px_36px_rgba(26,109,204,0.18)] transition overflow-hidden">
-                  <div className="p-4 flex-1 flex items-center justify-center min-h-[150px]">
+                <div className="group h-full flex flex-col rounded-3xl bg-white border border-slate-200 shadow-[0_12px_32px_rgba(0,0,0,0.08)] hover:shadow-[0_18px_46px_rgba(26,109,204,0.18)] transition overflow-hidden">
+                  <div className="p-6 flex-1 flex items-center justify-center min-h-[200px] w-full">
                     {p.imageSrc ? (
                       <div
-                        className="rounded-xl w-full flex items-center justify-center"
+                        className="rounded-2xl w-full flex items-center justify-center"
                         style={{ background: p.bg ?? "transparent" }}
                       >
                         <img
@@ -131,23 +131,23 @@ export function AdvisorsSection() {
                           alt={p.name}
                           loading="lazy"
                           decoding="async"
-                          className="h-16 w-auto object-contain"
+                          className="h-20 w-auto object-contain"
                         />
                       </div>
                     ) : (
                       <div
-                        className="w-20 h-20 rounded-xl text-white flex items-center justify-center shadow-md"
+                        className="w-24 h-24 rounded-2xl text-white flex items-center justify-center shadow-md"
                         style={{
                           background:
                             "linear-gradient(135deg, #144073, #1A6DCC)",
                         }}
                       >
-                        <span className="font-bold text-xl">{p.monogram}</span>
+                        <span className="font-bold text-2xl">{p.monogram}</span>
                       </div>
                     )}
                   </div>
                   <div
-                    className="h-1 mt-auto opacity-70 group-hover:opacity-100 transition"
+                    className="h-1 w-full mt-auto opacity-70 group-hover:opacity-100 transition"
                     style={{
                       background:
                         "linear-gradient(90deg, #144073, #1A6DCC, #144073)",
