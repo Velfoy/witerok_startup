@@ -52,7 +52,7 @@ export function Navigation() {
     {
       key: "partners",
       label: { uk: "Партнери", en: "Partners" },
-      href: "#partnership",
+      href: "#partners",
     },
     {
       key: "financial",
@@ -71,6 +71,16 @@ export function Navigation() {
     },
     { key: "faq", label: { uk: "Запитання", en: "FAQ" }, href: "#faq" },
     { key: "news", label: { uk: "Новини", en: "News" }, href: "#news" },
+    {
+      key: "gallery",
+      label: { uk: "Галерея", en: "Gallery" },
+      href: "#gallery",
+    },
+    {
+      key: "newsletter",
+      label: { uk: "Розсилка", en: "Newsletter" },
+      href: "#newsletter",
+    },
     {
       key: "contact",
       label: { uk: "Контакти", en: "Contact" },

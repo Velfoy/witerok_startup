@@ -82,6 +82,16 @@ const NewsSection = lazy(() =>
     default: m.NewsSection,
   }))
 );
+const GallerySection = lazy(() =>
+  import("./components/GallerySection").then((m) => ({
+    default: m.GallerySection,
+  }))
+);
+const NewsletterSection = lazy(() =>
+  import("./components/NewsletterSection").then((m) => ({
+    default: m.NewsletterSection,
+  }))
+);
 
 export default function App() {
   return (
@@ -115,6 +125,8 @@ export default function App() {
             <FAQSection />
             <EfficiencyCalculator />
             <NewsSection />
+            <GallerySection />
+            <NewsletterSection />
             <ContactSection />
           </Suspense>
         </main>

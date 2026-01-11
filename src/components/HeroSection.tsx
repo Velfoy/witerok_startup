@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Instagram } from "lucide-react";
 import { useLanguage } from "../hooks/useLanguage.js";
 import turbineImg from "../assets/turbine.jpg";
 import { useEffect, useRef, useState } from "react";
@@ -104,7 +104,7 @@ function WindParticles({ blurAmount = 0 }: { blurAmount?: number }) {
     canvas.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("mouseleave", handleMouseLeave);
 
-    const particleCount = 190;
+    const particleCount = 80;
 
     const particles: Particle[] = [];
     for (let i = 0; i < particleCount; i++) {
@@ -117,7 +117,7 @@ function WindParticles({ blurAmount = 0 }: { blurAmount?: number }) {
 
     function connect() {
       if (!ctx) return;
-      const maxDistance = 150;
+      const maxDistance = 120;
       const cellSize = maxDistance;
 
       const grid = new Map<string, number[]>();
@@ -166,16 +166,16 @@ function WindParticles({ blurAmount = 0 }: { blurAmount?: number }) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const time = Date.now() * 0.001;
-      if (gustTick++ % 6 === 0) {
-        const gusts = 3;
+      if (gustTick++ % 12 === 0) {
+        const gusts = 2;
         for (let g = 0; g < gusts; g++) {
           const y =
-            canvas.height * (0.2 + 0.2 * g) + Math.sin(time + g * 1.7) * 18;
+            canvas.height * (0.2 + 0.3 * g) + Math.sin(time + g * 1.7) * 18;
           ctx.strokeStyle = `rgba(255, 255, 255, ${0.05 + g * 0.02})`;
-          ctx.lineWidth = 6 - g;
+          ctx.lineWidth = 5 - g;
           ctx.beginPath();
           ctx.moveTo(0, y);
-          for (let x = 0; x <= canvas.width; x += 90) {
+          for (let x = 0; x <= canvas.width; x += 120) {
             const offset = Math.sin(time * 0.6 + x * 0.01 + g) * 14;
             ctx.lineTo(x, y + offset);
           }
@@ -356,21 +356,14 @@ export function HeroSection() {
               </a>
 
               <a
-                href="https://www.facebook.com/profile.php?id=61574850533708"
+                href="https://www.instagram.com/startup_witerok/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="WITERoK on Facebook"
-                title="Facebook"
+                aria-label="WITERoK on Instagram"
+                title="Instagram"
                 className="p-3 rounded-lg bg-muted inline-flex items-center justify-center hover:bg-white/10 transition"
               >
-                <svg
-                  className="w-5 h-5 text-foreground/60"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  stroke="none"
-                >
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                </svg>
+                <Instagram className="w-5 h-5 text-foreground/60" />
               </a>
             </div>
           </div>
