@@ -17,5 +17,7 @@ export { FAQSection } from "./FAQSection";
 export { GallerySection } from "./GallerySection";
 export { NewsletterSection } from "./NewsletterSection";
 export { EfficiencyCalculator } from "./EfficiencyCalculator";
+export { NewsSection } from "./NewsSection";
 export { ContactSection } from "./ContactSection";
+export { DonateSection } from "./DonateSection";
 export { Footer } from "./Footer";

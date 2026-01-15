@@ -92,6 +92,11 @@ const NewsletterSection = lazy(() =>
     default: m.NewsletterSection,
   }))
 );
+const DonateSection = lazy(() =>
+  import("./components/DonateSection").then((m) => ({
+    default: m.DonateSection,
+  }))
+);
 
 export default function App() {
   return (
@@ -127,6 +132,7 @@ export default function App() {
             <EfficiencyCalculator />
             <NewsletterSection />
             <GallerySection />
+            <DonateSection />
             <ContactSection />
           </Suspense>
         </main>

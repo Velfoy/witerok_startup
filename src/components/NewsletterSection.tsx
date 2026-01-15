@@ -1,10 +1,12 @@
-import { Mail, Send } from "lucide-react";
+import { Mail, Send, Loader } from "lucide-react";
 import { useLanguage } from "../hooks/useLanguage";
 import { useState } from "react";
+import { subscribeNewsletter } from "../services/api";
 
 export function NewsletterSection() {
   const { lang } = useLanguage();
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -25,8 +27,8 @@ export function NewsletterSection() {
 
     setStatus("loading");
 
-    // Placeholder - newsletter functionality not yet implemented
-    setTimeout(() => {
+    try {
+      await subscribeNewsletter({ email, name });
       setStatus("success");
       setMessage(
         lang === "uk"
@@ -34,12 +36,21 @@ export function NewsletterSection() {
           : "Thank you for subscribing! You'll receive our updates."
       );
       setEmail("");
+      setName("");
 
       setTimeout(() => {
         setStatus("idle");
         setMessage("");
       }, 5000);
-    }, 1000);
+    } catch (err) {
+      setStatus("error");
+      setMessage(
+        lang === "uk"
+          ? "Помилка при підписці. Спробуйте ще раз."
+          : "Error subscribing. Please try again."
+      );
+      console.error(err);
+    }
   };
 
   const copy = {
@@ -47,6 +58,10 @@ export function NewsletterSection() {
     subtitle: {
       uk: "Підпишіться на нашу розсилку та отримуйте останні новини про WITERoK",
       en: "Subscribe to our newsletter and get the latest news about WITERoK",
+    },
+    namePlaceholder: {
+      uk: "Введіть ваше ім'я (опціонально)",
+      en: "Enter your name (optional)",
     },
     placeholder: {
       uk: "Введіть вашу email адресу",
@@ -82,6 +97,21 @@ export function NewsletterSection() {
             >
               <div>
                 <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder={
+                    lang === "uk"
+                      ? copy.namePlaceholder.uk
+                      : copy.namePlaceholder.en
+                  }
+                  disabled={status === "loading"}
+                  className="w-full px-4 py-3 rounded-xl bg-white/8 border border-white/15 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 disabled:opacity-50 disabled:cursor-not-allowed shadow-inner"
+                />
+              </div>
+
+              <div>
+                <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -89,6 +119,7 @@ export function NewsletterSection() {
                     lang === "uk" ? copy.placeholder.uk : copy.placeholder.en
                   }
                   disabled={status === "loading"}
+                  required
                   className="w-full px-4 py-3 rounded-xl bg-white/8 border border-white/15 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 disabled:opacity-50 disabled:cursor-not-allowed shadow-inner"
                 />
               </div>
@@ -99,7 +130,7 @@ export function NewsletterSection() {
                 className="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-[#1A6DCC] hover:from-primary/90 hover:to-[#1A6DCC]/90 text-white font-semibold flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_14px_40px_rgba(26,109,204,0.30)] transition-colors"
               >
                 {status === "loading" ? (
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <Loader className="w-4 h-4 animate-spin" />
                 ) : (
                   <>
                     {lang === "uk" ? copy.button.uk : copy.button.en}

@@ -124,35 +124,6 @@ export function AboutSection() {
     threshold: 0.2,
   });
 
-  useEffect(() => {
-    let ticking = false;
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const rect = sectionRef.current?.getBoundingClientRect();
-        if (!rect || !bgRef.current) {
-          ticking = false;
-          return;
-        }
-        const viewportH = window.innerHeight;
-        const sectionCenter = rect.top + rect.height / 2;
-        const viewportCenter = viewportH / 2;
-        const delta = sectionCenter - viewportCenter;
-        const offset = -delta * 0.15;
-        bgRef.current.style.transform = `translateY(${offset}px)`;
-        ticking = false;
-      });
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
-
   const copy = {
     heading: {
       uk: "Про нас",

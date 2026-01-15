@@ -1,6 +1,14 @@
 import { useLanguage } from "../hooks/useLanguage";
-import { Calendar, Newspaper, ChevronDown, ChevronUp } from "lucide-react";
+import {
+  Calendar,
+  Newspaper,
+  ChevronDown,
+  ChevronUp,
+  Loader,
+} from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import type { Post } from "../services/api";
+import { getPosts } from "../services/api";
 import news1Img from "../assets/news1.jpg";
 import news2Img from "../assets/news2.png";
 import news3Img from "../assets/news3.jpg";
@@ -13,7 +21,7 @@ export interface NewsItem {
   image?: string;
 }
 
-// Mock news data
+// Fallback mock data in case API fails
 const mockNews: NewsItem[] = [
   {
     id: "1",
@@ -75,7 +83,7 @@ function NewsCard({ item }: { item: NewsItem }) {
   }, [content, isExpanded]);
 
   return (
-    <div className="group glass-panel glass-hover rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
+    <div className="group glass-panel glass-hover rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl h-full flex flex-col">
       {item.image && (
         <div className="relative w-full h-48 overflow-hidden">
           <img
@@ -85,7 +93,7 @@ function NewsCard({ item }: { item: NewsItem }) {
           />
         </div>
       )}
-      <div className="p-6 md:p-8">
+      <div className="p-6 md:p-8 flex-1 flex flex-col">
         <div className="flex items-start gap-3 mb-4">
           <div className="p-2 rounded-lg bg-secondary/10 group-hover:bg-secondary/20 transition-colors">
             <Newspaper className="w-5 h-5 text-secondary" />
@@ -120,7 +128,7 @@ function NewsCard({ item }: { item: NewsItem }) {
             )}
           </button>
         )}
-        <div className="flex items-center gap-2 pt-4 border-t border-white/5 text-sm text-foreground/50">
+        <div className="mt-auto flex items-center gap-2 pt-4 border-t border-white/5 text-sm text-foreground/50">
           <Calendar size={16} className="text-secondary/70" />
           <span>
             {new Date(item.date).toLocaleDateString(
@@ -135,6 +143,68 @@ function NewsCard({ item }: { item: NewsItem }) {
 
 export function NewsSection() {
   const { lang } = useLanguage();
+  const [news, setNews] = useState<NewsItem[]>(mockNews);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadNews = async () => {
+      try {
+        setLoading(true);
+        console.log("🔄 Loading news from API...");
+        const apiPosts = await getPosts(6);
+        console.log("✅ API response:", apiPosts);
+        console.log("📊 Number of posts:", apiPosts.length);
+
+        if (apiPosts.length === 0) {
+          console.warn("⚠️ API returned 0 posts. Check:");
+          console.warn("1. Are news added in admin panel?");
+          console.warn('2. Is status set to "published"?');
+          console.warn(
+            "3. Visit https://witerok.com/api/posts.php to see raw API response"
+          );
+        }
+
+        // Convert API posts to NewsItem format
+        const convertedNews: NewsItem[] = apiPosts.map((post: Post) => ({
+          id: post.id.toString(),
+          title: {
+            uk: post.title,
+            en: post.title,
+          },
+          content: {
+            uk: post.excerpt,
+            en: post.excerpt,
+          },
+          date: post.date,
+          image: post.image || undefined,
+        }));
+
+        // Use API news if available, otherwise fallback to mock
+        if (convertedNews.length > 0) {
+          console.log("✅ Using API news");
+          setNews(convertedNews);
+        } else {
+          console.log("⚠️ Using fallback mock news");
+          setNews(mockNews);
+        }
+        setError(null);
+      } catch (err) {
+        console.error("❌ Failed to load news:", err);
+        setError(
+          lang === "uk"
+            ? "Не вдалося завантажити новини"
+            : "Failed to load news"
+        );
+        // Keep fallback data visible
+        setNews(mockNews);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadNews();
+  }, [lang]);
 
   const copy = {
     title: { uk: "Новини", en: "News" },
@@ -156,13 +226,43 @@ export function NewsSection() {
           </p>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,350px),1fr))] gap-6 md:gap-8 justify-items-center">
-            {mockNews.map((item) => (
-              <NewsCard key={item.id} item={item} />
-            ))}
+        {loading && (
+          <div className="flex justify-center items-center py-12">
+            <Loader className="w-8 h-8 text-secondary animate-spin" />
           </div>
-        </div>
+        )}
+
+        {error && !loading && (
+          <div className="text-center py-12">
+            <p className="text-secondary">{error}</p>
+          </div>
+        )}
+
+        {!loading && (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+            {(() => {
+              const single = news.length === 1;
+              return (
+                <div
+                  className={
+                    single
+                      ? "grid grid-cols-1 place-items-center gap-6 md:gap-8"
+                      : "grid grid-cols-[repeat(auto-fit,minmax(min(100%,350px),1fr))] gap-6 md:gap-8 items-stretch auto-rows-fr"
+                  }
+                >
+                  {news.map((item) => (
+                    <div
+                      key={item.id}
+                      className={single ? "w-full max-w-3xl" : "w-full h-full"}
+                    >
+                      <NewsCard item={item} />
+                    </div>
+                  ))}
+                </div>
+              );
+            })()}
+          </div>
+        )}
       </div>
     </section>
   );

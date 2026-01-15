@@ -6,17 +6,18 @@ import {
   Facebook,
   Instagram,
   Youtube,
+  Loader,
 } from "lucide-react";
 import { useLanguage } from "../hooks/useLanguage.js";
 import { useState } from "react";
-import emailjs from "@emailjs/browser";
+import { sendContactMessage } from "../services/api";
 
 export function ContactSection() {
   const { lang } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    company: "",
+    subject: "General Inquiry",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -39,11 +40,6 @@ export function ContactSection() {
     setSubmitStatus(null);
 
     try {
-      // EmailJS configuration
-      const serviceId = "service_btq3vp4";
-      const templateId = "template_8vnj5hr";
-      const publicKey = "WdICTs7D7xOv_EtOn";
-
       // Validate required fields
       if (!formData.name || !formData.email || !formData.message) {
         setSubmitStatus("error");
@@ -51,31 +47,24 @@ export function ContactSection() {
         return;
       }
 
-      const response = await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          company: formData.company || "Not specified",
-          message: formData.message,
-          email: "witerokgreenenergy@gmail.com",
-        },
-        publicKey
-      );
-
-      console.log("Email sent successfully:", response);
-      setSubmitStatus("success");
-      setFormData({ name: "", email: "", company: "", message: "" });
-      setTimeout(() => setSubmitStatus(null), 5000);
-    } catch (error: unknown) {
-      const err = error as { status?: number; text?: string; message?: string };
-      console.error("Email send error:", error);
-      console.error("Error details:", {
-        status: err.status,
-        text: err.text,
-        message: err.message,
+      // Call API
+      await sendContactMessage({
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject || "General Inquiry",
+        message: formData.message,
       });
+
+      setSubmitStatus("success");
+      setFormData({
+        name: "",
+        email: "",
+        subject: "General Inquiry",
+        message: "",
+      });
+      setTimeout(() => setSubmitStatus(null), 5000);
+    } catch (error) {
+      console.error("Contact form error:", error);
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
@@ -222,19 +211,19 @@ export function ContactSection() {
 
               <div>
                 <label
-                  htmlFor="company"
+                  htmlFor="subject"
                   className="block text-[#144073] font-semibold mb-2 text-sm md:text-base"
                 >
-                  {lang === "uk" ? "Компанія" : "Company"}
+                  {lang === "uk" ? "Тема" : "Subject"}
                 </label>
                 <input
                   type="text"
-                  id="company"
-                  value={formData.company}
+                  id="subject"
+                  value={formData.subject}
                   onChange={handleChange}
                   className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#1A6DCC] focus:border-transparent text-slate-900 text-sm md:text-base"
                   placeholder={
-                    lang === "uk" ? "Назва компанії" : "Company name"
+                    lang === "uk" ? "Тема повідомлення" : "Message subject"
                   }
                 />
               </div>
@@ -283,15 +272,18 @@ export function ContactSection() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-6 md:px-8 py-2 md:py-3 bg-gradient-to-r from-[#144073] to-[#1A6DCC] text-white rounded-lg font-semibold text-sm md:text-base hover:shadow-lg transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-6 md:px-8 py-2 md:py-3 bg-gradient-to-r from-[#144073] to-[#1A6DCC] text-white rounded-lg font-semibold text-sm md:text-base hover:shadow-lg transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                {isSubmitting
-                  ? lang === "uk"
-                    ? "Надсилання..."
-                    : "Sending..."
-                  : lang === "uk"
-                  ? "Надіслати повідомлення"
-                  : "Send message"}
+                {isSubmitting ? (
+                  <>
+                    <Loader className="w-4 h-4 animate-spin" />
+                    {lang === "uk" ? "Надсилання..." : "Sending..."}
+                  </>
+                ) : lang === "uk" ? (
+                  "Надіслати повідомлення"
+                ) : (
+                  "Send message"
+                )}
               </button>
             </form>
           </div>
