@@ -10,13 +10,14 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// Создание таблицы при активации плагина
+// Создание таблиц при активации плагина
 function witerok_news_plugin_activate() {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'witerok_news';
     $charset_collate = $wpdb->get_charset_collate();
-
-    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+    
+    // Таблица новостей
+    $news_table = $wpdb->prefix . 'witerok_news';
+    $sql_news = "CREATE TABLE IF NOT EXISTS $news_table (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
         title varchar(255) NOT NULL,
         content longtext NOT NULL,
@@ -26,9 +27,23 @@ function witerok_news_plugin_activate() {
         updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
         PRIMARY KEY  (id)
     ) $charset_collate;";
+    
+    // Таблица контактных сообщений
+    $contact_table = $wpdb->prefix . 'contact_messages';
+    $sql_contact = "CREATE TABLE IF NOT EXISTS $contact_table (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        name varchar(100) NOT NULL,
+        email varchar(100) NOT NULL,
+        subject varchar(200) NOT NULL,
+        message text NOT NULL,
+        submitted_at datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+        status varchar(20) DEFAULT 'new' NOT NULL,
+        PRIMARY KEY  (id)
+    ) $charset_collate;";
 
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-    dbDelta($sql);
+    dbDelta($sql_news);
+    dbDelta($sql_contact);
 }
 register_activation_hook(__FILE__, 'witerok_news_plugin_activate');
 
@@ -51,6 +66,23 @@ function witerok_simple_news_menu() {
         'manage_options',
         'witerok-news-api',
         'witerok_news_api_page'
+    );
+    
+    // Подсчитываем новые сообщения для бейджа
+    global $wpdb;
+    $contact_table = $wpdb->prefix . 'contact_messages';
+    $new_count = $wpdb->get_var("SELECT COUNT(*) FROM $contact_table WHERE status = 'new'");
+    $badge = $new_count > 0 ? " <span class='update-plugins count-$new_count'><span class='update-count'>$new_count</span></span>" : '';
+    
+    // Добавляем меню для контактных сообщений
+    add_menu_page(
+        'Контактні повідомлення',
+        '📧 Повідомлення' . $badge,
+        'manage_options',
+        'witerok-contact-messages',
+        'witerok_contact_messages_page',
+        'dashicons-email',
+        7
     );
 }
 add_action('admin_menu', 'witerok_simple_news_menu');
@@ -324,8 +356,154 @@ function witerok_simple_news_page() {
 
     <div class="notice notice-info" style="margin-top:20px;">
         <p><strong>ℹ️ Інформація:</strong> Усі опубліковані новини автоматично загружаються в React додаток через API:
-            <code>GET <?php echo esc_html(home_url('/api/posts.php')); ?></code></p>
+            <code>GET <?php echo esc_html(home_url('/api/posts.php')); ?></code>
+        </p>
         <p>Тільки новини зі статусом "Опублікована" будуть видні на сайті.</p>
+    </div>
+</div>
+<?php
+}
+
+// Страница контактных сообщений
+function witerok_contact_messages_page() {
+    if (!current_user_can('manage_options')) {
+        wp_die('Доступ заборонено');
+    }
+
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'contact_messages';
+
+    $message = '';
+    
+    // Удаление сообщения
+    if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
+        check_admin_referer('delete_message_' . $_GET['id']);
+        $wpdb->delete($table_name, ['id' => intval($_GET['id'])]);
+        $message = 'Повідомлення видалено';
+    }
+    
+    // Изменение статуса
+    if (isset($_GET['action']) && $_GET['action'] === 'mark_read' && isset($_GET['id'])) {
+        check_admin_referer('mark_read_' . $_GET['id']);
+        $wpdb->update($table_name, ['status' => 'read'], ['id' => intval($_GET['id'])], ['%s'], ['%d']);
+        $message = 'Позначено як прочитане';
+    }
+    
+    if (isset($_GET['action']) && $_GET['action'] === 'mark_new' && isset($_GET['id'])) {
+        check_admin_referer('mark_new_' . $_GET['id']);
+        $wpdb->update($table_name, ['status' => 'new'], ['id' => intval($_GET['id'])], ['%s'], ['%d']);
+        $message = 'Позначено як нове';
+    }
+
+    // Фильтрация по статусу
+    $status_filter = isset($_GET['status']) ? sanitize_text_field($_GET['status']) : 'all';
+    
+    // Получаем сообщения
+    if ($status_filter === 'all') {
+        $all_messages = $wpdb->get_results("SELECT * FROM $table_name ORDER BY submitted_at DESC");
+    } else {
+        $all_messages = $wpdb->get_results($wpdb->prepare(
+            "SELECT * FROM $table_name WHERE status = %s ORDER BY submitted_at DESC",
+            $status_filter
+        ));
+    }
+    
+    // Подсчитываем новые
+    $new_count = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE status = 'new'");
+    
+    ?>
+<div class="wrap">
+    <h1>📧 Контактні повідомлення</h1>
+
+    <?php if ($message): ?>
+    <div class="notice notice-success is-dismissible">
+        <p><?php echo esc_html($message); ?></p>
+    </div>
+    <?php endif; ?>
+
+    <div class="notice notice-info">
+        <p><strong>ℹ️ Інформація:</strong> Усі повідомлення з контактної форми зберігаються тут. Коли надходить нове
+            повідомлення, адміністратор отримує email-сповіщення на
+            <code><?php echo esc_html(get_option('admin_email')); ?></code></p>
+    </div>
+
+    <div style="margin: 20px 0;">
+        <strong>Фільтр:</strong>
+        <a href="<?php echo admin_url('admin.php?page=witerok-contact-messages&status=all'); ?>"
+            class="button <?php echo $status_filter === 'all' ? 'button-primary' : ''; ?>">
+            Усі (<?php echo count($wpdb->get_results("SELECT * FROM $table_name")); ?>)
+        </a>
+        <a href="<?php echo admin_url('admin.php?page=witerok-contact-messages&status=new'); ?>"
+            class="button <?php echo $status_filter === 'new' ? 'button-primary' : ''; ?>">
+            Нові (<?php echo $new_count; ?>)
+        </a>
+        <a href="<?php echo admin_url('admin.php?page=witerok-contact-messages&status=read'); ?>"
+            class="button <?php echo $status_filter === 'read' ? 'button-primary' : ''; ?>">
+            Прочитані (<?php echo count($wpdb->get_results("SELECT * FROM $table_name WHERE status = 'read'")); ?>)
+        </a>
+    </div>
+
+    <?php if (empty($all_messages)): ?>
+    <p>Немає повідомлень.</p>
+    <?php else: ?>
+    <table class="wp-list-table widefat fixed striped table-view-list">
+        <thead>
+            <tr>
+                <th style="width: 50px;">ID</th>
+                <th style="width: 80px;">Статус</th>
+                <th style="width: 150px;">Ім'я</th>
+                <th style="width: 180px;">Email</th>
+                <th style="width: 200px;">Тема</th>
+                <th>Повідомлення</th>
+                <th style="width: 150px;">Дата</th>
+                <th style="width: 200px;">Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($all_messages as $msg): ?>
+            <tr style="<?php echo $msg->status === 'new' ? 'background: #fffbcc;' : ''; ?>">
+                <td>#<?php echo intval($msg->id); ?></td>
+                <td>
+                    <?php if ($msg->status === 'new'): ?>
+                    <span style="color: #d63638; font-weight: bold;">🔴 Нове</span>
+                    <?php else: ?>
+                    <span style="color: #00a32a;">✓ Прочитано</span>
+                    <?php endif; ?>
+                </td>
+                <td><?php echo esc_html($msg->name); ?></td>
+                <td><a href="mailto:<?php echo esc_attr($msg->email); ?>"><?php echo esc_html($msg->email); ?></a></td>
+                <td><?php echo esc_html($msg->subject); ?></td>
+                <td>
+                    <details>
+                        <summary style="cursor:pointer;color:#2271b1;">Переглянути повідомлення</summary>
+                        <div style="margin-top:10px;padding:10px;background:#f0f0f1;border-radius:4px;">
+                            <?php echo nl2br(esc_html($msg->message)); ?>
+                        </div>
+                    </details>
+                </td>
+                <td><?php echo date('d.m.Y H:i', strtotime($msg->submitted_at)); ?></td>
+                <td>
+                    <?php if ($msg->status === 'new'): ?>
+                    <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=witerok-contact-messages&action=mark_read&id=' . intval($msg->id)), 'mark_read_' . intval($msg->id)); ?>"
+                        class="button button-small">Прочитано</a>
+                    <?php else: ?>
+                    <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=witerok-contact-messages&action=mark_new&id=' . intval($msg->id)), 'mark_new_' . intval($msg->id)); ?>"
+                        class="button button-small">Нове</a>
+                    <?php endif; ?>
+                    <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=witerok-contact-messages&action=delete&id=' . intval($msg->id)), 'delete_message_' . intval($msg->id)); ?>"
+                        class="button button-small button-link-delete"
+                        onclick="return confirm('Видалити це повідомлення?')">Видалити</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php endif; ?>
+
+    <div class="notice notice-warning" style="margin-top:20px;">
+        <p><strong>⚙️ Налаштування email-сповіщень:</strong></p>
+        <p>Email для сповіщень: <code><?php echo esc_html(get_option('admin_email')); ?></code></p>
+        <p>Змінити можна в <a href="<?php echo admin_url('options-general.php'); ?>">Налаштування → Загальні</a></p>
     </div>
 </div>
 <?php
