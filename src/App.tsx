@@ -1,9 +1,10 @@
 import { Navigation } from "./components/Navigation";
 import { HeroSection } from "./components/HeroSection";
 import { Footer } from "./components/Footer";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useMemo } from "react";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import WindCursorGlobal from "./components/WindCursorGlobal";
+import { UnsubscribeSection } from "./components/UnsubscribeSection";
 
 const AboutSection = lazy(() =>
   import("./components/AboutSection").then((m) => ({ default: m.AboutSection }))
@@ -99,6 +100,20 @@ const DonateSection = lazy(() =>
 );
 
 export default function App() {
+  // Check if it's unsubscribe page
+  const isUnsubscribePage = useMemo(() => {
+    return new URLSearchParams(window.location.search).has("token");
+  }, []);
+
+  if (isUnsubscribePage) {
+    return (
+      <LanguageProvider>
+        <WindCursorGlobal />
+        <UnsubscribeSection />
+      </LanguageProvider>
+    );
+  }
+
   return (
     <LanguageProvider>
       <div className="min-h-screen bg-background scroll-smooth hide-cursor">

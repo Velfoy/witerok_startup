@@ -20,4 +20,5 @@ export { EfficiencyCalculator } from "./EfficiencyCalculator";
 export { NewsSection } from "./NewsSection";
 export { ContactSection } from "./ContactSection";
 export { DonateSection } from "./DonateSection";
+export { UnsubscribeSection } from "./UnsubscribeSection";
 export { Footer } from "./Footer";
