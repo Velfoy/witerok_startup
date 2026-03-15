@@ -5,6 +5,7 @@ import { Suspense, lazy, useMemo } from "react";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import WindCursorGlobal from "./components/WindCursorGlobal";
 import { UnsubscribeSection } from "./components/UnsubscribeSection";
+import { SharedBackground } from "./components/SharedBackground";
 
 const AboutSection = lazy(() =>
   import("./components/AboutSection").then((m) => ({
@@ -136,9 +137,14 @@ export default function App() {
             {/* <EfficiencyCalculator /> */}
             <CompetitiveSection />
             <ComparisonSection />
-            <TargetAudienceSection />
-            <AboutSection />
-            <TeamSection />
+            <div className="relative">
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <SharedBackground active={true} />
+              </div>
+              <TargetAudienceSection />
+              <AboutSection />
+              <TeamSection />
+            </div>
             <AdvisorsSection />
             <RoadmapSection />
 
