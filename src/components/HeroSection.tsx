@@ -282,8 +282,8 @@ export function HeroSection() {
       en: "Next-generation wind energy",
     },
     subtitle: {
-      uk: "WITERoK - енергія , яка завжди з вами. Просто. Тихо. Надійно.",
-      en: "WITERoK - energy that is always with you. Simple. Quiet. Reliable.",
+      uk: "WITERoK - український стартап, що створює інноваційні мобільні вітрогенератори висотою в 2,5 м та виробітком близько 3-5 МВт*год/рік. ",
+      en: "WITERoK is a Ukrainian startup developing innovative 2.5m tall mobile wind turbines that can generate around 3-5 MWh/year.",
     },
     ctas: {
       primary: { uk: "Дізнатися більше", en: "Learn more" },

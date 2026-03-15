@@ -35,8 +35,8 @@ export function Navigation() {
     },
     {
       key: "audience",
-      label: { uk: "Цільова аудиторія", en: "Target Audience" },
-      href: "#audience",
+      label: { uk: "Місця установки", en: "Installation Locations" },
+      href: "#locations",
     },
     {
       key: "business",
@@ -137,10 +137,10 @@ export function Navigation() {
   }, []);
 
   const centerVisibleKeys = new Set(
-    navLinks.slice(0, centerCount).map((i) => i.key)
+    navLinks.slice(0, centerCount).map((i) => i.key),
   );
   let dropdownItems = navItems.filter(
-    (item) => !centerVisibleKeys.has(item.key)
+    (item) => !centerVisibleKeys.has(item.key),
   );
   if (dropdownItems.length === 0) dropdownItems = navItems;
 

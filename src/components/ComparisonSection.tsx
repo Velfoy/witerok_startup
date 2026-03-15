@@ -6,6 +6,7 @@ export function ComparisonSection() {
   const metrics = [
     {
       label: { uk: "Термін служби, роки", en: "Lifetime, years" },
+      witerok: "x",
       solar: "25-30",
       verticalWind: "15-25",
       capacity: "10",
@@ -13,6 +14,7 @@ export function ComparisonSection() {
     },
     {
       label: { uk: "Початкові інвестиції, $", en: "Initial Investment, $" },
+      witerok: "x",
       solar: "1200",
       verticalWind: "16800",
       capacity: "6500",
@@ -20,6 +22,7 @@ export function ComparisonSection() {
     },
     {
       label: { uk: "Вартість 1 KW, $", en: "Cost per 1 KW, $" },
+      witerok: "x",
       solar: "350",
       verticalWind: "8400",
       capacity: "700",
@@ -27,6 +30,7 @@ export function ComparisonSection() {
     },
     {
       label: { uk: "Вартість обслуговування, $", en: "Maintenance Cost, $" },
+      witerok: "x",
       solar: "25",
       verticalWind: "50",
       capacity: "0",
@@ -34,7 +38,7 @@ export function ComparisonSection() {
     },
     {
       label: { uk: "ROI, роки", en: "ROI, years" },
-      solar: "1,3",
+      witerok: "x",
       verticalWind: "4,3",
       capacity: "-",
       dizell: "-",
@@ -44,6 +48,7 @@ export function ComparisonSection() {
         uk: "Вартість додаткового обладнання, $",
         en: "Additional Equipment Cost, $",
       },
+      witerok: "x",
       solar: "1050",
       verticalWind: "1050",
       capacity: "3200",
@@ -51,6 +56,7 @@ export function ComparisonSection() {
     },
     {
       label: { uk: "Площа, м²", en: "Area, m²" },
+      witerok: "x",
       solar: "25",
       verticalWind: "2,5",
       capacity: "0,5",
@@ -58,6 +64,7 @@ export function ComparisonSection() {
     },
     {
       label: { uk: "Ефективність, %", en: "Efficiency, %" },
+      witerok: "x",
       solar: "20-25",
       verticalWind: "15-20",
       capacity: "90-95",
@@ -92,16 +99,17 @@ export function ComparisonSection() {
                 <tr className="bg-gradient-to-r from-[#144073] to-[#1A6DCC]">
                   <th className="px-6 py-4 text-left text-white font-semibold"></th>
                   <th className="px-6 py-4 text-center text-white font-semibold">
-                    Solar
+                    WITERoK
                   </th>
                   <th className="px-6 py-4 text-center text-white font-semibold">
-                    {lang === "uk" ? "Вертикальний вітер" : "Vertical Wind"}
+                    {lang === "uk" ? "Сонячна енергія" : "Solar"}
+                  </th>
+
+                  <th className="px-6 py-4 text-center text-white font-semibold">
+                    {lang === "uk" ? "Накопичення" : "Energy Storage"}
                   </th>
                   <th className="px-6 py-4 text-center text-white font-semibold">
-                    Capacity
-                  </th>
-                  <th className="px-6 py-4 text-center text-white font-semibold">
-                    Dizell
+                    {lang === "uk" ? "Дизель" : "Dizell"}
                   </th>
                 </tr>
               </thead>
@@ -116,12 +124,13 @@ export function ComparisonSection() {
                     <td className="px-6 py-4 text-sm font-medium text-[#144073]">
                       {lang === "uk" ? metric.label.uk : metric.label.en}
                     </td>
+                    <td className="px-8 py-4 text-center text-base text-slate-700 font-bold">
+                      {metric.witerok}
+                    </td>
                     <td className="px-6 py-4 text-center text-sm text-slate-700 font-medium">
                       {metric.solar}
                     </td>
-                    <td className="px-6 py-4 text-center text-sm text-slate-700 font-medium">
-                      {metric.verticalWind}
-                    </td>
+
                     <td className="px-6 py-4 text-center text-sm text-slate-700 font-medium">
                       {metric.capacity}
                     </td>

@@ -1,6 +1,5 @@
 import {
   Wind,
-  Battery,
   Gauge,
   Shield,
   Wrench,
@@ -8,11 +7,12 @@ import {
   Calendar,
   Zap,
   Clock,
+  DollarSign,
 } from "lucide-react";
 import { useLanguage } from "../hooks/useLanguage.js";
 import { useEffect, useRef } from "react";
 import { useInViewport } from "../hooks/useInViewport";
-import turbineImg from "../assets/turbine2.png";
+import turbineVideo from "../assets/turbine.mp4";
 
 function ProductBackground({ active }: { active: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -62,7 +62,7 @@ function ProductBackground({ active }: { active: boolean }) {
         0,
         0,
         canvas.width,
-        canvas.height
+        canvas.height,
       );
       gradient.addColorStop(0, "#0a2540");
       gradient.addColorStop(0.5, "#144073");
@@ -78,7 +78,7 @@ function ProductBackground({ active }: { active: boolean }) {
         0,
         0,
         canvas.width,
-        canvas.height
+        canvas.height,
       );
       gradient.addColorStop(0, "#0a2540");
       gradient.addColorStop(0.5, "#144073");
@@ -137,8 +137,8 @@ export function ProductSection() {
   const specs = [
     {
       icon: Calendar,
-      label: { uk: "Термін служби", en: "Lifetime" },
-      value: { uk: "15 - 20 років", en: "15 - 20 years" },
+      label: { uk: "Стартова швидкість", en: "Startup speed" },
+      value: { uk: "4 м/с", en: "4 m/s" },
     },
     {
       icon: Gauge,
@@ -148,7 +148,7 @@ export function ProductSection() {
     {
       icon: Wind,
       label: { uk: "Номінальна швидкість вітру", en: "Nominal wind speed" },
-      value: { uk: "~7,0 м/с", en: "~7.0 m/s" },
+      value: { uk: "~8,0 м/с", en: "~8.0 m/s" },
     },
     {
       icon: Wrench,
@@ -166,7 +166,7 @@ export function ProductSection() {
       value: { uk: "~ 1 м²", en: "~ 1 m²" },
     },
     {
-      icon: Battery,
+      icon: DollarSign,
       label: { uk: "Ціна", en: "Price" },
       value: { uk: "2500$", en: "2500$" },
     },
@@ -209,38 +209,41 @@ export function ProductSection() {
 
           <p className="text-l text-white/90 drop-shadow-md max-w-4xl mx-auto">
             {lang === "uk"
-              ? "Безлопатева вітрова установка, що генерує 2-4 МВт·год на рік з окупністю за 3-5 років. Працює від низької швидкості вітру, не потребує регулярного обслуговування та перевищує 15 років безперервної роботи."
-              : "Bladeless wind turbine generating 2-4 MWh per year with payback in 3-5 years. Works from low wind speeds, requires minimal maintenance, and operates for over 15 years continuously."}
+              ? " П’ятироторний вітрогенератор, що генерує 3-5 МВт*год на рік. Працює при швидкості від 4 м/с, не потребує регулярного обслуговування з терміном служби 10-15 років."
+              : "A five-rotor wind turbine that generates 3-5 MWh per year. Operates at wind speeds starting from 4 m/s, requires no regular maintenance, and has a lifespan of 10-15 years."}
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-16">
           <div className="relative max-w-xl mx-auto lg:mx-0">
             <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src={turbineImg}
-                alt="WITERoK Wind Generator"
-                loading="lazy"
-                decoding="async"
+              <video
+                src={turbineVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-6 -right-6 bg-white/20 backdrop-blur-md border border-white/30 text-white p-6 rounded-xl shadow-2xl">
+            <div className="absolute -bottom-6 -right-6 bg-[#21457d]/60 backdrop-blur-md border border-white/30 text-white p-6 rounded-xl shadow-2xl">
               <div className="text-sm mb-1 text-white/90">
                 {lang === "uk" ? "Термін служби" : "Lifetime"}
               </div>
-              <div className="text-3xl font-semibold">15-20</div>
+              <div className="text-3xl font-semibold">
+                15-20 {lang === "uk" ? " років" : " years"}
+              </div>
             </div>
           </div>
           <div>
             <h3 className="text-3xl text-white mb-4 drop-shadow-lg">
               {lang === "uk" ? "Характеристики" : "Specifications"}
             </h3>
-            <p className="text-white/90 mb-6 drop-shadow-sm leading-relaxed">
+            {/* <p className="text-white/90 mb-6 drop-shadow-sm leading-relaxed">
               {lang === "uk"
                 ? "WITERoK поєднує інноваційний дизайн без лопатей з практичною функціональністю. Це безпечне, тихе рішення для енергонезалежності, яке легко встановлюється та вимагає мінімального обслуговування."
                 : "WITERoK combines innovative bladeless design with practical functionality. It's a safe, quiet solution for energy independence that installs easily and requires minimal maintenance."}
-            </p>
+            </p> */}
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 ">
               {specs.map((spec, index) => {
                 const Icon = spec.icon;
@@ -257,8 +260,8 @@ export function ProductSection() {
                       {typeof spec.value === "string"
                         ? spec.value
                         : lang === "uk"
-                        ? spec.value.uk
-                        : spec.value.en}
+                          ? spec.value.uk
+                          : spec.value.en}
                     </div>
                   </div>
                 );

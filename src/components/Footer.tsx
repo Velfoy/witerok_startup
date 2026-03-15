@@ -29,8 +29,8 @@ export function Footer() {
         href: "#problem",
       },
       {
-        label: { uk: "Цільова аудиторія", en: "Target Audience" },
-        href: "#audience",
+        label: { uk: "Місця установки", en: "Installation Locations" },
+        href: "#locations",
       },
       { label: { uk: "FAQ", en: "FAQ" }, href: "#faq" },
       { label: { uk: "Дорожна карта", en: "Roadmap" }, href: "#roadmap" },

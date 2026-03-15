@@ -2,10 +2,9 @@ import { useLanguage } from "../hooks/useLanguage.js";
 import { useEffect, useRef } from "react";
 import { useInViewport } from "../hooks/useInViewport";
 import leraZlydarImg from "../assets/lera_zlydar.jpg";
-import artem_dedeniukImg from "../assets/artem_der.jpg";
+
 import stasKotlyarImg from "../assets/Stat_kotlar.jpg";
 import yaroslavaPolikarpovaImg from "../assets/Jaroslava_Polikarpowa.jpg";
-import nataliaYaroshenkoImg from "../assets/natalia-yaroszenko.png";
 
 function TeamBackground({ active }: { active: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -55,7 +54,7 @@ function TeamBackground({ active }: { active: boolean }) {
         0,
         0,
         canvas.width,
-        canvas.height
+        canvas.height,
       );
       gradient.addColorStop(0, "#0a2540");
       gradient.addColorStop(0.5, "#144073");
@@ -71,7 +70,7 @@ function TeamBackground({ active }: { active: boolean }) {
         0,
         0,
         canvas.width,
-        canvas.height
+        canvas.height,
       );
       gradient.addColorStop(0, "#0a2540");
       gradient.addColorStop(0.5, "#144073");
@@ -142,18 +141,6 @@ export function TeamSection() {
 
   const team = [
     {
-      name: { uk: "Артем Деденок", en: "Artem Dedenok" },
-      position: {
-        uk: "Data Analyst, co-founders",
-        en: "Data Analyst, co-founders",
-      },
-      bio: {
-        uk: "2+ роки досвіду роботи в галузі альтернативної енергетики",
-        en: "2+ years of experience in the renewable energy sector",
-      },
-      image: artem_dedeniukImg,
-    },
-    {
       name: { uk: "Ярослава Полікарпова", en: "Yaroslava Polikarpova" },
       position: { uk: "CEO, co-founders", en: "CEO, co-founders" },
       bio: {
@@ -181,13 +168,13 @@ export function TeamSection() {
       image: leraZlydarImg,
     },
     {
-      name: { uk: "Наталія Ярошенко", en: "Natalia Yaroshenko" },
-      position: { uk: "Sales Representative", en: "Sales Representative" },
+      name: { uk: "Іван Петренко", en: "Ivan Petrenko" },
+      position: { uk: "Backend розробник", en: "Backend Developer" },
       bio: {
-        uk: "0,5+ рік досвіду активної комунікації з потенційними клієнтами",
-        en: "0.5+ year of experience in active communication with potential clients",
+        uk: "1+ рік комерційного досвіду у бекенд розробці ",
+        en: "1+ year of commercial experience in backend development",
       },
-      image: nataliaYaroshenkoImg,
+      image: "https://randomuser.me/api/portraits",
     },
   ];
 
@@ -253,15 +240,12 @@ export function TeamSection() {
       ref={(el) => {
         viewportRef.current = el as HTMLElement | null;
       }}
-      className="relative py-24 min-h-[600px] overflow-hidden"
+      className="relative py-20 md:py-24 min-h-[600px] overflow-hidden"
     >
       <div className="absolute inset-0" style={{ zIndex: 0 }}>
         <TeamBackground active={inView} />
       </div>
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/20"
-        style={{ zIndex: 1 }}
-      />
+      <div className="absolute inset-0 bg-[#103a69]/55" style={{ zIndex: 1 }} />
 
       <div
         className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"

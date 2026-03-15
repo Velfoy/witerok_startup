@@ -20,8 +20,8 @@ export function CompetitiveSection() {
         en: "Accessibility & Mobility",
       },
       description: {
-        uk: "Сегментована конструкція, ціна $2000 та простий монтаж.",
-        en: "Segmented design, $2000 price, and simple installation.",
+        uk: "Сегментована конструкція, ціна $2500 та простий монтаж.",
+        en: "Segmented design, $2500 price, and simple installation.",
       },
     },
     {

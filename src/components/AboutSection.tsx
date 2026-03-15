@@ -50,7 +50,7 @@ function WindEnergyBackground({ active }: { active: boolean }) {
         0,
         0,
         canvas.width,
-        canvas.height
+        canvas.height,
       );
       gradient.addColorStop(0, "#0a2540");
       gradient.addColorStop(0.5, "#144073");
@@ -66,7 +66,7 @@ function WindEnergyBackground({ active }: { active: boolean }) {
         0,
         0,
         canvas.width,
-        canvas.height
+        canvas.height,
       );
       gradient.addColorStop(0, "#0a2540");
       gradient.addColorStop(0.5, "#144073");
@@ -165,7 +165,7 @@ export function AboutSection() {
         sectionRef.current = el;
         viewportRef.current = el as HTMLElement | null;
       }}
-      className="relative py-16 min-h-[450px] my-20"
+      className="relative py-20 md:py-24 min-h-[450px] overflow-hidden"
     >
       <div
         ref={bgRef}
@@ -174,13 +174,10 @@ export function AboutSection() {
       >
         <WindEnergyBackground active={inView} />
       </div>
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-black/15 via-black/8 to-black/15"
-        style={{ zIndex: 1 }}
-      />
+      <div className="absolute inset-0 bg-[#103a69]/55" style={{ zIndex: 1 }} />
 
       <div
-        className="section-surface max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
+        className="section-surface max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         style={{ position: "relative", zIndex: 10 }}
       >
         <div className="text-center mb-12">
@@ -196,7 +193,7 @@ export function AboutSection() {
           {copy.pillars.map((pillar) => (
             <div
               key={pillar.title.uk}
-              className="p-6 rounded-2xl border border-white/20 bg-white/8 backdrop-blur-sm hover:bg-white/12 hover:shadow-lg transition"
+              className="p-6 rounded-2xl border border-white/20 bg-white/8 backdrop-blur-sm hover:bg-white/12 hover:shadow-lg transition text-center"
             >
               <h3 className="text-xl text-white mb-2 drop-shadow">
                 {lang === "uk" ? pillar.title.uk : pillar.title.en}

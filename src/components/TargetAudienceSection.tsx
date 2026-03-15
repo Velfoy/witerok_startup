@@ -1,6 +1,11 @@
 import { useLanguage } from "../hooks/useLanguage.js";
 import { useEffect, useRef } from "react";
 import { useInViewport } from "../hooks/useInViewport";
+import turbineImageA from "../assets/turbine.jpg";
+import turbineImageB from "../assets/turbine2.png";
+import turbineImageC from "../assets/IMG_20260109_200624.jpg";
+import turbineImageD from "../assets/IMG_8394.jpg";
+import turbineImageE from "../assets/IMG_8396.jpg";
 
 function AudienceBackground({ active }: { active: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -50,7 +55,7 @@ function AudienceBackground({ active }: { active: boolean }) {
         0,
         0,
         canvas.width,
-        canvas.height
+        canvas.height,
       );
       gradient.addColorStop(0, "#0a2540");
       gradient.addColorStop(0.5, "#144073");
@@ -66,7 +71,7 @@ function AudienceBackground({ active }: { active: boolean }) {
         0,
         0,
         canvas.width,
-        canvas.height
+        canvas.height,
       );
       gradient.addColorStop(0, "#0a2540");
       gradient.addColorStop(0.5, "#144073");
@@ -122,6 +127,14 @@ export function TargetAudienceSection() {
     threshold: 0.2,
   });
 
+  const locationImages = [
+    turbineImageA,
+    turbineImageB,
+    turbineImageC,
+    turbineImageD,
+    turbineImageE,
+  ];
+
   return (
     <section
       id="audience"
@@ -133,10 +146,7 @@ export function TargetAudienceSection() {
       <div className="absolute inset-0" style={{ zIndex: 0 }}>
         <AudienceBackground active={inView} />
       </div>
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/20"
-        style={{ zIndex: 1 }}
-      />
+      <div className="absolute inset-0 bg-[#103a69]/55" style={{ zIndex: 1 }} />
 
       <div
         className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
@@ -144,124 +154,34 @@ export function TargetAudienceSection() {
       >
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl text-white mb-4 drop-shadow-lg">
-            {lang === "uk" ? "Цільова аудиторія" : "Target audience"}
-          </h2>
-          <p className="text-l text-white/90 max-w-3xl mx-auto drop-shadow-sm">
             {lang === "uk"
-              ? "WITERoK створює цінність для різних сегментів ринку"
-              : "WITERoK creates value across diverse market segments"}
-          </p>
+              ? "Локації встановлення WITERoK"
+              : "WITERoK Installation Locations"}
+          </h2>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 md:p-12 text-white">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="text-center">
-              <div className="w-48 h-48 mx-auto mb-6 rounded-full border-8 border-[#144073] flex items-center justify-center bg-white/5">
-                <span
-                  className="text-5xl font-bold text-[#144073] drop-shadow-lg"
-                  style={{ color: "#144073" }}
-                >
-                  TAM
-                </span>
-              </div>
-              <div className="text-4xl font-bold mb-2 drop-shadow-lg">
-                ≈13 mil
-              </div>
-              <div className="text-lg font-semibold mb-4 text-white/90">
-                {lang === "uk" ? "Потенційні клієнти" : "Potential clients"}
-              </div>
-              <div className="space-y-3 text-left">
-                <div className="flex items-start">
-                  <div className="w-3 h-3 rounded-full bg-[#144073] mt-1.5 flex-shrink-0"></div>
-                  <span className="ml-3 text-white/80 text-sm">
-                    {lang === "uk"
-                      ? "Приватний сектор (невеликі домогосподарства, еко-будинки з пласким дахом)"
-                      : "Private sector (small households, eco-homes with flat roofs)"}
-                  </span>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-3 h-3 rounded-full bg-[#144073] mt-1.5 flex-shrink-0"></div>
-                  <span className="ml-3 text-white/80 text-sm">
-                    {lang === "uk"
-                      ? "Багатоповерхові будівлі (дахи будівель)"
-                      : "Multi-story buildings (building roofs)"}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <div className="w-48 h-48 mx-auto mb-6 rounded-full border-8 border-[#1A6DCC] flex items-center justify-center bg-white/5">
-                <span
-                  className="text-5xl font-bold text-[#1A6DCC] drop-shadow-lg"
-                  style={{ color: "#1A6DCC" }}
-                >
-                  SAM
-                </span>
-              </div>
-              <div className="text-4xl font-bold mb-2 drop-shadow-lg">
-                ≈1.1 mil
-              </div>
-              <div className="text-lg font-semibold mb-4 text-white/90">
-                {lang === "uk" ? "Доступні клієнти" : "Serviceable clients"}
-              </div>
-              <div className="space-y-3 text-left">
-                <div className="flex items-start">
-                  <div className="w-3 h-3 rounded-full bg-[#1A6DCC] mt-1.5 flex-shrink-0"></div>
-                  <span className="ml-3 text-white/80 text-sm">
-                    {lang === "uk"
-                      ? "Сільськогосподарські поля (системи електричного керування)"
-                      : "Agricultural fields (electrical control systems)"}
-                  </span>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-3 h-3 rounded-full bg-[#1A6DCC] mt-1.5 flex-shrink-0"></div>
-                  <span className="ml-3 text-white/80 text-sm">
-                    {lang === "uk"
-                      ? "Офісний простір (дах/тераса)"
-                      : "Office space (roof/terrace)"}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <div className="w-48 h-48 mx-auto mb-6 rounded-full border-8 border-[#5BA3E8] flex items-center justify-center bg-white/5">
-                <span
-                  className="text-5xl font-bold text-[#5BA3E8] drop-shadow-lg"
-                  style={{ color: "#5BA3E8" }}
-                >
-                  SOM
-                </span>
-              </div>
-              <div className="text-4xl font-bold mb-2 drop-shadow-lg">
-                ≈20500
-              </div>
-              <div className="text-lg font-semibold mb-4 text-white/90">
-                {lang === "uk"
-                  ? "Реальні клієнти на початку"
-                  : "Initial obtainable market"}
-              </div>
-              <div className="space-y-3 text-left">
-                <div className="flex items-start">
-                  <div className="w-3 h-3 rounded-full bg-[#5BA3E8] mt-1.5 flex-shrink-0"></div>
-                  <span className="ml-3 text-white/80 text-sm">
-                    {lang === "uk"
-                      ? "Громадські місця (парки, сквери, місця для прогулянок на свіжому повітрі)"
-                      : "Public spaces (parks, squares, outdoor recreation areas)"}
-                  </span>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-3 h-3 rounded-full bg-[#5BA3E8] mt-1.5 flex-shrink-0"></div>
-                  <span className="ml-3 text-white/80 text-sm">
-                    {lang === "uk"
-                      ? "Вітрові електростанції та електростанції"
-                      : "Wind power and power stations"}
-                  </span>
-                </div>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-rows-[150px] sm:auto-rows-[170px] lg:auto-rows-[190px] gap-3 sm:gap-4">
+          <div className="sm:col-span-2 lg:col-span-2 lg:row-span-2 overflow-hidden rounded-xl">
+            <img
+              src={locationImages[0]}
+              alt="WITERoK installation location"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover"
+            />
           </div>
+
+          {locationImages.slice(1).map((image, index) => (
+            <div key={index} className="overflow-hidden rounded-xl">
+              <img
+                src={image}
+                alt="WITERoK installation location"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>

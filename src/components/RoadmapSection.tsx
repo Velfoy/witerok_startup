@@ -57,7 +57,7 @@ function RoadmapBackground({ active }: { active: boolean }) {
         0,
         0,
         canvas.width,
-        canvas.height
+        canvas.height,
       );
       gradient.addColorStop(0, "#0a2540");
       gradient.addColorStop(0.5, "#144073");
@@ -73,7 +73,7 @@ function RoadmapBackground({ active }: { active: boolean }) {
         0,
         0,
         canvas.width,
-        canvas.height
+        canvas.height,
       );
       gradient.addColorStop(0, "#0a2540");
       gradient.addColorStop(0.5, "#144073");
@@ -259,25 +259,18 @@ export function RoadmapSection() {
           </p>
         </div>
 
-        <div className="relative mt-12">
+        <div className="mt-12 flex items-center gap-3 sm:gap-4">
           <button
             onClick={() => scroll("left")}
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-30 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 rounded-full p-3 transition-all hover:scale-110"
+            className="shrink-0 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 rounded-full p-3 transition-all hover:scale-110"
             aria-label="Scroll left"
           >
             <ChevronLeft className="text-white" size={24} />
           </button>
-          <button
-            onClick={() => scroll("right")}
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-30 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 rounded-full p-3 transition-all hover:scale-110"
-            aria-label="Scroll right"
-          >
-            <ChevronRight className="text-white" size={24} />
-          </button>
 
           <div
             ref={scrollContainerRef}
-            className="relative overflow-x-auto pb-8 no-scrollbar z-20 cursor-grab active:cursor-grabbing px-16"
+            className="relative flex-1 overflow-x-auto pb-8 no-scrollbar z-20 cursor-grab active:cursor-grabbing"
           >
             <div className="flex gap-8 min-w-min">
               {roadmapItems.map((item, index) => {
@@ -331,6 +324,14 @@ export function RoadmapSection() {
               })}
             </div>
           </div>
+
+          <button
+            onClick={() => scroll("right")}
+            className="shrink-0 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 rounded-full p-3 transition-all hover:scale-110"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="text-white" size={24} />
+          </button>
         </div>
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
