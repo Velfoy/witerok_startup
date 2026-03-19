@@ -38,30 +38,33 @@ export function AboutSection() {
   };
 
   return (
-    <section id="about" className="relative py-20 md:py-24 min-h-[450px]">
+    <section
+      id="about"
+      className="relative py-14 sm:py-16 md:py-24 min-h-[420px]"
+    >
       <div
         className="section-surface max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         style={{ position: "relative", zIndex: 10 }}
       >
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl text-white drop-shadow mb-4">
+        <div className="text-center mb-10 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-white drop-shadow mb-4">
             {lang === "uk" ? copy.heading.uk : copy.heading.en}
           </h2>
-          <p className="text-lg text-white/90 drop-shadow-sm max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg text-white/90 drop-shadow-sm max-w-3xl mx-auto">
             {lang === "uk" ? copy.tagline.uk : copy.tagline.en}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
           {copy.pillars.map((pillar) => (
             <div
               key={pillar.title.uk}
-              className="p-6 rounded-2xl border border-white/20 bg-white/8 backdrop-blur-sm hover:bg-white/12 hover:shadow-lg transition text-center"
+              className="p-5 sm:p-6 rounded-2xl border border-white/20 bg-white/8 backdrop-blur-sm hover:bg-white/12 hover:shadow-lg transition text-center"
             >
-              <h3 className="text-xl text-white mb-2 drop-shadow">
+              <h3 className="text-lg sm:text-xl text-white mb-2 drop-shadow">
                 {lang === "uk" ? pillar.title.uk : pillar.title.en}
               </h3>
-              <p className="text-white/90">
+              <p className="text-sm sm:text-base text-white/90">
                 {lang === "uk" ? pillar.text.uk : pillar.text.en}
               </p>
             </div>

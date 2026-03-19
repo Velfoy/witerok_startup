@@ -17,16 +17,16 @@ export function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "General Inquiry",
+    subject: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
-    null
+    null,
   );
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({
       ...formData,
@@ -51,7 +51,7 @@ export function ContactSection() {
       await sendContactMessage({
         name: formData.name,
         email: formData.email,
-        subject: formData.subject || "General Inquiry",
+        subject: formData.subject || "",
         message: formData.message,
       });
 
@@ -59,7 +59,7 @@ export function ContactSection() {
       setFormData({
         name: "",
         email: "",
-        subject: "General Inquiry",
+        subject: "",
         message: "",
       });
       setTimeout(() => setSubmitStatus(null), 5000);

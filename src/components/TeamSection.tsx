@@ -116,16 +116,19 @@ export function TeamSection() {
   ];
 
   return (
-    <section id="team" className="relative py-20 md:py-24 min-h-[600px]">
+    <section
+      id="team"
+      className="relative py-14 sm:py-16 md:py-24 min-h-[560px]"
+    >
       <div
         className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         style={{ zIndex: 10 }}
       >
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl text-white font-bold mb-4 drop-shadow-lg">
+        <div className="text-center mb-10 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-white font-bold mb-4 drop-shadow-lg">
             {lang === "uk" ? "Команда" : "Team"}
           </h2>
-          <p className="text-l text-white/90 drop-shadow-sm">
+          <p className="text-base sm:text-lg text-white/90 drop-shadow-sm">
             {lang === "uk"
               ? "Досвідчені професіонали з різних галузей"
               : "Experienced professionals from multiple domains"}
@@ -136,42 +139,42 @@ export function TeamSection() {
           <button
             aria-label={lang === "uk" ? "Попередні" : "Previous"}
             onClick={scrollPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 px-3 py-2 rounded-full bg-white/20 text-white hover:bg-white/30"
+            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-20 px-3 py-2 rounded-full bg-white/20 text-white hover:bg-white/30"
           >
             ‹
           </button>
           <button
             aria-label={lang === "uk" ? "Наступні" : "Next"}
             onClick={scrollNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 px-3 py-2 rounded-full bg-white/20 text-white hover:bg-white/30"
+            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-20 px-3 py-2 rounded-full bg-white/20 text-white hover:bg-white/30"
           >
             ›
           </button>
 
           <div
             ref={sliderRef}
-            className="flex overflow-x-auto no-scrollbar snap-x snap-mandatory gap-6 px-10"
+            className="flex overflow-x-auto no-scrollbar snap-x snap-mandatory gap-4 sm:gap-5 md:gap-6 px-1 sm:px-2 md:px-10"
             style={{ scrollBehavior: "smooth" }}
           >
             {team.map((member, index) => (
               <div
                 key={index}
-                className="snap-start shrink-0 w-full md:w-1/2 lg:w-1/4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl overflow-hidden hover:bg-white/15 transition-all group"
+                className="snap-start shrink-0 w-[58%] sm:w-[40%] md:w-[35%] lg:w-[31%] xl:w-[25%] bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl overflow-hidden hover:bg-white/15 transition-all group"
               >
-                <div className="aspect-square overflow-hidden">
+                <div className="h-50 sm:h-56 md:h-56 lg:h-[65%] overflow-hidden">
                   <img
                     src={member.image}
                     alt={lang === "uk" ? member.name.uk : member.name.en}
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <div className="p-4 text-center">
-                  <h3 className="text-lg text-white font-semibold mb-1">
+                <div className="p-4 sm:p-5 text-center">
+                  <h3 className="text-base sm:text-lg text-white font-semibold mb-1">
                     {lang === "uk" ? member.name.uk : member.name.en}
                   </h3>
-                  <p className="text-sm text-blue-200 mb-2">
+                  <p className="text-xs sm:text-sm text-blue-200 mb-2">
                     {lang === "uk" ? member.position.uk : member.position.en}
                   </p>
                   <p className="text-xs text-white/80 leading-relaxed">

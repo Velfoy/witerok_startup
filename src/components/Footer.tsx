@@ -8,7 +8,7 @@ export function Footer() {
     company: [
       { label: { uk: "Про компанію", en: "About" }, href: "#about" },
       { label: { uk: "Команда", en: "Team" }, href: "#team" },
-      { label: { uk: "Партнери", en: "Partners" }, href: "#partnership" },
+      { label: { uk: "Партнери", en: "Partners" }, href: "#partners" },
       { label: { uk: "Контакти", en: "Contact" }, href: "#contact" },
     ],
     product: [
@@ -114,7 +114,7 @@ export function Footer() {
                 ? `© ${currentYear} WITERoK. Всі права захищено.`
                 : `© ${currentYear} WITERoK. All rights reserved.`}
             </div>
-            <div className="flex gap-6 text-sm">
+            {/* <div className="flex gap-6 text-sm">
               <a
                 href="#"
                 className="text-white/60 hover:text-white transition-colors"
@@ -127,7 +127,7 @@ export function Footer() {
               >
                 {lang === "uk" ? "Умови використання" : "Terms of use"}
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

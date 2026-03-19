@@ -72,7 +72,7 @@ function NewsCard({ item }: { item: NewsItem }) {
     const checkTruncation = () => {
       if (contentRef.current && !isExpanded) {
         setIsTruncated(
-          contentRef.current.scrollHeight > contentRef.current.clientHeight
+          contentRef.current.scrollHeight > contentRef.current.clientHeight,
         );
       }
     };
@@ -132,7 +132,7 @@ function NewsCard({ item }: { item: NewsItem }) {
           <Calendar size={16} className="text-secondary/70" />
           <span>
             {new Date(item.date).toLocaleDateString(
-              lang === "uk" ? "uk-UA" : "en-US"
+              lang === "uk" ? "uk-UA" : "en-US",
             )}
           </span>
         </div>
@@ -161,7 +161,7 @@ export function NewsSection() {
           console.warn("1. Are news added in admin panel?");
           console.warn('2. Is status set to "published"?');
           console.warn(
-            "3. Visit https://witerok.com/api/posts.php to see raw API response"
+            "3. Visit https://witerok.com/api/posts.php to see raw API response",
           );
         }
 
@@ -194,7 +194,7 @@ export function NewsSection() {
         setError(
           lang === "uk"
             ? "Не вдалося завантажити новини"
-            : "Failed to load news"
+            : "Failed to load news",
         );
         // Keep fallback data visible
         setNews(mockNews);
@@ -215,7 +215,7 @@ export function NewsSection() {
   };
 
   return (
-    <section id="news" className="section-shell">
+    <section id="news" className="section-shell pt-16">
       <div className="section-surface">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl text-foreground font-bold mb-4">

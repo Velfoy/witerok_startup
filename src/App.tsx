@@ -86,11 +86,11 @@ const NewsSection = lazy(() =>
     default: m.NewsSection,
   })),
 );
-const GallerySection = lazy(() =>
-  import("./components/GallerySection").then((m) => ({
-    default: m.GallerySection,
-  })),
-);
+// const GallerySection = lazy(() =>
+//   import("./components/GallerySection").then((m) => ({
+//     default: m.GallerySection,
+//   })),
+// );
 const NewsletterSection = lazy(() =>
   import("./components/NewsletterSection").then((m) => ({
     default: m.NewsletterSection,
@@ -134,13 +134,15 @@ export default function App() {
           >
             <ProblemSection />
             <ProductSection />
+            <NewsSection />
             {/* <EfficiencyCalculator /> */}
             <CompetitiveSection />
             <ComparisonSection />
-            <div className="relative">
+            <div className="relative overflow-hidden">
               <div className="absolute inset-0 z-0 pointer-events-none">
                 <SharedBackground active={true} />
               </div>
+              <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-black/20 via-black/10 to-black/20" />
               <TargetAudienceSection />
               <AboutSection />
               <TeamSection />
@@ -151,13 +153,13 @@ export default function App() {
             <BusinessModelSection />
             <ESGSection />
             <FAQSection />
+            <NewsletterSection />
             <ContactSection />
 
-            <NewsSection />
             {/* <MarketingSection />
             <FinancialSection /> */}
-            <NewsletterSection />
-            <GallerySection />
+
+            {/* <GallerySection /> */}
             {/* <DonateSection /> */}
           </Suspense>
         </main>

@@ -326,12 +326,12 @@ export function HeroSection() {
                   className="transition-transform duration-300 group-hover:translate-x-1"
                 />
               </a>
-              <a
+              {/* <a
                 href="#donate"
                 className="group inline-flex items-center gap-3 glass-pill bg-white text-[#004799] px-6 py-3 shadow-md transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_10px_30px_rgba(0,71,153,0.35)]"
               >
                 {lang === "uk" ? copy.ctas.donate.uk : copy.ctas.donate.en}
-              </a>
+              </a> */}
               <a
                 href="https://www.linkedin.com/in/startup-witerok-682429266/"
                 target="_blank"
