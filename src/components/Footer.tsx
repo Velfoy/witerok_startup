@@ -49,11 +49,11 @@ export function Footer() {
                 : "Next-generation wind energy for businesses and communities"}
             </p>
             <div className="text-white/60 text-sm">
-              <p>{lang === "uk" ? "вул. Хрещатик, 1" : "1 Khreshchatyk St."}</p>
               <p>
+                {" "}
                 {lang === "uk"
-                  ? "Київ, 01001, Україна"
-                  : "Kyiv, 01001, Ukraine"}
+                  ? "Чоколівський бульвар, 13, Київ"
+                  : "13 Chokolivskyi Boulevard, Kyiv"}
               </p>
             </div>
           </div>

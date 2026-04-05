@@ -6,7 +6,7 @@ export function ComparisonSection() {
   const metrics = [
     {
       label: { uk: "Термін служби, роки", en: "Lifetime, years" },
-      witerok: "x",
+      witerok: "10",
       solar: "25-30",
       verticalWind: "15-25",
       capacity: "10",
@@ -14,7 +14,7 @@ export function ComparisonSection() {
     },
     {
       label: { uk: "Початкові інвестиції, $", en: "Initial Investment, $" },
-      witerok: "x",
+      witerok: "2500",
       solar: "1200",
       verticalWind: "16800",
       capacity: "6500",
@@ -22,7 +22,7 @@ export function ComparisonSection() {
     },
     {
       label: { uk: "Вартість 1 KW, $", en: "Cost per 1 KW, $" },
-      witerok: "x",
+      witerok: "*",
       solar: "350",
       verticalWind: "8400",
       capacity: "700",
@@ -30,7 +30,7 @@ export function ComparisonSection() {
     },
     {
       label: { uk: "Вартість обслуговування, $", en: "Maintenance Cost, $" },
-      witerok: "x",
+      witerok: "100",
       solar: "25",
       verticalWind: "50",
       capacity: "0",
@@ -38,7 +38,7 @@ export function ComparisonSection() {
     },
     {
       label: { uk: "ROI, роки", en: "ROI, years" },
-      witerok: "x",
+      witerok: "-",
       verticalWind: "4,3",
       capacity: "-",
       dizell: "-",
@@ -48,7 +48,7 @@ export function ComparisonSection() {
         uk: "Вартість додаткового обладнання, $",
         en: "Additional Equipment Cost, $",
       },
-      witerok: "x",
+      witerok: "1050",
       solar: "1050",
       verticalWind: "1050",
       capacity: "3200",
@@ -56,7 +56,7 @@ export function ComparisonSection() {
     },
     {
       label: { uk: "Площа, м²", en: "Area, m²" },
-      witerok: "x",
+      witerok: "1",
       solar: "25",
       verticalWind: "2,5",
       capacity: "0,5",
@@ -64,7 +64,7 @@ export function ComparisonSection() {
     },
     {
       label: { uk: "Ефективність, %", en: "Efficiency, %" },
-      witerok: "x",
+      witerok: "*",
       solar: "20-25",
       verticalWind: "15-20",
       capacity: "90-95",

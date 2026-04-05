@@ -1,6 +1,6 @@
 import {
   Mail,
-  Phone,
+  // Phone,
   MapPin,
   Linkedin,
   Facebook,
@@ -91,7 +91,7 @@ export function ContactSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-12">
           <div className="flex items-start gap-3 md:gap-4 p-4 md:p-6 rounded-2xl bg-white border border-slate-200 shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_14px_36px_rgba(26,109,204,0.18)] transition">
             <div
               className="w-10 md:w-12 h-10 md:h-12 rounded-xl text-white flex items-center justify-center shadow-md flex-shrink-0"
@@ -116,7 +116,7 @@ export function ContactSection() {
               </a>
             </div>
           </div>
-
+          {/* 
           <div className="flex items-start gap-3 md:gap-4 p-4 md:p-6 rounded-2xl bg-white border border-slate-200 shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_14px_36px_rgba(26,109,204,0.18)] transition">
             <div
               className="w-10 md:w-12 h-10 md:h-12 rounded-xl text-white flex items-center justify-center shadow-md flex-shrink-0"
@@ -140,7 +140,7 @@ export function ContactSection() {
                 +38 (044) 123-45-67
               </a>
             </div>
-          </div>
+          </div> */}
 
           <div className="flex items-start gap-3 md:gap-4 p-4 md:p-6 rounded-2xl bg-white border border-slate-200 shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_14px_36px_rgba(26,109,204,0.18)] transition">
             <div
@@ -159,11 +159,9 @@ export function ContactSection() {
                 {lang === "uk" ? "Відвідайте нас" : "Visit us"}
               </p>
               <p className="text-[#144073] font-semibold transition text-sm md:text-base mt-1">
-                {lang === "uk" ? "вул. Хрещатик, 1" : "1 Khreshchatyk St."}
-                <br />
                 {lang === "uk"
-                  ? "Київ, 01001, Україна"
-                  : "Kyiv, 01001, Ukraine"}
+                  ? "Чоколівський бульвар, 13, Київ"
+                  : "13 Chokolivskyi Boulevard, Kyiv"}
               </p>
             </div>
           </div>
@@ -299,7 +297,7 @@ export function ContactSection() {
             </p>
             <div className="space-y-2 md:space-y-3">
               <a
-                href="https://www.linkedin.com/in/startup-witerok-682429266/"
+                href="https://www.linkedin.com/in/startup-witerok-682429266"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-lg border border-slate-200 hover:border-[#1A6DCC] hover:bg-blue-50 transition group"
@@ -370,7 +368,7 @@ export function ContactSection() {
                 </div>
               </a>
               <a
-                href="https://www.youtube.com/@startup_witerok"
+                href="http://www.youtube.com/@startupWITERoK"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-lg border border-slate-200 hover:border-[#1A6DCC] hover:bg-blue-50 transition group"

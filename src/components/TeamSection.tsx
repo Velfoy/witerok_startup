@@ -2,6 +2,7 @@ import { useLanguage } from "../hooks/useLanguage.js";
 import { useRef } from "react";
 import leraZlydarImg from "../assets/lera_zlydar.jpg";
 import stasKotlyarImg from "../assets/Stat_kotlar.jpg";
+import vaniaImg from "../assets/vania.jpg";
 import yaroslavaPolikarpovaImg from "../assets/Jaroslava_Polikarpowa.jpg";
 
 export function TeamSection() {
@@ -49,13 +50,13 @@ export function TeamSection() {
       image: leraZlydarImg,
     },
     {
-      name: { uk: "Іван Петренко", en: "Ivan Petrenko" },
+      name: { uk: "Іван Крикун", en: "Ivan Krykun" },
       position: { uk: "Backend розробник", en: "Backend Developer" },
       bio: {
         uk: "1+ рік комерційного досвіду у бекенд розробці ",
         en: "1+ year of commercial experience in backend development",
       },
-      image: "https://randomuser.me/api/portraits",
+      image: vaniaImg,
     },
   ];
 

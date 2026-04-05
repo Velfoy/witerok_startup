@@ -231,7 +231,7 @@ export function ProductSection() {
                 {lang === "uk" ? "Термін служби" : "Lifetime"}
               </div>
               <div className="text-3xl font-semibold">
-                15-20 {lang === "uk" ? " років" : " years"}
+                10 {lang === "uk" ? " років" : " years"}
               </div>
             </div>
           </div>
