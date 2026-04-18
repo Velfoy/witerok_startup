@@ -71,11 +71,11 @@ const RoadmapSection = lazy(() =>
 const FAQSection = lazy(() =>
   import("./components/FAQSection").then((m) => ({ default: m.FAQSection })),
 );
-// const EfficiencyCalculator = lazy(() =>
-//   import("./components/EfficiencyCalculator").then((m) => ({
-//     default: m.EfficiencyCalculator,
-//   })),
-// );
+const EfficiencyCalculator = lazy(() =>
+  import("./components/EfficiencyCalculator").then((m) => ({
+    default: m.EfficiencyCalculator,
+  })),
+);
 const ContactSection = lazy(() =>
   import("./components/ContactSection").then((m) => ({
     default: m.ContactSection,
@@ -135,7 +135,7 @@ export default function App() {
             <ProblemSection />
             <ProductSection />
             <NewsSection />
-            {/* <EfficiencyCalculator /> */}
+            <EfficiencyCalculator />
             <CompetitiveSection />
             <ComparisonSection />
             <div className="relative overflow-hidden">
