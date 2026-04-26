@@ -188,7 +188,7 @@ export function ProductSection() {
       ref={(el) => {
         viewportRef.current = el as HTMLElement | null;
       }}
-      className="relative py-24 min-h-[500px] overflow-hidden"
+      className="relative py-20 min-h-[500px] overflow-hidden"
     >
       <div className="absolute inset-0" style={{ zIndex: 0 }}>
         <ProductBackground active={inView} />

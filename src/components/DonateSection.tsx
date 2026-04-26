@@ -30,7 +30,7 @@ export function DonateSection() {
         setErrorMessage(
           lang === "uk"
             ? "Будь ласка, заповніть ім'я та email"
-            : "Please fill in name and email"
+            : "Please fill in name and email",
         );
         setIsSubmitting(false);
         return;
@@ -57,7 +57,7 @@ export function DonateSection() {
       setErrorMessage(
         lang === "uk"
           ? "Помилка при обробці доната. Спробуйте ще раз."
-          : "Error processing donation. Please try again."
+          : "Error processing donation. Please try again.",
       );
       console.error(err);
     } finally {
@@ -89,9 +89,9 @@ export function DonateSection() {
   };
 
   return (
-    <section id="donate" className="section-shell">
+    <section id="donate" className="section-shell py-20">
       <div className="section-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-red-500/20 border border-red-500/30 shadow-md mb-6">
               <Heart className="w-8 h-8 text-red-500" />

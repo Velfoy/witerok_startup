@@ -47,7 +47,8 @@ export function EfficiencyCalculator() {
 
     const en = {
       title: "Efficiency Calculator",
-      subtitle: "Pick a point on the map to estimate annual electricity generation.",
+      subtitle:
+        "Pick a point on the map to estimate annual electricity generation.",
       turbineModel: "Turbine model:",
       calculate: "Calculate",
       calculating: "Calculating…",
@@ -127,11 +128,8 @@ export function EfficiencyCalculator() {
   return (
     <section
       id="calculator"
-      className="relative py-16 md:py-24 bg-gradient-to-b from-white via-[#f7fbff] to-white overflow-hidden"
+      className="relative py-20 bg-white overflow-hidden"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.08),transparent_36%),radial-gradient(circle_at_80%_30%,rgba(59,130,246,0.08),transparent_34%),radial-gradient(circle_at_50%_80%,rgba(14,165,233,0.05),transparent_32%)]" />
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/60 via-transparent to-white/70" />
-
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 md:mb-14">
           <h2 className="text-3xl sm:text-4xl md:text-5xl text-[#144073] font-semibold mt-2 md:mt-4 mb-3">
@@ -142,7 +140,7 @@ export function EfficiencyCalculator() {
           </p>
         </div>
 
-        <div className="mt-8 md:mt-12 max-w-4xl mx-auto rounded-2xl bg-white border border-slate-200 shadow-[0_8px_24px_rgba(0,0,0,0.06)] overflow-hidden">
+        <div className="mt-8 md:mt-12 max-w-6xl mx-auto rounded-2xl bg-white border border-slate-200 shadow-[0_8px_24px_rgba(0,0,0,0.06)] overflow-hidden">
           <div className="p-6 sm:p-8 md:p-10">
             <form onSubmit={onSubmit} className="flex flex-col gap-4 sm:gap-5">
               <MapPicker

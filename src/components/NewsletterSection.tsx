@@ -20,7 +20,7 @@ export function NewsletterSection() {
       setMessage(
         lang === "uk"
           ? "Будь ласка, введіть коректну email адресу"
-          : "Please enter a valid email address"
+          : "Please enter a valid email address",
       );
       return;
     }
@@ -33,7 +33,7 @@ export function NewsletterSection() {
       setMessage(
         lang === "uk"
           ? "Дякуємо за підписку! Ви будете отримувати наші новини."
-          : "Thank you for subscribing! You'll receive our updates."
+          : "Thank you for subscribing! You'll receive our updates.",
       );
       setEmail("");
       setName("");
@@ -47,7 +47,7 @@ export function NewsletterSection() {
       setMessage(
         lang === "uk"
           ? "Помилка при підписці. Спробуйте ще раз."
-          : "Error subscribing. Please try again."
+          : "Error subscribing. Please try again.",
       );
       console.error(err);
     }
@@ -75,9 +75,9 @@ export function NewsletterSection() {
   };
 
   return (
-    <section id="newsletter" className="section-shell">
+    <section id="newsletter" className="section-shell py-20">
       <div className="section-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-white/8 via-white/4 to-white/2 backdrop-blur-xl shadow-[0_18px_50px_rgba(20,64,115,0.16)] p-8 md:p-12">
             <div className="text-center mb-8">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/15 border border-white/20 shadow-md mb-6">

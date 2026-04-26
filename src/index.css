@@ -144,26 +144,6 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-
-  /* Utility to hide the native cursor across the app */
-  @media (hover: hover) and (pointer: fine) {
-    .hide-cursor,
-    .hide-cursor * {
-      cursor: none !important;
-    }
-
-    /* Keep text editing usable (caret + selection feels normal) */
-    .hide-cursor input,
-    .hide-cursor textarea,
-    .hide-cursor [contenteditable="true"],
-    .hide-cursor [contenteditable=""] {
-      cursor: text !important;
-    }
-
-    .hide-cursor select {
-      cursor: default !important;
-    }
-  }
 }
 
 .dark {

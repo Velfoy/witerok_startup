@@ -88,7 +88,7 @@ export function GallerySection() {
 
   const loadMore = () => {
     setVisibleCount((prev) =>
-      Math.min(prev + LOAD_MORE_COUNT, galleryImages.length)
+      Math.min(prev + LOAD_MORE_COUNT, galleryImages.length),
     );
   };
 
@@ -117,7 +117,7 @@ export function GallerySection() {
   };
 
   return (
-    <section id="gallery" className="section-shell">
+    <section id="gallery" className="section-shell py-20">
       <div className="section-surface">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl text-foreground font-bold mb-4">
@@ -128,7 +128,7 @@ export function GallerySection() {
           </p>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8\">
           {galleryImages.length === 0 ? (
             <div className="text-center py-20">
               <p className="text-xl text-foreground/60">
@@ -155,8 +155,8 @@ export function GallerySection() {
                         typeof image.alt === "string"
                           ? image.alt
                           : lang === "uk"
-                          ? image.alt.uk
-                          : image.alt.en
+                            ? image.alt.uk
+                            : image.alt.en
                       }
                       loading="lazy"
                       decoding="async"
@@ -213,8 +213,8 @@ export function GallerySection() {
                 typeof selectedImage.alt === "string"
                   ? selectedImage.alt
                   : lang === "uk"
-                  ? selectedImage.alt.uk
-                  : selectedImage.alt.en;
+                    ? selectedImage.alt.uk
+                    : selectedImage.alt.en;
               downloadImage(selectedImage.src, altText);
             }}
             className="fixed top-4 left-4 flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-colors"
@@ -237,8 +237,8 @@ export function GallerySection() {
                   typeof selectedImage.alt === "string"
                     ? selectedImage.alt
                     : lang === "uk"
-                    ? selectedImage.alt.uk
-                    : selectedImage.alt.en
+                      ? selectedImage.alt.uk
+                      : selectedImage.alt.en
                 }
                 loading="lazy"
                 decoding="async"
@@ -250,8 +250,8 @@ export function GallerySection() {
                 {typeof selectedImage.alt === "string"
                   ? selectedImage.alt
                   : lang === "uk"
-                  ? selectedImage.alt.uk
-                  : selectedImage.alt.en}
+                    ? selectedImage.alt.uk
+                    : selectedImage.alt.en}
               </p>
             </div>
           </div>

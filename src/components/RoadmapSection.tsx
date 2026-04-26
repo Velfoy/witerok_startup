@@ -234,7 +234,7 @@ export function RoadmapSection() {
       ref={(el) => {
         viewportRef.current = el as HTMLElement | null;
       }}
-      className="relative py-24 min-h-[600px] overflow-hidden"
+      className="relative py-20 min-h-[600px] overflow-hidden"
     >
       <div className="absolute inset-0" style={{ zIndex: 0 }}>
         <RoadmapBackground active={inView} />

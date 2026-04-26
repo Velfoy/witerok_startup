@@ -117,10 +117,7 @@ export function TeamSection() {
   ];
 
   return (
-    <section
-      id="team"
-      className="relative py-14 sm:py-16 md:py-24 min-h-[560px]"
-    >
+    <section id="team" className="relative py-20 min-h-[560px]">
       <div
         className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         style={{ zIndex: 10 }}

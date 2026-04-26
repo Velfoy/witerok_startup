@@ -3,7 +3,6 @@ import { HeroSection } from "./components/HeroSection";
 import { Footer } from "./components/Footer";
 import { Suspense, lazy, useMemo } from "react";
 import { LanguageProvider } from "./contexts/LanguageContext";
-import WindCursorGlobal from "./components/WindCursorGlobal";
 import { UnsubscribeSection } from "./components/UnsubscribeSection";
 import { SharedBackground } from "./components/SharedBackground";
 
@@ -111,7 +110,6 @@ export default function App() {
   if (isUnsubscribePage) {
     return (
       <LanguageProvider>
-        <WindCursorGlobal />
         <UnsubscribeSection />
       </LanguageProvider>
     );
@@ -119,8 +117,7 @@ export default function App() {
 
   return (
     <LanguageProvider>
-      <div className="min-h-screen bg-background scroll-smooth hide-cursor">
-        <WindCursorGlobal />
+      <div className="min-h-screen bg-background scroll-smooth">
         <Navigation />
 
         <main>
