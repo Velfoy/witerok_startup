@@ -12,14 +12,17 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@mailchimp/mailchimp_marketing": "^3.0.80",
+    "leaflet": "^1.9.4",
     "lucide-react": "^0.562.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-leaflet": "^5.0.0",
     "recharts": "^2.10.3",
     "tailwindcss": "^3.4.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@types/leaflet": "^1.9.21",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",

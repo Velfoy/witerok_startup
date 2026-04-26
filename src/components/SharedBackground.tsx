@@ -31,11 +31,11 @@ export function SharedBackground({ active }: { active: boolean }) {
     }
 
     const waves: Array<{ y: number; speed: number; amplitude: number }> = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 11; i++) {
       waves.push({
-        y: (canvas.height / 6) * (i + 1),
-        speed: 0.02 + i * 0.005,
-        amplitude: 20 + i * 8,
+        y: (canvas.height / 12) * (i + 1),
+        speed: 0.02 + i * 0.002,
+        amplitude: 20 + i * 3,
       });
     }
 
@@ -81,7 +81,7 @@ export function SharedBackground({ active }: { active: boolean }) {
             Math.sin((x + frame * wave.speed * 50) * 0.01) * wave.amplitude;
           ctx.lineTo(x, y);
         }
-        ctx.strokeStyle = `rgba(255, 255, 255, ${0.12 - idx * 0.02})`;
+        ctx.strokeStyle = `rgba(255, 255, 255, ${0.15 - idx * 0.008})`;
         ctx.lineWidth = 2;
         ctx.stroke();
       });

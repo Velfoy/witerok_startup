@@ -37,13 +37,7 @@ export function MarketingSection() {
   ];
 
   return (
-    <section
-      id="marketing"
-      className="relative py-24 bg-gradient-to-b from-white via-[#f7fbff] to-white overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.08),transparent_36%),radial-gradient(circle_at_80%_30%,rgba(59,130,246,0.08),transparent_34%),radial-gradient(circle_at_50%_80%,rgba(14,165,233,0.05),transparent_32%)]" />
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/60 via-transparent to-white/70" />
-
+    <section id="marketing" className="relative py-20 bg-white overflow-hidden">
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <h2 className="text-4xl md:text-5xl text-[#144073] font-semibold mt-4 mb-3">

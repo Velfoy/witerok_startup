@@ -38,10 +38,7 @@ export function AboutSection() {
   };
 
   return (
-    <section
-      id="about"
-      className="relative py-14 sm:py-16 md:py-24 min-h-[420px]"
-    >
+    <section id="about" className="relative py-20 min-h-[420px]">
       <div
         className="section-surface max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         style={{ position: "relative", zIndex: 10 }}

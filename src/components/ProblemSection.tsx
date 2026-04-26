@@ -79,13 +79,8 @@ export function ProblemSection() {
   `;
 
   return (
-    <section
-      id="problem"
-      className="relative py-12 bg-gradient-to-b from-white via-[#eef3ff] to-[#f7fbff] overflow-hidden"
-    >
+    <section id="problem" className="relative py-20 bg-white overflow-hidden">
       <style>{problemStyles}</style>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(26,109,204,0.08),transparent_32%),radial-gradient(circle_at_82%_24%,rgba(20,64,115,0.08),transparent_32%),radial-gradient(circle_at_50%_84%,rgba(56,189,248,0.07),transparent_34%)]" />
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/75 via-white/40 to-white/80" />
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
           className="problem-ribbon-anim absolute -left-1/3 top-1/4 w-[150%] h-48 blur-[64px]"

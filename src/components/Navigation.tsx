@@ -11,8 +11,6 @@ export function Navigation() {
 
   const navItems = [
     { key: "home", label: { uk: "Головна", en: "Home" }, href: "#home" },
-    { key: "about", label: { uk: "Про нас", en: "About Us" }, href: "#about" },
-    { key: "esg", label: { uk: "ESG", en: "ESG" }, href: "#esg" },
     {
       key: "problem",
       label: { uk: "Проблема", en: "Problem & Solution" },
@@ -22,6 +20,12 @@ export function Navigation() {
       key: "product",
       label: { uk: "Продукт", en: "Product" },
       href: "#product",
+    },
+    { key: "news", label: { uk: "Новини", en: "News" }, href: "#news" },
+    {
+      key: "calculator",
+      label: { uk: "Калькулятор", en: "Efficiency Calculator" },
+      href: "#calculator",
     },
     {
       key: "competitive",
@@ -38,16 +42,7 @@ export function Navigation() {
       label: { uk: "Місця установки", en: "Installation Locations" },
       href: "#locations",
     },
-    {
-      key: "business",
-      label: { uk: "Бізнес-модель", en: "Business Model" },
-      href: "#business",
-    },
-    {
-      key: "marketing",
-      label: { uk: "Маркетингова стратегія", en: "Marketing Strategy" },
-      href: "#marketing",
-    },
+    { key: "about", label: { uk: "Про нас", en: "About Us" }, href: "#about" },
     { key: "team", label: { uk: "Команда", en: "Team" }, href: "#team" },
     {
       key: "partners",
@@ -55,27 +50,17 @@ export function Navigation() {
       href: "#partners",
     },
     {
-      key: "financial",
-      label: { uk: "Фінансова модель", en: "Financial Model" },
-      href: "#financial",
-    },
-    {
       key: "roadmap",
       label: { uk: "Дорожна карта", en: "Roadmap" },
       href: "#roadmap",
     },
     {
-      key: "calculator",
-      label: { uk: "Калькулятор", en: "Efficiency Calculator" },
-      href: "#calculator",
+      key: "business",
+      label: { uk: "Бізнес-модель", en: "Business Model" },
+      href: "#business",
     },
-    { key: "faq", label: { uk: "Запитання", en: "FAQ" }, href: "#faq" },
-    { key: "news", label: { uk: "Новини", en: "News" }, href: "#news" },
-    {
-      key: "gallery",
-      label: { uk: "Галерея", en: "Gallery" },
-      href: "#gallery",
-    },
+    { key: "esg", label: { uk: "ESG", en: "ESG" }, href: "#esg" },
+    { key: "faq", label: { uk: "Питання", en: "FAQ" }, href: "#faq" },
     {
       key: "newsletter",
       label: { uk: "Розсилка", en: "Newsletter" },

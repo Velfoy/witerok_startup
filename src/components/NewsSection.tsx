@@ -215,8 +215,8 @@ export function NewsSection() {
   };
 
   return (
-    <section id="news" className="section-shell pt-16">
-      <div className="section-surface">
+    <section id="news" className="section-shell py-20">
+      <div className="section-surface\">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl text-foreground font-bold mb-4">
             {lang === "uk" ? copy.title.uk : copy.title.en}
