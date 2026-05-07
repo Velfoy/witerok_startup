@@ -22,7 +22,7 @@ interface TurbineOption {
 }
 
 const TURBINE_OPTIONS: TurbineOption[] = [
-  { label: "Standard HAWT", apiValue: "STANDARD_HAWT" },
+  { label: "WiterOK Bladeless", apiValue: "STANDARD_HAWT" },
 ];
 
 export function EfficiencyCalculator() {
@@ -47,9 +47,9 @@ export function EfficiencyCalculator() {
     };
 
     const en = {
-      title: "Efficiency Calculator",
+      title: "Energy production on Your site",
       subtitle:
-        "Pick a point on the map to estimate annual electricity generation.",
+        "See how much WiterOK turbines will generate on your location of choice!",
       turbineModel: "Turbine model:",
       calculate: "Calculate",
       calculating: "Calculating…",

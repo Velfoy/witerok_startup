@@ -24,7 +24,7 @@ export function Navigation() {
     { key: "news", label: { uk: "Новини", en: "News" }, href: "#news" },
     {
       key: "calculator",
-      label: { uk: "Калькулятор", en: "Efficiency Calculator" },
+      label: { uk: "Калькулятор", en: "Energy production on Your site" },
       href: "#calculator",
     },
     {
